@@ -1,5 +1,12 @@
 # AI-Powered Retail Analytics Platform
 
+
+## 🎬 Video Demo
+
+Watch the project demo here:
+
+**[YouTube Demo](https://youtu.be/yaCJZF7c1wE)**
+
 ## 📚 API Documentation
 
 Access the interactive API docs here:
