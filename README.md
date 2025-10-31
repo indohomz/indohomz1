@@ -13,6 +13,38 @@ Access the interactive API docs here:
 
 **[FastAPI Swagger UI](https://retail-analytics-platform-hjhh.onrender.com/docs)**
 
+## ▶️ Run locally (quick)
+
+Recommended: use Docker Compose to run DB + backend + frontend together.
+
+Docker (from repo root):
+
+```powershell
+docker-compose up --build
+```
+
+Or run services separately:
+
+Backend (venv):
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r backend/requirements.txt
+cd backend
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Frontend:
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+After backend starts, open http://localhost:8000/docs for the interactive API docs.
+
 A comprehensive full-stack application for retail businesses to analyze sales data, predict trends, and generate AI-powered insights.
 
 ## 🚀 Features
