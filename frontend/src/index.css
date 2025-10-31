@@ -22,19 +22,26 @@
   --accent-purple: #8b5cf6;
   --heading-size: 2.25rem; /* 36px */
 }
-
-/* Dark theme variables */
-.dark {
-  --bg: #0f1724;
-  --panel: #0b1220;
+/* Dark / Light theme variables */
+html.dark {
+  --bg: #071025;
+  --panel: #071427;
   --text: #e6eef8;
   --muted: #9aa7bf;
   --card-shadow: rgba(2,6,23,0.6);
 }
 
+html.light {
+  --bg: linear-gradient(180deg, rgba(59,130,246,0.06), rgba(139,92,246,0.03));
+  --panel: #ffffff;
+  --text: #0f1724;
+  --muted: #64748b;
+  --card-shadow: rgba(16,24,40,0.08);
+}
+
 /* Apply variables */
 body {
-  background: linear-gradient(180deg, rgba(59,130,246,0.06), rgba(139,92,246,0.03));
+  background: var(--bg);
   color: var(--text, #0f1724);
 }
 
