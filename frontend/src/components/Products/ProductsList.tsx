@@ -1,7 +1,7 @@
 import React from 'react'
 import { Edit2, Trash2 } from 'lucide-react'
 
-interface ProductItem {
+export interface ProductItem {
   id: number
   name: string
   sku: string
@@ -9,20 +9,20 @@ interface ProductItem {
   price: number
 }
 
-const mockProducts: ProductItem[] = [
-  { id: 1, name: 'Wireless Headphones', sku: 'WH-001', stock: 120, price: 99.99 },
-  { id: 2, name: 'Smartphone X', sku: 'SP-010', stock: 32, price: 699.0 },
-  { id: 3, name: 'Coffee Maker', sku: 'CM-23', stock: 0, price: 49.5 },
-]
+interface Props {
+  products: ProductItem[]
+  onEdit?: (p: ProductItem) => void
+  onDelete?: (id: number) => void
+}
 
-const ProductsList: React.FC = () => {
+const ProductsList: React.FC<Props> = ({ products, onEdit, onDelete }) => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Products</h2>
         <div className="flex items-center space-x-2">
-          <button className="btn-outline">Import</button>
-          <button className="btn-primary">Add Product</button>
+          <button className="btn-outline" title="Import CSV">Import</button>
+          <button className="btn-primary" title="Add product">Add Product</button>
         </div>
       </div>
 
@@ -38,7 +38,7 @@ const ProductsList: React.FC = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-100">
-            {mockProducts.map((p) => (
+            {products.map((p) => (
               <tr key={p.id} className="hover:bg-gray-50 transition-colors">
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">{p.name}</div>
@@ -48,8 +48,8 @@ const ProductsList: React.FC = () => {
                 <td className={`px-6 py-4 whitespace-nowrap text-sm ${p.stock === 0 ? 'text-red-500' : 'text-gray-700'}`}>{p.stock}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${p.price.toFixed(2)}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button title="Edit" className="p-2 mr-2 text-gray-500 hover:text-primary-600"><Edit2 className="h-4 w-4"/></button>
-                  <button title="Delete" className="p-2 text-red-500 hover:text-red-600"><Trash2 className="h-4 w-4"/></button>
+                  <button title="Edit" onClick={() => onEdit && onEdit(p)} className="p-2 mr-2 text-gray-500 hover:text-primary-600"><Edit2 className="h-4 w-4"/></button>
+                  <button title="Delete" onClick={() => onDelete && onDelete(p.id)} className="p-2 text-red-500 hover:text-red-600"><Trash2 className="h-4 w-4"/></button>
                 </td>
               </tr>
             ))}

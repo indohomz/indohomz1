@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install frontend deps
+        working-directory: frontend
+        run: npm ci
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+  health-check:
+    needs: build-frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl health endpoint
+        env:
+          HEALTH_URL: ${{ secrets.HEALTH_URL || 'http://localhost:8000/health' }}
+        run: |
+          echo "Checking HEALTH_URL=$HEALTH_URL"
+          if command -v curl >/dev/null 2>&1; then
+            curl --fail --silent --show-error --max-time 10 "$HEALTH_URL"
+          else
+            echo "curl not available"; exit 1
+          fi

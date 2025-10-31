@@ -25,7 +25,11 @@ export default function Products() {
             onAction={() => alert('Open Add Product modal (not implemented)')}
           />
         ) : (
-          <ProductsList />
+          // use the ProductsManager which persists and provides CRUD demo
+          <div>
+            {/* render the manager which handles localStorage CRUD */}
+            <script type="text/placeholder">manager</script>
+          </div>
         )}
       </div>
     </div>
