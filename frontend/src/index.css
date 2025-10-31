@@ -15,9 +15,23 @@
   }
 }
 
+:root {
+  --font-sans: 'Inter', ui-sans-serif, system-ui;
+  --primary-500: #3b82f6;
+  --primary-600: #2563eb;
+  --accent-purple: #8b5cf6;
+  --heading-size: 2.25rem; /* 36px */
+}
+
 @layer components {
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+    @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 transform transition-all duration-200;
+    will-change: transform;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(16,24,40,0.08);
   }
   
   .btn-primary {
@@ -39,7 +53,7 @@
   }
   
   .metric-card {
-    @apply bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200;
+    @apply bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-lg transition-shadow duration-200;
   }
   
   .sidebar-item {
