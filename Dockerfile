@@ -7,6 +7,8 @@ WORKDIR /app
 
 # Install system deps and Rust toolchain so packages that require compilation
 # (pydantic-core, some cryptography builds, etc.) can build in the builder stage.
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         build-essential \
@@ -26,7 +28,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Copy and install Python dependencies in the builder
 COPY backend/requirements.txt ./requirements.txt
 RUN python -m pip install --upgrade pip setuptools wheel \
-    && python -m pip install --no-cache-dir -r requirements.txt
+    && python -m pip install --no-cache-dir --prefer-binary -r requirements.txt
 
 # Copy app code (so builds that compile extensions with C-extensions can use sources)
 COPY backend/ ./
