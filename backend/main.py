@@ -4,19 +4,23 @@ IndoHomz API - Luxury Real Estate PropTech Platform
 FastAPI backend for property listings, lead management, and AI-powered search.
 """
 
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from contextlib import asynccontextmanager
 from sqlalchemy import text
 import uvicorn
 from datetime import datetime
+import time
 
 # Import routers
-from app.api.routers import properties, leads, analytics, reports
+from app.api.routers import properties, leads, analytics, reports, maps
 from app.database.connection import get_db, engine
 from app.database import models
 from app.core.config import settings, get_database_url
+from app.core.rate_limit import init_rate_limiting
 
 
 @asynccontextmanager
@@ -30,6 +34,8 @@ async def lifespan(app: FastAPI):
     print(f"   Debug Mode: {settings.DEBUG}")
     print(f"   Database: {'Supabase' if 'supabase' in settings.DATABASE_URL else 'SQLite (local)'}")
     print(f"   OpenAI: {'✓ Configured' if settings.OPENAI_API_KEY else '✗ Not configured'}")
+    print(f"   reCAPTCHA: {'✓ Enabled' if settings.RECAPTCHA_ENABLED else '✗ Disabled'}")
+    print(f"   Google Maps: {'✓ Configured' if settings.GOOGLE_MAPS_API_KEY else '✗ Not configured'}")
     print("=" * 50)
     
     # Create database tables
@@ -38,6 +44,10 @@ async def lifespan(app: FastAPI):
         print("✓ Database tables ready")
     except Exception as e:
         print(f"✗ Database initialization error: {e}")
+    
+    # Initialize rate limiting
+    init_rate_limiting()
+    print("✓ Rate limiting initialized")
     
     yield
     
@@ -63,6 +73,25 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Security headers middleware
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    """Add security headers to all responses"""
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    
+    # Security headers
+    if settings.ENVIRONMENT == "production":
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["X-Process-Time"] = str(process_time)
+    
+    return response
 
 
 # =============================================================================
@@ -95,6 +124,13 @@ app.include_router(
     reports.router, 
     prefix="/api/v1/reports", 
     tags=["reports"]
+)
+
+# Maps proxy routes
+app.include_router(
+    maps.router, 
+    prefix="/api/v1/maps", 
+    tags=["maps"]
 )
 
 

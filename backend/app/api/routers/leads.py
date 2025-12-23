@@ -1,16 +1,18 @@
 """
 IndoHomz Leads Router
 
-Handles all lead/inquiry endpoints.
+Handles all lead/inquiry endpoints with rate limiting and spam protection.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status, Query
+from fastapi import APIRouter, Depends, HTTPException, status, Query, Request
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
 from app.database.connection import get_db
 from app.schemas.schemas import Lead, LeadCreate, LeadUpdate
 from app.services.crud import lead_service
+from app.core.rate_limit import rate_limit_lead_submission, rate_limit_moderate
+from app.core.security import require_recaptcha, validate_phone_number, normalize_phone_number, sanitize_html
 
 router = APIRouter()
 
@@ -78,26 +80,88 @@ async def get_lead(
 @router.post("/", response_model=Lead, status_code=status.HTTP_201_CREATED)
 async def create_lead(
     lead_data: LeadCreate,
-    db: Session = Depends(get_db)
+    request: Request,
+    db: Session = Depends(get_db),
+    _rate_limit: None = Depends(rate_limit_lead_submission),
 ):
     """
-    Create a new lead/inquiry.
+    Create a new lead/inquiry with rate limiting and spam protection.
     
-    This is called when a user submits a "Book Visit" or inquiry form.
+    Rate limit: 5 submissions per hour per IP address.
     """
+    # Validate phone number
+    if lead_data.phone and not validate_phone_number(lead_data.phone):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid phone number format. Please enter a valid Indian phone number."
+        )
+    
+    # Normalize phone number
+    if lead_data.phone:
+        lead_data.phone = normalize_phone_number(lead_data.phone)
+    
+    # Sanitize text inputs to prevent XSS
+    if lead_data.name:
+        lead_data.name = sanitize_html(lead_data.name)
+    if lead_data.message:
+        lead_data.message = sanitize_html(lead_data.message)
+    
     return lead_service.create_lead(db=db, lead_data=lead_data)
 
 
 @router.post("/inquiry")
 async def submit_inquiry(
+    request: Request,
     name: str,
     phone: str,
     property_id: Optional[int] = None,
     email: Optional[str] = None,
     message: Optional[str] = None,
     source: str = "website",
-    db: Session = Depends(get_db)
+    recaptcha_token: Optional[str] = None,
+    db: Session = Depends(get_db),
+    _rate_limit: None = Depends(rate_limit_lead_submission),
 ):
+    """
+    Submit a quick inquiry (alternative endpoint with reCAPTCHA support).
+    
+    Rate limit: 5 submissions per hour per IP address.
+    """
+    # Verify reCAPTCHA if enabled
+    if recaptcha_token:
+        from app.core.security import verify_recaptcha
+        client_ip = request.client.host if request.client else None
+        is_valid = await verify_recaptcha(recaptcha_token, client_ip)
+        if not is_valid:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="reCAPTCHA verification failed"
+            )
+    
+    # Validate phone number
+    if not validate_phone_number(phone):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid phone number format"
+        )
+    
+    # Create lead
+    lead_data = LeadCreate(
+        name=sanitize_html(name),
+        phone=normalize_phone_number(phone),
+        email=email,
+        message=sanitize_html(message) if message else None,
+        property_id=property_id,
+        source=source
+    )
+    
+    lead = lead_service.create_lead(db=db, lead_data=lead_data)
+    
+    return {
+        "success": True,
+        "message": "Thank you! We'll contact you shortly.",
+        "lead_id": lead.id
+    }
     """
     Simple inquiry endpoint for form submissions.
     

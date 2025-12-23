@@ -123,10 +123,11 @@ export default function PropertyDetail() {
     return `https://www.google.com/maps/search/?api=1&query=${encoded}`
   }
 
-  // Generate Google Maps Embed URL
+  // Generate Google Maps Embed URL (uses backend proxy)
   const getGoogleMapsEmbed = (location: string) => {
     const encoded = encodeURIComponent(location + ', Gurgaon, Haryana, India')
-    return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encoded}&zoom=15`
+    // Use backend endpoint that securely includes API key
+    return `/api/v1/maps/embed?location=${encoded}`
   }
 
   if (isLoading) {

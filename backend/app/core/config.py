@@ -37,9 +37,10 @@ class Settings(BaseSettings):
     # ==========================================================================
     # SECURITY
     # ==========================================================================
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "indohomz-secret-key-change-in-production-2024")
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "CHANGE_IN_PRODUCTION_" + os.urandom(16).hex())
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 7  # 7 days
     
     # ==========================================================================
     # AI / LLM CONFIGURATION
@@ -53,6 +54,29 @@ class Settings(BaseSettings):
     TAVILY_API_KEY: Optional[str] = os.getenv("TAVILY_API_KEY", None)
     
     # ==========================================================================
+    # GOOGLE SERVICES
+    # ==========================================================================
+    GOOGLE_MAPS_API_KEY: Optional[str] = os.getenv("GOOGLE_MAPS_API_KEY", None)
+    
+    # ==========================================================================
+    # RECAPTCHA (Anti-Spam)
+    # ==========================================================================
+    RECAPTCHA_SITE_KEY: Optional[str] = os.getenv("RECAPTCHA_SITE_KEY", None)
+    RECAPTCHA_SECRET_KEY: Optional[str] = os.getenv("RECAPTCHA_SECRET_KEY", None)
+    RECAPTCHA_ENABLED: bool = os.getenv("RECAPTCHA_ENABLED", "False").lower() == "true"
+    
+    # ==========================================================================
+    # SMS/OTP SERVICE
+    # ==========================================================================
+    SMS_PROVIDER: str = os.getenv("SMS_PROVIDER", "twilio")  # twilio or msg91
+    TWILIO_ACCOUNT_SID: Optional[str] = os.getenv("TWILIO_ACCOUNT_SID", None)
+    TWILIO_AUTH_TOKEN: Optional[str] = os.getenv("TWILIO_AUTH_TOKEN", None)
+    TWILIO_PHONE_NUMBER: Optional[str] = os.getenv("TWILIO_PHONE_NUMBER", None)
+    MSG91_AUTH_KEY: Optional[str] = os.getenv("MSG91_AUTH_KEY", None)
+    MSG91_SENDER_ID: Optional[str] = os.getenv("MSG91_SENDER_ID", "INDOHZ")
+    OTP_EXPIRY_MINUTES: int = 10
+    
+    # ==========================================================================
     # WHATSAPP INTEGRATION (Future)
     # ==========================================================================
     WHATSAPP_API_URL: Optional[str] = os.getenv("WHATSAPP_API_URL", None)
@@ -64,6 +88,7 @@ class Settings(BaseSettings):
     # ==========================================================================
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     DEBUG: bool = os.getenv("DEBUG", "True").lower() == "true"
+    FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:5173")
     
     # ==========================================================================
     # CORS
@@ -76,15 +101,25 @@ class Settings(BaseSettings):
                 return json.loads(origins_env)
             except json.JSONDecodeError:
                 return origins_env.split(",")
-        return [
+        
+        # Default allowed origins
+        origins = [
             "http://localhost:3000",
             "http://localhost:5173",
             "http://localhost:5174",
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:5173",
             "https://indohomz.com",
             "https://www.indohomz.com",
-            "https://indohomz.vercel.app",
+            "https://indohomz1.vercel.app",  # Production
             "https://indohomz-*.vercel.app",  # Preview deployments
         ]
+        
+        # Add custom frontend URL if provided
+        if self.FRONTEND_URL and self.FRONTEND_URL not in origins:
+            origins.append(self.FRONTEND_URL)
+        
+        return origins
     
     # ==========================================================================
     # FILE UPLOADS (Supabase Storage)
