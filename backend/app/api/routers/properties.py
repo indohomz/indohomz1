@@ -20,6 +20,7 @@ from app.schemas.schemas import (
 )
 from app.services.crud import property_service
 from app.core.config import settings
+from app.core.security import get_current_user, get_current_admin
 
 router = APIRouter()
 
@@ -184,10 +185,13 @@ async def get_property_by_slug(
 @router.post("/", response_model=Property, status_code=status.HTTP_201_CREATED)
 async def create_property(
     property_data: PropertyCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
 ):
     """
     Create a new property listing.
+    
+    Requires authentication.
     """
     return property_service.create_property(db=db, property_data=property_data)
 
@@ -196,7 +200,8 @@ async def create_property(
 async def update_property(
     property_id: int,
     property_update: PropertyUpdate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
 ):
     """
     Update an existing property.
@@ -218,10 +223,13 @@ async def update_property(
 async def toggle_property_availability(
     property_id: int,
     is_available: bool,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
 ):
     """
     Quick toggle for property availability status.
+    
+    Requires authentication.
     """
     property_obj = property_service.get_property(db=db, property_id=property_id)
     if not property_obj:
@@ -240,11 +248,13 @@ async def toggle_property_availability(
 async def delete_property(
     property_id: int,
     permanent: bool = Query(False, description="Permanently delete (vs soft delete)"),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    admin_user: dict = Depends(get_current_admin)
 ):
     """
     Delete a property.
     
+    Requires admin authentication.
     By default, performs a soft delete (marks as unavailable).
     Set permanent=true to completely remove the property.
     """

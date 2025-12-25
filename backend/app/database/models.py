@@ -1,8 +1,46 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Text, Boolean
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Text, Boolean, Index
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.database.connection import Base
 
+
+# =============================================================================
+# USER MODEL (Authentication)
+# =============================================================================
+
+class User(Base):
+    """
+    IndoHomz User Model
+    Represents admin users who can manage properties and leads
+    """
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    
+    # Authentication
+    email = Column(String(255), unique=True, nullable=False, index=True)
+    password_hash = Column(String(255), nullable=False)
+    
+    # Profile
+    name = Column(String(100), nullable=True)
+    phone = Column(String(20), nullable=True)
+    
+    # Role-based access
+    role = Column(String(50), default="staff")  # admin, staff, viewer
+    
+    # Status
+    is_active = Column(Boolean, default=True)
+    is_verified = Column(Boolean, default=False)
+    
+    # Metadata
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    last_login = Column(DateTime(timezone=True), nullable=True)
+
+
+# =============================================================================
+# PROPERTY MODEL
+# =============================================================================
 
 class Property(Base):
     """
@@ -16,7 +54,8 @@ class Property(Base):
     slug = Column(String(255), nullable=True, unique=True, index=True)  # URL-friendly identifier
     
     # Pricing
-    price = Column(String(100), nullable=False)  # e.g., "₹15,000/month"
+    price = Column(String(100), nullable=False)  # Display format: "₹15,000/month"
+    price_numeric = Column(Float, nullable=True, index=True)  # Numeric value for sorting/filtering
     
     # Location
     location = Column(String(255), nullable=False, default="Gurgaon")
@@ -49,8 +88,17 @@ class Property(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     
-    # Future: For vector search (pgvector)
-    # embedding = Column(Vector(1536), nullable=True)  # OpenAI ada-002 embedding
+    # Composite indexes for common queries
+    __table_args__ = (
+        Index('idx_property_city_available', 'city', 'is_available'),
+        Index('idx_property_type_available', 'property_type', 'is_available'),
+        Index('idx_property_price_available', 'price_numeric', 'is_available'),
+    )
+
+
+# =============================================================================
+# LEAD MODEL
+# =============================================================================
 
 
 class Lead(Base):
@@ -82,7 +130,17 @@ class Lead(Base):
     
     # Relationships
     property = relationship("Property", backref="leads")
+    
+    # Composite indexes for common queries
+    __table_args__ = (
+        Index('idx_lead_status_created', 'status', 'created_at'),
+        Index('idx_lead_property_status', 'property_id', 'status'),
+    )
 
+
+# =============================================================================
+# BOOKING MODEL
+# =============================================================================
 
 class Booking(Base):
     """

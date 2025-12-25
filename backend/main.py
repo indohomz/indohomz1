@@ -16,7 +16,7 @@ from datetime import datetime
 import time
 
 # Import routers
-from app.api.routers import properties, leads, analytics, reports, maps
+from app.api.routers import properties, leads, analytics, reports, maps, auth
 from app.database.connection import get_db, engine
 from app.database import models
 from app.core.config import settings, get_database_url
@@ -47,9 +47,9 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"✗ Database initialization error: {e}")
     
-    # Initialize rate limiting
-    init_rate_limiting()
-    print("✓ Rate limiting initialized")
+    # Initialize rate limiting (async to support Redis)
+    using_redis = await init_rate_limiting()
+    print(f"✓ Rate limiting initialized {'(Redis)' if using_redis else '(in-memory)'}")
     
     yield
     
@@ -99,6 +99,13 @@ async def add_security_headers(request: Request, call_next):
 # =============================================================================
 # ROUTERS
 # =============================================================================
+
+# Authentication routes (login, register, etc.)
+app.include_router(
+    auth.router,
+    prefix="/api/v1",
+    tags=["authentication"]
+)
 
 # Property routes (main feature)
 app.include_router(
@@ -151,6 +158,7 @@ async def root():
         "timestamp": datetime.now().isoformat(),
         "endpoints": {
             "docs": "/docs",
+            "auth": "/api/v1/auth",
             "properties": "/api/v1/properties",
             "leads": "/api/v1/leads",
             "analytics": "/api/v1/analytics",

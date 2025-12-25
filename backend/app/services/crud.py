@@ -24,6 +24,20 @@ def generate_slug(title: str) -> str:
     return slug
 
 
+def escape_like_pattern(pattern: str) -> str:
+    r"""
+    Escape special characters in SQL LIKE patterns to prevent injection.
+    Escapes %, _, and \ characters.
+    """
+    if not pattern:
+        return pattern
+    # Escape backslash first, then other special chars
+    pattern = pattern.replace('\\', '\\\\')
+    pattern = pattern.replace('%', '\\%')
+    pattern = pattern.replace('_', '\\_')
+    return pattern
+
+
 # =============================================================================
 # PROPERTY SERVICE
 # =============================================================================
@@ -79,11 +93,13 @@ class PropertyService:
             query = query.filter(models.Property.is_available == is_available)
             count_query = count_query.filter(models.Property.is_available == is_available)
         if city:
-            query = query.filter(models.Property.city.ilike(f"%{city}%"))
-            count_query = count_query.filter(models.Property.city.ilike(f"%{city}%"))
+            escaped_city = escape_like_pattern(city)
+            query = query.filter(models.Property.city.ilike(f"%{escaped_city}%", escape='\\'))
+            count_query = count_query.filter(models.Property.city.ilike(f"%{escaped_city}%", escape='\\'))
         if location:
-            query = query.filter(models.Property.location.ilike(f"%{location}%"))
-            count_query = count_query.filter(models.Property.location.ilike(f"%{location}%"))
+            escaped_location = escape_like_pattern(location)
+            query = query.filter(models.Property.location.ilike(f"%{escaped_location}%", escape='\\'))
+            count_query = count_query.filter(models.Property.location.ilike(f"%{escaped_location}%", escape='\\'))
         if property_type:
             query = query.filter(models.Property.property_type == property_type)
             count_query = count_query.filter(models.Property.property_type == property_type)
@@ -116,7 +132,8 @@ class PropertyService:
         if is_available is not None:
             query = query.filter(models.Property.is_available == is_available)
         if city:
-            query = query.filter(models.Property.city.ilike(f"%{city}%"))
+            escaped_city = escape_like_pattern(city)
+            query = query.filter(models.Property.city.ilike(f"%{escaped_city}%", escape='\\'))
         
         return query.scalar() or 0
     
@@ -144,21 +161,23 @@ class PropertyService:
         
         # Text search across multiple fields
         if query_text:
-            search_term = f"%{query_text}%"
+            escaped_text = escape_like_pattern(query_text)
+            search_term = f"%{escaped_text}%"
             query = query.filter(
                 or_(
-                    models.Property.title.ilike(search_term),
-                    models.Property.location.ilike(search_term),
-                    models.Property.area.ilike(search_term),
-                    models.Property.amenities.ilike(search_term),
-                    models.Property.description.ilike(search_term),
+                    models.Property.title.ilike(search_term, escape='\\'),
+                    models.Property.location.ilike(search_term, escape='\\'),
+                    models.Property.area.ilike(search_term, escape='\\'),
+                    models.Property.amenities.ilike(search_term, escape='\\'),
+                    models.Property.description.ilike(search_term, escape='\\'),
                 )
             )
         
         # Apply additional filters
         if filters:
             if filters.get("city"):
-                query = query.filter(models.Property.city.ilike(f"%{filters['city']}%"))
+                escaped_city = escape_like_pattern(filters['city'])
+                query = query.filter(models.Property.city.ilike(f"%{escaped_city}%", escape='\\'))
             if filters.get("property_type"):
                 query = query.filter(models.Property.property_type == filters["property_type"])
             if filters.get("bedrooms"):

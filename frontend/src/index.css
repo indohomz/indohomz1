@@ -1,12 +1,12 @@
+/* Import Google Fonts - must be first */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* IndoHomz - Premium Light Theme PropTech Platform
    Clean, Professional, Eye-catching */
-
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 /* Global font */
 * {

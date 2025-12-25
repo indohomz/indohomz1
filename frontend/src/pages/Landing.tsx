@@ -36,6 +36,27 @@ import {
   Navigation,
   Map as MapIcon
 } from 'lucide-react'
+import SEO, { FAQSchema } from '../components/Common/SEO'
+
+// FAQ data for schema
+const LANDING_FAQS = [
+  {
+    question: "What is IndoHomz?",
+    answer: "IndoHomz is a premium co-living and rental apartment platform in Gurgaon, offering fully-furnished rooms, zero brokerage, and instant booking."
+  },
+  {
+    question: "Is there any brokerage fee?",
+    answer: "No, IndoHomz offers zero brokerage. You pay only the rent and security deposit directly to the property."
+  },
+  {
+    question: "What areas in Gurgaon does IndoHomz cover?",
+    answer: "We cover major areas including DLF Cybercity, Golf Course Road, Sector 24, Sector 54, MG Road, and Sohna Road."
+  },
+  {
+    question: "What amenities are included?",
+    answer: "All properties include WiFi, AC, housekeeping, security, and access to common areas. Premium properties also include gym, pool, and food services."
+  }
+]
 
 // 3D Tilt Card Component
 const TiltCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
@@ -382,6 +403,15 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 overflow-x-hidden">
+      {/* SEO Meta Tags */}
+      <SEO 
+        title="Premium Co-Living & Rental Apartments in Gurgaon"
+        description="Find your perfect home with IndoHomz. Premium co-living spaces, fully-furnished apartments, and verified PGs in Gurgaon. Zero brokerage, instant booking, 24/7 support."
+        keywords={['PG in Gurgaon', 'co-living spaces', 'rental apartments', 'furnished rooms', 'DLF Cybercity PG', 'Golf Course Road apartments']}
+        url="/"
+      />
+      <FAQSchema faqs={LANDING_FAQS} />
+      
       {/* Subtle Background Pattern */}
       <div className="fixed inset-0 pattern-dots opacity-40 pointer-events-none" />
       <div className="fixed inset-0 mesh-gradient-light pointer-events-none" />

@@ -87,8 +87,16 @@ class Settings(BaseSettings):
     # ENVIRONMENT
     # ==========================================================================
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
-    DEBUG: bool = os.getenv("DEBUG", "True").lower() == "true"
     FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:5173")
+    
+    @property
+    def DEBUG(self) -> bool:
+        """DEBUG is True only in development, False in production unless explicitly set"""
+        debug_env = os.getenv("DEBUG")
+        if debug_env is not None:
+            return debug_env.lower() == "true"
+        # Auto-detect: DEBUG=True in development, False in production
+        return self.ENVIRONMENT.lower() != "production"
     
     # ==========================================================================
     # CORS
@@ -103,16 +111,21 @@ class Settings(BaseSettings):
                 return origins_env.split(",")
         
         # Default allowed origins
+        # NOTE: Wildcard patterns like "https://*.vercel.app" do NOT work in CORS!
+        # You must explicitly list each allowed origin.
         origins = [
+            # Local development
             "http://localhost:3000",
             "http://localhost:5173",
             "http://localhost:5174",
             "http://127.0.0.1:3000",
             "http://127.0.0.1:5173",
+            # Production domains
             "https://indohomz.com",
             "https://www.indohomz.com",
-            "https://indohomz1.vercel.app",  # Production
-            "https://indohomz-*.vercel.app",  # Preview deployments
+            "https://indohomz1.vercel.app",
+            # Add preview deployment URLs here explicitly when needed:
+            # "https://indohomz-abc123.vercel.app",
         ]
         
         # Add custom frontend URL if provided

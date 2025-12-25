@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
+import SEO, { BreadcrumbSchema } from '../components/Common/SEO'
 import { 
   ArrowLeft, 
   MapPin, 
@@ -176,6 +177,34 @@ export default function PropertyDetail() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* SEO Meta Tags - Dynamic per property */}
+      {property && (
+        <>
+          <SEO 
+            property={{
+              id: property.id,
+              title: property.title,
+              description: property.description,
+              price: property.price,
+              location: property.location,
+              city: property.city || 'Gurgaon',
+              image: property.image_url,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
+              area_sqft: property.area_sqft,
+              property_type: property.property_type,
+              amenities: property.amenities?.split(',').map((a: string) => a.trim()),
+              is_available: property.is_available
+            }}
+          />
+          <BreadcrumbSchema items={[
+            { name: 'Home', url: '/' },
+            { name: 'Properties', url: '/properties' },
+            { name: property.title, url: `/property/${property.slug || property.id}` }
+          ]} />
+        </>
+      )}
+      
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">

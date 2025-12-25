@@ -44,7 +44,11 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
-      window.location.href = '/login'
+      // Redirect to home page since /login doesn't exist yet
+      // When you add authentication UI, update this to '/login'
+      if (window.location.pathname !== '/') {
+        window.location.href = '/'
+      }
     }
     return Promise.reject(error)
   }

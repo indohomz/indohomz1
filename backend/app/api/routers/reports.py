@@ -14,6 +14,7 @@ from app.database import models
 from app.schemas.schemas import ReportRequest, ReportResponse, ReportType
 from app.services.genai_service import GenAIService
 from app.services.crud import property_service, lead_service
+from app.core.security import get_current_user
 
 router = APIRouter()
 genai_service = GenAIService()
@@ -22,9 +23,10 @@ genai_service = GenAIService()
 @router.post("/generate", response_model=ReportResponse)
 async def generate_report(
     request: ReportRequest,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
 ):
-    """Generate an AI-powered natural language report"""
+    """Generate an AI-powered natural language report. Requires authentication."""
     try:
         # Get data based on report type
         data = await get_report_data(db, request)
@@ -82,9 +84,10 @@ async def get_report_types():
 @router.post("/ask")
 async def ask_business_question(
     question: str,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
 ):
-    """Ask a natural language question about the business data"""
+    """Ask a natural language question about the business data. Requires authentication."""
     try:
         # Get relevant data context
         context = await get_business_context(db)

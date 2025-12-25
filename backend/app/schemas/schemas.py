@@ -5,6 +5,69 @@ from enum import Enum
 
 
 # =============================================================================
+# USER SCHEMAS (Authentication)
+# =============================================================================
+
+class UserRole(str, Enum):
+    ADMIN = "admin"
+    STAFF = "staff"
+    VIEWER = "viewer"
+
+
+class UserBase(BaseModel):
+    email: EmailStr
+    name: Optional[str] = Field(None, max_length=100)
+    phone: Optional[str] = Field(None, max_length=20)
+    role: str = Field(default="staff", max_length=50)
+
+
+class UserCreate(UserBase):
+    password: str = Field(..., min_length=8, max_length=100)
+
+
+class UserUpdate(BaseModel):
+    name: Optional[str] = Field(None, max_length=100)
+    phone: Optional[str] = Field(None, max_length=20)
+    role: Optional[str] = Field(None, max_length=50)
+    is_active: Optional[bool] = None
+
+
+class UserPasswordUpdate(BaseModel):
+    current_password: str
+    new_password: str = Field(..., min_length=8, max_length=100)
+
+
+class User(UserBase):
+    id: int
+    is_active: bool
+    is_verified: bool
+    created_at: datetime
+    updated_at: Optional[datetime] = None
+    last_login: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+
+
+class TokenPayload(BaseModel):
+    user_id: int
+    email: str
+    role: str
+    exp: datetime
+
+
+# =============================================================================
 # PROPERTY SCHEMAS (IndoHomz Core)
 # =============================================================================
 

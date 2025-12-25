@@ -1,3 +1,12 @@
+"""
+⚠️ DEPRECATED - Legacy Retail Analytics Router
+
+This file is from the original retail analytics project and is NOT used by IndoHomz.
+Use the 'properties' router instead for property-related operations.
+
+This file is kept for reference only and should be removed in the next cleanup sprint.
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional

@@ -13,15 +13,20 @@ from datetime import datetime, timedelta
 from app.database.connection import get_db
 from app.database import models
 from app.services.crud import property_service, lead_service
+from app.core.security import get_current_user
 
 router = APIRouter()
 
 
 @router.get("/dashboard")
-async def get_dashboard_analytics(db: Session = Depends(get_db)):
+async def get_dashboard_analytics(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
     """
     Get comprehensive dashboard analytics.
     
+    Requires authentication.
     Returns property stats, lead metrics, and recent activity.
     """
     property_stats = property_service.get_property_stats(db)
@@ -62,26 +67,40 @@ async def get_dashboard_analytics(db: Session = Depends(get_db)):
 
 
 @router.get("/properties/overview")
-async def get_property_analytics(db: Session = Depends(get_db)):
+async def get_property_analytics(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
     """
     Get property-specific analytics.
+    
+    Requires authentication.
     """
     return property_service.get_property_stats(db)
 
 
 @router.get("/leads/overview")
-async def get_lead_analytics(db: Session = Depends(get_db)):
+async def get_lead_analytics(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
     """
     Get lead-specific analytics.
+    
+    Requires authentication.
     """
     return lead_service.get_lead_stats(db)
 
 
 @router.get("/properties/price-distribution")
-async def get_price_distribution(db: Session = Depends(get_db)):
+async def get_price_distribution(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
     """
     Get price distribution of properties.
     
+    Requires authentication.
     Returns properties grouped by price ranges.
     """
     # Note: This is simplified - in production you'd parse the price string
@@ -127,10 +146,13 @@ async def get_price_distribution(db: Session = Depends(get_db)):
 @router.get("/properties/availability-trend")
 async def get_availability_trend(
     days: int = Query(30, ge=7, le=90),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
 ):
     """
     Get property availability trend over time.
+    
+    Requires authentication.
     """
     # Simplified - in production you'd track historical availability
     total = db.query(func.count(models.Property.id)).scalar() or 0
@@ -147,9 +169,14 @@ async def get_availability_trend(
 
 
 @router.get("/leads/conversion-funnel")
-async def get_conversion_funnel(db: Session = Depends(get_db)):
+async def get_conversion_funnel(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
     """
     Get lead conversion funnel data.
+    
+    Requires authentication.
     """
     stats = lead_service.get_lead_stats(db)
     
@@ -172,9 +199,14 @@ async def get_conversion_funnel(db: Session = Depends(get_db)):
 
 
 @router.get("/leads/source-performance")
-async def get_source_performance(db: Session = Depends(get_db)):
+async def get_source_performance(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
     """
     Get lead source performance metrics.
+    
+    Requires authentication.
     """
     stats = lead_service.get_lead_stats(db)
     

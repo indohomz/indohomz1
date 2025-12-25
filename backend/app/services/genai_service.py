@@ -95,7 +95,10 @@ class GenAIService:
                 data = resp.json()
                 return data["choices"][0]["message"]["content"]
             except Exception as e:
-                raise Exception(f"OpenAI API error: {str(e)}")
+                # Log the actual error but don't expose to user
+                import logging
+                logging.error(f"OpenAI API error: {str(e)}")
+                raise Exception("AI service temporarily unavailable. Please try again later.")
     
     async def _generate_with_tavily(self, prompt: str) -> str:
         """Generate response using Tavily API"""
@@ -114,7 +117,10 @@ class GenAIService:
                 data = resp.json()
                 return data.get("result", "")
             except Exception as e:
-                raise Exception(f"Tavily API error: {str(e)}")
+                # Log the actual error but don't expose to user
+                import logging
+                logging.error(f"Tavily API error: {str(e)}")
+                raise Exception("AI service temporarily unavailable. Please try again later.")
     
     def _create_property_overview_prompt(self, data: Dict[str, Any]) -> str:
         """Create prompt for property overview report"""

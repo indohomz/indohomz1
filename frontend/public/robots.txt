@@ -1,0 +1,33 @@
+# IndoHomz Robots.txt
+# https://indohomz.com
+
+User-agent: *
+Allow: /
+Allow: /properties
+Allow: /property/
+
+# Disallow admin/API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+
+# Disallow search with parameters (prevent crawl traps)
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*page=
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://indohomz.com/sitemap.xml
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

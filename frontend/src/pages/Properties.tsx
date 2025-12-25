@@ -7,6 +7,7 @@ import { useState, useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import SEO from '../components/Common/SEO'
 import { 
   Search, 
   MapPin, 
@@ -22,17 +23,15 @@ import {
   Heart,
   Bed,
   Bath,
-  BadgeCheck,
   SlidersHorizontal,
   Phone,
   Wind,
   Star,
   X,
-  Filter,
   ChevronDown,
   Navigation
 } from 'lucide-react'
-import { propertyService, Property } from '../services/api'
+import { propertyService } from '../services/api'
 
 // Sample properties for demo
 const SAMPLE_PROPERTIES = [
@@ -291,6 +290,14 @@ export default function Properties() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
+      {/* SEO Meta Tags */}
+      <SEO 
+        title="Properties for Rent in Gurgaon"
+        description="Browse premium co-living spaces, furnished apartments, and PGs for rent in Gurgaon. Filter by location, price, and amenities. Zero brokerage, instant booking."
+        keywords={['properties for rent Gurgaon', 'PG near me', 'furnished apartments', 'co-living Gurgaon', 'rental rooms DLF Cybercity']}
+        url="/properties"
+      />
+      
       {/* Subtle Background */}
       <div className="fixed inset-0 pattern-dots opacity-30 pointer-events-none" />
 
