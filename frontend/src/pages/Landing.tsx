@@ -37,6 +37,7 @@ import {
   Map as MapIcon
 } from 'lucide-react'
 import SEO, { FAQSchema } from '../components/Common/SEO'
+import { PROPERTIES as REAL_PROPERTIES } from '../data/properties'
 
 // FAQ data for schema
 const LANDING_FAQS = [
@@ -92,61 +93,26 @@ const TiltCard = ({ children, className = "" }: { children: React.ReactNode; cla
   )
 }
 
-// Property data with real-looking info
-const PROPERTIES = [
-  {
-    id: 1,
-    title: "The Luxe Studio",
-    subtitle: "Executive Workspace Living",
-    price: "₹22,000",
-    location: "DLF Cybercity, Sector 24",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-    beds: 1, baths: 1, sqft: 650,
-    amenities: ["High-Speed WiFi", "Fitness Centre", "Infinity Pool"],
-    rating: 4.9, reviews: 128,
-    badge: "Bestseller",
-    color: "indigo"
-  },
-  {
-    id: 2,
-    title: "Golf View Residence",
-    subtitle: "Ultra-Premium Sanctuary",
-    price: "₹45,000",
-    location: "Golf Course Road, Sector 54",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-    beds: 2, baths: 2, sqft: 1200,
-    amenities: ["Smart Home", "Private Gym", "Valet Parking", "Concierge"],
-    rating: 4.8, reviews: 89,
-    badge: "Premium Collection",
-    color: "cyan"
-  },
-  {
-    id: 3,
-    title: "Urban Co-Living Hub",
-    subtitle: "Where Community Thrives",
-    price: "₹14,000",
-    location: "Sohna Road, Sector 49",
-    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    beds: 1, baths: 1, sqft: 400,
-    amenities: ["Gourmet Meals", "Social Events", "Co-working Space"],
-    rating: 4.7, reviews: 256,
-    badge: "Best Value",
-    color: "emerald"
-  },
-  {
-    id: 4,
-    title: "Skyline Penthouse",
-    subtitle: "Above the Ordinary",
-    price: "₹85,000",
-    location: "MG Road, Sector 28",
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-    beds: 3, baths: 3, sqft: 2200,
-    amenities: ["Panoramic Views", "Private Terrace", "Smart Automation"],
-    rating: 5.0, reviews: 42,
-    badge: "Ultra Luxury",
-    color: "amber"
-  }
-]
+// Use real properties from data file with display formatting
+const PROPERTIES = REAL_PROPERTIES.map((p, index) => ({
+  id: p.id,
+  title: p.title,
+  subtitle: p.property_type === 'villa' ? 'Premium Villa Living' : 
+            p.property_type === 'pg' ? 'Co-Living Excellence' : 
+            p.property_type === 'apartment' ? 'Modern Apartment' : 'Premium Property',
+  price: p.price.replace('/month', ''),
+  location: p.area + ', ' + p.city,
+  image: p.image_url,
+  beds: p.bedrooms,
+  baths: p.bathrooms,
+  sqft: p.area_sqft,
+  amenities: p.amenities.split(',').slice(0, 3).map(a => a.trim()),
+  rating: 4.7 + (index * 0.1),
+  reviews: 50 + (index * 30),
+  badge: index === 0 ? 'Premium Villa' : index === 1 ? 'Best Value' : index === 2 ? 'Luxury Living' : 'Top Rated',
+  color: index === 0 ? 'indigo' : index === 1 ? 'emerald' : index === 2 ? 'amber' : 'cyan',
+  slug: p.slug
+}))
 
 const TESTIMONIALS = [
   {
@@ -210,7 +176,7 @@ const PropertyCard = ({ property, index }: { property: typeof PROPERTIES[0]; ind
     >
       <TiltCard>
         <Link 
-          to="/properties"
+          to={`/property/${property.slug || property.id}`}
           className="block group"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
