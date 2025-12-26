@@ -6,10 +6,10 @@
  */
 
 import React, { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import { Search, MapPin, Home as HomeIcon, Sparkles, ArrowRight, Building2, Users, TrendingUp } from 'lucide-react'
-import { propertyService, leadService, Property } from '../services/api'
+import { Property } from '../services/api'
+import { PROPERTIES } from '../data/properties'
 import PropertiesList from '../components/Properties/PropertiesList'
 
 // Stats Card Component
@@ -41,17 +41,11 @@ const InquiryModal = ({ property, onClose }: { property: Property | null; onClos
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    try {
-      await leadService.submitInquiry({
-        ...formData,
-        property_id: property.id,
-        source: 'website',
-      })
+    // Simulate form submission (no backend needed)
+    setTimeout(() => {
       setSubmitted(true)
-    } catch (error) {
-      console.error('Error submitting inquiry:', error)
-    }
-    setIsSubmitting(false)
+      setIsSubmitting(false)
+    }, 1000)
   }
 
   return (
@@ -143,17 +137,16 @@ const Home: React.FC = () => {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
 
-  // Fetch properties
-  const { data: properties, isLoading } = useQuery({
-    queryKey: ['properties'],
-    queryFn: () => propertyService.getProperties({ limit: 50 }).then(res => res.data),
-  })
+  // Use static properties data
+  const properties = PROPERTIES as unknown as Property[]
+  const isLoading = false
 
-  // Fetch stats
-  const { data: stats } = useQuery({
-    queryKey: ['property-stats'],
-    queryFn: () => propertyService.getPropertyStats().then(res => res.data),
-  })
+  // Static stats
+  const stats = {
+    total_properties: PROPERTIES.length,
+    available_properties: PROPERTIES.filter(p => p.is_available).length,
+    rented_properties: PROPERTIES.filter(p => !p.is_available).length,
+  }
 
   const handleBookVisit = (property: Property) => {
     setSelectedProperty(property)

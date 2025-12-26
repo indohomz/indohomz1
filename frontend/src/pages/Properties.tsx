@@ -4,14 +4,12 @@
  */
 
 import { useState, useMemo } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import SEO from '../components/Common/SEO'
 import { 
   Search, 
   MapPin, 
-  Building2, 
   Wifi,
   Dumbbell,
   Car,
@@ -31,59 +29,7 @@ import {
   ChevronDown,
   Navigation
 } from 'lucide-react'
-import { propertyService } from '../services/api'
-
-// Sample properties for demo
-const SAMPLE_PROPERTIES = [
-  {
-    id: 1, title: "The Luxe Studio", price: "₹22,000", location: "DLF Cybercity, Sector 24",
-    image_url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-    bedrooms: 1, bathrooms: 1, area_sqft: 650, property_type: "studio", is_available: true,
-    amenities: "High-Speed WiFi, Fitness Centre, Infinity Pool, Climate Control", slug: "luxe-studio"
-  },
-  {
-    id: 2, title: "Golf View Residence", price: "₹45,000", location: "Golf Course Road, Sector 54",
-    image_url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-    bedrooms: 2, bathrooms: 2, area_sqft: 1200, property_type: "apartment", is_available: true,
-    amenities: "Smart Home, Private Gym, Valet Parking, 24/7 Concierge, AC", slug: "golf-view"
-  },
-  {
-    id: 3, title: "Urban Co-Living Hub", price: "₹14,000", location: "Sohna Road, Sector 49",
-    image_url: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    bedrooms: 1, bathrooms: 1, area_sqft: 400, property_type: "co_living", is_available: true,
-    amenities: "Gourmet Meals, Social Events, Co-working Space, AC", slug: "urban-hub"
-  },
-  {
-    id: 4, title: "Skyline Penthouse", price: "₹85,000", location: "MG Road, Sector 28",
-    image_url: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-    bedrooms: 3, bathrooms: 3, area_sqft: 2200, property_type: "penthouse", is_available: true,
-    amenities: "Panoramic Views, Private Terrace, Smart Automation, AC", slug: "skyline-penthouse"
-  },
-  {
-    id: 5, title: "Metro Connect Suite", price: "₹18,000", location: "HUDA City Centre, Sector 29",
-    image_url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
-    bedrooms: 1, bathrooms: 1, area_sqft: 550, property_type: "apartment", is_available: true,
-    amenities: "Fibre WiFi, Climate Control, Reserved Parking", slug: "metro-connect"
-  },
-  {
-    id: 6, title: "Premium Studio Loft", price: "₹28,000", location: "Cyber City, Sector 24",
-    image_url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop",
-    bedrooms: 1, bathrooms: 1, area_sqft: 750, property_type: "studio", is_available: false,
-    amenities: "Enterprise WiFi, Fitness Studio, Rooftop Lounge, AC", slug: "premium-loft"
-  },
-  {
-    id: 7, title: "Executive Suite", price: "₹35,000", location: "Sector 56, Near Golf Course",
-    image_url: "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800&h=600&fit=crop",
-    bedrooms: 2, bathrooms: 2, area_sqft: 1000, property_type: "apartment", is_available: true,
-    amenities: "Smart WiFi, Gym Access, Infinity Pool, Personal Concierge, AC", slug: "executive-suite"
-  },
-  {
-    id: 8, title: "Artisan Studio", price: "₹16,000", location: "Sector 47, Near Metro",
-    image_url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-    bedrooms: 1, bathrooms: 1, area_sqft: 450, property_type: "studio", is_available: true,
-    amenities: "High-Speed WiFi, Climate Control, Power Backup", slug: "artisan-studio"
-  }
-]
+import { PROPERTIES } from '../data/properties'
 
 // Property Card Component
 const PropertyCard = ({ property, index }: { property: any; index: number }) => {
@@ -247,14 +193,9 @@ export default function Properties() {
   const [availabilityFilter, setAvailabilityFilter] = useState<'all' | 'available' | 'rented'>('all')
   const [showFilters, setShowFilters] = useState(false)
 
-  // Fetch properties from API or use samples
-  const { data: apiProperties, isLoading } = useQuery({
-    queryKey: ['properties'],
-    queryFn: () => propertyService.getProperties({ limit: 100 }).then(res => res.data),
-  })
-
-  // Use API data if available, otherwise use samples
-  const properties = apiProperties?.length ? apiProperties : SAMPLE_PROPERTIES
+  // Use static properties data directly - no loading needed
+  const properties = PROPERTIES
+  const isLoading = false
 
   // Filter properties
   const filteredProperties = useMemo(() => {

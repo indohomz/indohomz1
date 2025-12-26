@@ -3,9 +3,8 @@
  * Light Theme with Google Maps Integration
  */
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import SEO, { BreadcrumbSchema } from '../components/Common/SEO'
 import { 
@@ -38,7 +37,7 @@ import {
   Copy,
   Check
 } from 'lucide-react'
-import { propertyService, leadService } from '../services/api'
+import { getPropertyBySlug, getPropertyById, PROPERTIES } from '../data/properties'
 
 // Amenity icons mapping
 const amenityIcons: Record<string, any> = {
@@ -70,30 +69,22 @@ export default function PropertyDetail() {
   const [submitted, setSubmitted] = useState(false)
   const [activeImage, setActiveImage] = useState(0)
 
-  const { data: property, isLoading } = useQuery({
-    queryKey: ['property', slug],
-    queryFn: async () => {
-      if (slug && isNaN(Number(slug))) {
-        return propertyService.getPropertyBySlug(slug).then(res => res.data)
-      }
-      return propertyService.getProperty(Number(slug)).then(res => res.data)
-    },
-  })
+  // Get property from static data
+  const property = slug ? (
+    isNaN(Number(slug)) 
+      ? getPropertyBySlug(slug) 
+      : getPropertyById(Number(slug))
+  ) : undefined
+  const isLoading = false
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    try {
-      await leadService.submitInquiry({
-        ...formData,
-        property_id: property?.id,
-        source: 'website',
-      })
+    // For now, just simulate success (no backend needed)
+    setTimeout(() => {
       setSubmitted(true)
-    } catch (error) {
-      console.error('Error:', error)
-    }
-    setIsSubmitting(false)
+      setIsSubmitting(false)
+    }, 1000)
   }
 
   const handleShare = async () => {
@@ -424,10 +415,10 @@ export default function PropertyDetail() {
                 </a>
               </div>
               
-              {/* Map Embed Placeholder - In production, use Google Maps API */}
+              {/* Google Maps Embed - Using coordinates for accurate location */}
               <div className="relative h-[300px] rounded-xl overflow-hidden bg-gray-100">
                 <iframe
-                  src={`https://maps.google.com/maps?q=${encodeURIComponent(property.location + ', Gurgaon')}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                  src={`https://maps.google.com/maps?q=${(property as any).latitude || 28.4595},${(property as any).longitude || 77.0266}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -435,23 +426,31 @@ export default function PropertyDetail() {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="rounded-xl"
+                  title={`Map showing ${property.title} location`}
                 />
               </div>
               
-              {/* Nearby Places */}
-              <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {[
-                  { name: 'Metro Station', dist: '500m' },
-                  { name: 'Shopping Mall', dist: '1.2 km' },
-                  { name: 'Hospital', dist: '2 km' },
-                  { name: 'Airport', dist: '15 km' },
-                ].map((place, i) => (
-                  <div key={i} className="text-center p-3 bg-gray-50 rounded-xl">
-                    <p className="text-sm font-medium text-gray-700">{place.name}</p>
-                    <p className="text-xs text-gray-400">{place.dist}</p>
+              {/* Address */}
+              <div className="mt-4 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl">
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 text-indigo-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-gray-900">{property.title}</p>
+                    <p className="text-sm text-gray-600">{property.location}</p>
                   </div>
-                ))}
+                </div>
               </div>
+              
+              {/* Nearby Places from highlights */}
+              {property.highlights && (
+                <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {property.highlights.split(',').map((highlight, i) => (
+                    <div key={i} className="text-center p-3 bg-gray-50 rounded-xl">
+                      <p className="text-sm font-medium text-gray-700">{highlight.trim()}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           </div>
 
