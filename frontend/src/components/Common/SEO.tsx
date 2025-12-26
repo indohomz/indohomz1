@@ -153,7 +153,7 @@ const organizationSchema = {
   "logo": `${BASE_URL}/logo.png`,
   "image": DEFAULT_IMAGE,
   "telephone": "+91-XXXXXXXXXX",
-  "email": "hello@indohomz.com",
+  "email": "info@indohomz.com",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Gurgaon",

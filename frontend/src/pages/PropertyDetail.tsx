@@ -35,7 +35,8 @@ import {
   Navigation,
   ExternalLink,
   Copy,
-  Check
+  Check,
+  Mail
 } from 'lucide-react'
 import { getPropertyBySlug, getPropertyById, PROPERTIES } from '../data/properties'
 
@@ -527,7 +528,7 @@ export default function PropertyDetail() {
                 
                 <div className="mt-6 pt-6 border-t border-gray-100">
                   <p className="text-gray-400 text-sm text-center mb-4">Or contact us directly</p>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-3 mb-3">
                     <a 
                       href={`https://wa.me/919999999999?text=Hi! I'm interested in ${encodeURIComponent(property.title)}`}
                       target="_blank"
@@ -545,6 +546,13 @@ export default function PropertyDetail() {
                       Call Now
                     </a>
                   </div>
+                  <a 
+                    href={`mailto:info@indohomz.com?subject=Inquiry about ${encodeURIComponent(property.title)}`}
+                    className="w-full py-3 rounded-xl bg-gray-900 text-white font-semibold text-center hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 text-sm"
+                  >
+                    <Mail className="h-4 w-4" />
+                    info@indohomz.com
+                  </a>
                 </div>
                 
                 {/* Trust Badges */}

@@ -34,7 +34,8 @@ import {
   CreditCard,
   Award,
   Navigation,
-  Map as MapIcon
+  Map as MapIcon,
+  Mail
 } from 'lucide-react'
 import SEO, { FAQSchema } from '../components/Common/SEO'
 import { PROPERTIES as REAL_PROPERTIES } from '../data/properties'
@@ -885,6 +886,10 @@ export default function Landing() {
                 <li className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
                   +91 99999 99999
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  <a href="mailto:info@indohomz.com" className="hover:text-white transition-colors">info@indohomz.com</a>
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
