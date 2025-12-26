@@ -423,16 +423,15 @@ export default function Landing() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
               <motion.div 
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
-                className="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-200"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
               >
-                <Building2 className="h-6 w-6 text-white" />
+                <img 
+                  src="/logo.png" 
+                  alt="IndoHomz" 
+                  className="h-10 sm:h-12 w-auto object-contain"
+                />
               </motion.div>
-              <div>
-                <span className="text-xl font-bold text-gray-900">IndoHomz</span>
-                <span className="hidden sm:block text-[10px] text-gray-400 uppercase tracking-widest">Premium Living</span>
-              </div>
             </Link>
             
             {/* Nav Links */}
@@ -886,10 +885,11 @@ export default function Landing() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                  <Building2 className="h-6 w-6 text-white" />
-                </div>
-                <span className="text-xl font-bold">IndoHomz</span>
+                <img 
+                  src="/logo.png" 
+                  alt="IndoHomz" 
+                  className="h-12 w-auto object-contain brightness-0 invert"
+                />
               </div>
               <p className="text-gray-400 mb-5 max-w-sm">
                 Redefining urban living for ambitious professionals. Where exceptional spaces meet extraordinary communities.

@@ -217,10 +217,11 @@ export default function PropertyDetail() {
           </Link>
           
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-200">
-              <Building2 className="h-5 w-5 text-white" />
-            </div>
-            <span className="font-bold text-lg bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent hidden sm:block">IndoHomz</span>
+            <img 
+              src="/logo.png" 
+              alt="IndoHomz" 
+              className="h-9 w-auto object-contain"
+            />
           </Link>
           
           <div className="flex items-center gap-2">
