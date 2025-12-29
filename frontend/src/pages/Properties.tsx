@@ -56,7 +56,7 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
       className="group"
     >
       <Link to={`/property/${property.slug || property.id}`}>
-        <div className="relative bg-white rounded-none sm:rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-lg hover:shadow-xl pb-24 md:pb-0">
+        <div className="relative bg-white/95 rounded-t-2xl rounded-b-none sm:rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-xl hover:shadow-2xl pb-24 md:pb-0 mb-8">
           {/* Image */}
           <div className="relative h-52 overflow-hidden">
             <motion.img 
@@ -67,24 +67,13 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
               transition={{ duration: 0.5 }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent" />
-            
             {/* Badges */}
             <div className="absolute top-3 left-3 flex gap-2">
-              <span className={`px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ${
-                property.is_available 
-                  ? 'bg-emerald-500 text-white' 
-                  : 'bg-gray-500 text-white'
-              }`}>
-                {property.is_available ? 'Available Now' : 'Currently Occupied'}
-              </span>
+              <span className={`px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ${property.is_available ? 'bg-emerald-500 text-white' : 'bg-gray-500 text-white'}`}>{property.is_available ? 'Available Now' : 'Currently Occupied'}</span>
             </div>
-            
             {/* Like Button */}
             <motion.button 
-              onClick={(e) => {
-                e.preventDefault()
-                setIsLiked(!isLiked)
-              }}
+              onClick={(e) => { e.preventDefault(); setIsLiked(!isLiked); }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="absolute top-3 right-3 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/90 backdrop-blur flex items-center justify-center hover:bg-white transition-all shadow"
@@ -92,11 +81,10 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
             >
               <Heart className={`h-5 w-5 transition-colors ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-gray-600'}`} />
             </motion.button>
-            
             {/* Price & Rating */}
             <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
               <div>
-                <p className="text-xl font-bold text-white text-shadow">{property.price}</p>
+                <p className="text-lg sm:text-2xl font-extrabold text-white text-shadow">{property.price}</p>
                 <p className="text-white/80 text-xs">per month</p>
               </div>
               <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-white/90 backdrop-blur shadow text-xs">
@@ -106,18 +94,13 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
               </div>
             </div>
           </div>
-          
           {/* Content */}
           <div className="p-5">
-            <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1 group-hover:text-indigo-600 transition-colors">
-              {property.title}
-            </h3>
-            
+            <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 mb-2 line-clamp-1 group-hover:text-indigo-600 transition-colors">{property.title}</h3>
             <div className="flex items-center gap-2 text-gray-500 mb-4">
               <MapPin className="h-4 w-4 text-indigo-500" />
               <span className="text-sm truncate">{property.location}</span>
             </div>
-            
             {/* Details */}
             <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100">
               {property.bedrooms != null && (
@@ -134,37 +117,35 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
                 <span className="text-gray-600 text-sm">{property.area_sqft} sqft</span>
               )}
             </div>
-            
             {/* Amenities */}
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-3 mb-6">
               {hasWifi && (
-                <span className="px-2.5 py-1 min-w-[44px] min-h-[32px] rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-1">
                   <Wifi className="h-4 w-4 text-indigo-500" /> WiFi
                 </span>
               )}
               {hasAC && (
-                <span className="px-2.5 py-1 min-w-[44px] min-h-[32px] rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-1">
                   <Wind className="h-4 w-4 text-indigo-500" /> AC
                 </span>
               )}
               {hasGym && (
-                <span className="px-2.5 py-1 min-w-[44px] min-h-[32px] rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-1">
                   <Dumbbell className="h-4 w-4 text-indigo-500" /> Gym
                 </span>
               )}
               {hasParking && (
-                <span className="px-2.5 py-1 min-w-[44px] min-h-[32px] rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-1">
                   <Car className="h-4 w-4 text-indigo-500" /> Parking
                 </span>
               )}
             </div>
-            
             {/* Actions */}
             <div className="flex gap-2">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex-1 py-3 min-h-[44px] rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-center flex items-center justify-center gap-2 text-sm shadow-lg shadow-indigo-200"
+                className="flex-1 py-3 min-h-[44px] w-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-center flex items-center justify-center gap-2 text-base shadow-lg shadow-indigo-200"
                 tabIndex={0}
                 role="button"
                 aria-label="View Details"
@@ -178,7 +159,7 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
                 onClick={(e) => e.stopPropagation()}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="py-3 px-4 rounded-xl bg-green-500 text-white hover:bg-green-600 transition-colors shadow-lg shadow-green-200"
+                className="py-3 px-4 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors shadow-lg shadow-green-200"
               >
                 <MessageCircle className="h-5 w-5" />
               </motion.a>
@@ -401,12 +382,12 @@ export default function Properties() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-0 sm:px-4 py-8 relative w-full overflow-x-hidden">
+      <main className="max-w-7xl mx-auto px-0 sm:px-4 py-4 sm:py-8 relative w-full overflow-x-hidden">
         {/* Results Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between mb-8"
+          className="flex items-center justify-between mb-6 sm:mb-8"
         >
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
