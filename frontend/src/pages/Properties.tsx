@@ -56,7 +56,7 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
       className="group"
     >
       <Link to={`/property/${property.slug || property.id}`}>
-        <div className="relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-lg hover:shadow-xl pb-24 md:pb-0">
+        <div className="relative bg-white rounded-none sm:rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-lg hover:shadow-xl pb-24 md:pb-0">
           {/* Image */}
           <div className="relative h-52 overflow-hidden">
             <motion.img 
@@ -401,7 +401,7 @@ export default function Properties() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 relative w-full overflow-x-hidden">
+      <main className="max-w-7xl mx-auto px-0 sm:px-4 py-8 relative w-full overflow-x-hidden">
         {/* Results Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
