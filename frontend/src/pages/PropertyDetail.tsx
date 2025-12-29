@@ -256,7 +256,7 @@ export default function PropertyDetail() {
             
             {/* Thumbnail Grid */}
             <div className="grid grid-cols-2 gap-2">
-              {images.slice(1, 5).map((img, i) => (
+              {images.slice(1).map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveImage(i + 1)}
