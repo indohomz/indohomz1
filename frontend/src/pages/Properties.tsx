@@ -54,14 +54,9 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="group"
-                className="fixed right-4 md:right-6 w-14 h-14 min-w-[44px] min-h-[44px] rounded-full bg-green-500 text-white flex items-center justify-center shadow-2xl shadow-green-500/30 z-50"
-                style={{
-                  bottom: 'max(1.5rem, env(safe-area-inset-bottom, 0px) + 1rem)'
-                }}
-                aria-label="Chat on WhatsApp"
+    >
       <Link to={`/property/${property.slug || property.id}`}>
-        <div className="relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-lg hover:shadow-xl">
-                <div className="relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-lg hover:shadow-xl pb-8 md:pb-0">
+        <div className="relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-lg hover:shadow-xl pb-24 md:pb-0">
           {/* Image */}
           <div className="relative h-52 overflow-hidden">
             <motion.img 
@@ -239,7 +234,7 @@ export default function Properties() {
   }, [properties])
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div className="min-h-screen bg-gray-50 text-gray-900 w-full overflow-x-hidden">
       {/* SEO Meta Tags */}
       <SEO 
         title="Properties for Rent in Gurgaon"
@@ -406,7 +401,7 @@ export default function Properties() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 relative">
+      <main className="max-w-7xl mx-auto px-4 py-8 relative w-full overflow-x-hidden">
         {/* Results Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -435,9 +430,10 @@ export default function Properties() {
           <motion.div 
             layout
             className={viewMode === 'grid' 
-              ? "grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-              : "flex flex-col gap-4"
+              ? "grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-full"
+              : "flex flex-col gap-4 w-full max-w-full"
             }
+            style={{overflowX: 'hidden'}}
           >
             <AnimatePresence>
               {filteredProperties.map((property, index) => (
