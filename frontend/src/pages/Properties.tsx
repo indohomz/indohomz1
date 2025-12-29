@@ -56,17 +56,17 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
       className="group"
     >
       <Link to={`/property/${property.slug || property.id}`}>
-        <div className="relative bg-white/95 rounded-t-2xl rounded-b-none sm:rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-xl hover:shadow-2xl pb-24 md:pb-0 mb-8">
+        <div className="relative bg-white/95 rounded-t-2xl rounded-b-none sm:rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-xl hover:shadow-2xl pb-24 md:pb-0 mb-6">
           {/* Image */}
-          <div className="relative h-52 overflow-hidden">
+          <div className="relative h-52 overflow-hidden rounded-t-2xl sm:rounded-t-2xl">
             <motion.img 
               src={property.image_url} 
               alt={property.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-t-2xl sm:rounded-t-2xl"
               animate={{ scale: isHovered ? 1.08 : 1 }}
               transition={{ duration: 0.5 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent rounded-t-2xl sm:rounded-t-2xl" />
             {/* Badges */}
             <div className="absolute top-3 left-3 flex gap-2">
               <span className={`px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ${property.is_available ? 'bg-emerald-500 text-white' : 'bg-gray-500 text-white'}`}>{property.is_available ? 'Available Now' : 'Currently Occupied'}</span>
@@ -141,11 +141,11 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
               )}
             </div>
             {/* Actions */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 mt-4">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex-1 py-3 min-h-[44px] w-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-center flex items-center justify-center gap-2 text-base shadow-lg shadow-indigo-200"
+                className="flex-1 py-3 min-h-[44px] w-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-center flex items-center justify-center gap-2 text-base shadow-lg shadow-indigo-200 px-3"
                 tabIndex={0}
                 role="button"
                 aria-label="View Details"
