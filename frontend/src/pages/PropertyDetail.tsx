@@ -156,16 +156,12 @@ export default function PropertyDetail() {
   }
 
   const amenitiesList = property.amenities?.split(',').map(a => a.trim()) || []
-  const imageUrl = property.image_url || 
-    `https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&h=800&fit=crop`
+  const imageUrl = property.image_url || '/images/properties/default.webp'
   
-  // Multiple images for gallery (using variations of the main image)
-  const images = [
-    imageUrl,
-    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800&h=600&fit=crop',
-  ]
+  // Use property's actual images array, fallback to image_url if not available
+  const images = property.images && property.images.length > 0 
+    ? property.images 
+    : [imageUrl]
 
   return (
     <div className="min-h-screen bg-gray-50">
