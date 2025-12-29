@@ -54,9 +54,14 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="group"
-    >
+                className="fixed right-4 md:right-6 w-14 h-14 min-w-[44px] min-h-[44px] rounded-full bg-green-500 text-white flex items-center justify-center shadow-2xl shadow-green-500/30 z-50"
+                style={{
+                  bottom: 'max(1.5rem, env(safe-area-inset-bottom, 0px) + 1rem)'
+                }}
+                aria-label="Chat on WhatsApp"
       <Link to={`/property/${property.slug || property.id}`}>
         <div className="relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-lg hover:shadow-xl">
+                <div className="relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-lg hover:shadow-xl pb-8 md:pb-0">
           {/* Image */}
           <div className="relative h-52 overflow-hidden">
             <motion.img 
@@ -87,9 +92,10 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
               }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur flex items-center justify-center hover:bg-white transition-all shadow"
+              className="absolute top-3 right-3 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/90 backdrop-blur flex items-center justify-center hover:bg-white transition-all shadow"
+              aria-label={isLiked ? 'Unlike' : 'Like'}
             >
-              <Heart className={`h-4 w-4 transition-colors ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-gray-600'}`} />
+              <Heart className={`h-5 w-5 transition-colors ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-gray-600'}`} />
             </motion.button>
             
             {/* Price & Rating */}
@@ -137,23 +143,23 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
             {/* Amenities */}
             <div className="flex flex-wrap gap-2 mb-4">
               {hasWifi && (
-                <span className="px-2.5 py-1 rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
-                  <Wifi className="h-3 w-3 text-indigo-500" /> WiFi
+                <span className="px-2.5 py-1 min-w-[44px] min-h-[32px] rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
+                  <Wifi className="h-4 w-4 text-indigo-500" /> WiFi
                 </span>
               )}
               {hasAC && (
-                <span className="px-2.5 py-1 rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
-                  <Wind className="h-3 w-3 text-indigo-500" /> AC
+                <span className="px-2.5 py-1 min-w-[44px] min-h-[32px] rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
+                  <Wind className="h-4 w-4 text-indigo-500" /> AC
                 </span>
               )}
               {hasGym && (
-                <span className="px-2.5 py-1 rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
-                  <Dumbbell className="h-3 w-3 text-indigo-500" /> Gym
+                <span className="px-2.5 py-1 min-w-[44px] min-h-[32px] rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
+                  <Dumbbell className="h-4 w-4 text-indigo-500" /> Gym
                 </span>
               )}
               {hasParking && (
-                <span className="px-2.5 py-1 rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
-                  <Car className="h-3 w-3 text-indigo-500" /> Parking
+                <span className="px-2.5 py-1 min-w-[44px] min-h-[32px] rounded-full text-xs bg-gray-50 text-gray-600 border border-gray-100 flex items-center gap-1">
+                  <Car className="h-4 w-4 text-indigo-500" /> Parking
                 </span>
               )}
             </div>
@@ -163,9 +169,12 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex-1 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-center flex items-center justify-center gap-2 text-sm shadow-lg shadow-indigo-200"
+                className="flex-1 py-3 min-h-[44px] rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-center flex items-center justify-center gap-2 text-sm shadow-lg shadow-indigo-200"
+                tabIndex={0}
+                role="button"
+                aria-label="View Details"
               >
-                View Details <ArrowRight className="h-4 w-4" />
+                View Details <ArrowRight className="h-5 w-5" />
               </motion.div>
               <motion.a 
                 href={`https://wa.me/919999999999?text=Hi! I'm interested in ${encodeURIComponent(property.title)}`}
@@ -310,27 +319,29 @@ export default function Properties() {
         </div>
       </header>
 
-      {/* Filters Bar */}
+      {/* Filters Bar - Mobile friendly */}
       <div className="sticky top-[73px] z-40 bg-white/90 backdrop-blur-xl border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
+          <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-hide snap-x snap-mandatory">
             {/* Filter Button */}
             <button 
               onClick={() => setShowFilters(!showFilters)}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium border flex items-center gap-2 flex-shrink-0 transition-all ${
+              className={`px-4 py-2.5 min-w-[44px] min-h-[44px] rounded-xl text-sm font-medium border flex items-center gap-2 flex-shrink-0 transition-all snap-start ${
                 showFilters 
                   ? 'bg-indigo-50 border-indigo-200 text-indigo-700' 
                   : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
               }`}
+              aria-label="Show Filters"
             >
-              <SlidersHorizontal className="h-4 w-4" /> Filters
+              <SlidersHorizontal className="h-5 w-5" />
+              <span className="hidden xs:inline">Filters</span>
               <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
             </button>
             
             {/* Property Type Pills */}
             <button
               onClick={() => setSelectedType('all')}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all flex-shrink-0 ${
+              className={`px-4 py-2.5 min-w-[44px] min-h-[44px] rounded-xl text-sm font-medium whitespace-nowrap transition-all flex-shrink-0 snap-start ${
                 selectedType === 'all' 
                   ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-200' 
                   : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
@@ -342,7 +353,7 @@ export default function Properties() {
               <button
                 key={type}
                 onClick={() => setSelectedType(type)}
-                className={`px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap capitalize transition-all flex-shrink-0 ${
+                className={`px-4 py-2.5 min-w-[44px] min-h-[44px] rounded-xl text-sm font-medium whitespace-nowrap capitalize transition-all flex-shrink-0 snap-start ${
                   selectedType === type 
                     ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-200' 
                     : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
