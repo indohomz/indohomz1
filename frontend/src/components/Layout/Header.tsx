@@ -1,7 +1,6 @@
 import { Fragment } from 'react'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import {
-  Bell,
   ChevronDown,
   LogOut,
   Menu as MenuIcon,
@@ -13,6 +12,7 @@ import {
 } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
 import SecurityLock from './SecurityLock'
+import NotificationCenter from '../Notifications/NotificationCenter'
 
 interface HeaderProps {
   onOpenMobileSidebar?: () => void
@@ -55,13 +55,7 @@ export default function Header({
 
       {/* Right-side Icons */}
       <div className="flex items-center gap-3">
-        <button
-          type="button"
-          className="p-2 rounded-full text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
-        >
-          <span className="sr-only">View notifications</span>
-          <Bell className="h-5 w-5" />
-        </button>
+        <NotificationCenter />
 
         <button
           type="button"
