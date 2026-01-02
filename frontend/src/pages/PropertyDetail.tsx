@@ -164,7 +164,7 @@ export default function PropertyDetail() {
     : [imageUrl]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 via-white to-gray-100">
       {/* SEO Meta Tags - Dynamic per property */}
       {property && (
         <>
@@ -194,11 +194,11 @@ export default function PropertyDetail() {
       )}
       
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <header className="sticky top-0 z-50 bg-gray-900 border-b border-gray-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
           <Link 
             to="/properties" 
-            className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition-colors text-sm font-medium"
+            className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors text-sm font-medium"
           >
             <ArrowLeft className="h-5 w-5" />
             <span className="hidden sm:inline">Back to Properties</span>
@@ -208,31 +208,31 @@ export default function PropertyDetail() {
             <img 
               src="/logo.png" 
               alt="IndoHomz" 
-              className="h-9 w-auto object-contain"
+              className="h-9 w-auto object-contain brightness-0 invert"
             />
           </Link>
           
           <div className="flex items-center gap-2">
             <button 
               onClick={() => setIsLiked(!isLiked)}
-              className="p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              className="p-2.5 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
               aria-label={isLiked ? "Unlike" : "Like"}
             >
-              <Heart className={`h-5 w-5 ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-gray-600'}`} />
+              <Heart className={`h-5 w-5 ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-gray-300'}`} />
             </button>
             <button 
               onClick={handleShare}
-              className="p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors flex items-center gap-1"
+              className="p-2.5 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors flex items-center gap-1"
               aria-label="Share"
             >
-              {copied ? <Check className="h-5 w-5 text-green-600" /> : <Share2 className="h-5 w-5 text-gray-600" />}
+              {copied ? <Check className="h-5 w-5 text-green-400" /> : <Share2 className="h-5 w-5 text-gray-300" />}
             </button>
           </div>
         </div>
       </header>
 
       {/* Image Gallery */}
-      <section className="bg-white">
+      <section className="bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 p-2">
             {/* Main Image */}
@@ -275,7 +275,7 @@ export default function PropertyDetail() {
       </section>
 
       {/* Content */}
-      <section className="max-w-7xl mx-auto px-4 py-8">
+      <section className="max-w-7xl mx-auto px-4 py-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
@@ -459,7 +459,7 @@ export default function PropertyDetail() {
               transition={{ delay: 0.2 }}
               className="sticky top-24"
             >
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+              <div className="bg-white rounded-2xl p-6 shadow-xl border border-gray-200">
                 <h3 className="text-lg font-bold text-gray-900 mb-5 flex items-center gap-2">
                   <Calendar className="h-5 w-5 text-indigo-500" />
                   Schedule a Visit
@@ -526,7 +526,7 @@ export default function PropertyDetail() {
                   <p className="text-gray-400 text-sm text-center mb-4">Or contact us directly</p>
                   <div className="grid grid-cols-2 gap-3 mb-3">
                     <a 
-                      href={`https://wa.me/919999999999?text=Hi! I'm interested in ${encodeURIComponent(property.title)}`}
+                      href={`https://wa.me/919053070100?text=Hi! I'm interested in ${encodeURIComponent(property.title)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="py-3 rounded-xl bg-green-500 text-white font-semibold text-center hover:bg-green-600 transition-colors flex items-center justify-center gap-2 text-sm"
@@ -535,11 +535,11 @@ export default function PropertyDetail() {
                       WhatsApp
                     </a>
                     <a 
-                      href="tel:+919999999999"
+                      href="tel:+919053070100"
                       className="py-3 rounded-xl bg-gray-100 text-gray-700 font-semibold text-center hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 text-sm"
                     >
                       <Phone className="h-4 w-4" />
-                      Call Now
+                      9053070100
                     </a>
                   </div>
                   <a 
@@ -566,7 +566,7 @@ export default function PropertyDetail() {
 
       {/* Floating WhatsApp - Mobile */}
       <a
-        href={`https://wa.me/919999999999?text=Hi! I'm interested in ${encodeURIComponent(property.title)}`}
+        href={`https://wa.me/919053070100?text=Hi! I'm interested in ${encodeURIComponent(property.title)}`}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-2xl z-50 hover:scale-110 transition-transform lg:hidden"

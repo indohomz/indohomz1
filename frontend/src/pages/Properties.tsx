@@ -56,7 +56,7 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
       className="group"
     >
       <Link to={`/property/${property.slug || property.id}`}>
-        <div className="relative bg-white/95 rounded-t-2xl rounded-b-none sm:rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-300 shadow-xl hover:shadow-2xl pb-24 md:pb-0 mb-6">
+        <div className="relative bg-white rounded-t-2xl rounded-b-none sm:rounded-2xl overflow-hidden border border-gray-200 hover:border-indigo-300 transition-all duration-300 shadow-lg hover:shadow-2xl pb-24 md:pb-0 mb-6 hover:bg-gray-50">
           {/* Image */}
           <div className="relative h-52 overflow-hidden rounded-t-2xl sm:rounded-t-2xl">
             <motion.img 
@@ -153,7 +153,7 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
                 View Details <ArrowRight className="h-5 w-5" />
               </motion.div>
               <motion.a 
-                href={`https://wa.me/919999999999?text=Hi! I'm interested in ${encodeURIComponent(property.title)}`}
+                href={`https://wa.me/919053070100?text=Hi! I'm interested in ${encodeURIComponent(property.title)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
@@ -215,7 +215,7 @@ export default function Properties() {
   }, [properties])
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 w-full overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 via-white to-gray-100 text-gray-900 w-full overflow-x-hidden">
       {/* SEO Meta Tags */}
       <SEO 
         title="Properties for Rent in Gurgaon"
@@ -228,7 +228,7 @@ export default function Properties() {
       <div className="fixed inset-0 pattern-dots opacity-30 pointer-events-none" />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-sm">
+      <header className="sticky top-0 z-50 bg-gray-900 backdrop-blur-xl border-b border-gray-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
@@ -236,7 +236,7 @@ export default function Properties() {
               <img 
                 src="/logo.png" 
                 alt="IndoHomz" 
-                className="h-10 w-auto object-contain"
+                className="h-10 w-auto object-contain brightness-0 invert"
               />
             </Link>
             
@@ -249,11 +249,11 @@ export default function Properties() {
                   placeholder="Search by neighbourhood, amenities, or style..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all text-sm"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all text-sm"
                 />
                 {searchQuery && (
                   <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2">
-                    <X className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                    <X className="h-4 w-4 text-gray-400 hover:text-white" />
                   </button>
                 )}
               </div>
@@ -262,16 +262,16 @@ export default function Properties() {
             {/* Actions */}
             <div className="flex items-center gap-3">
               <a 
-                href="tel:+919999999999"
-                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all text-sm font-medium"
+                href="tel:+919053070100"
+                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl text-gray-300 hover:text-white hover:bg-gray-800 transition-all text-sm font-medium"
               >
-                <Phone className="h-4 w-4" /> Call
+                <Phone className="h-4 w-4" /> 9053070100
               </a>
               <a 
-                href="https://wa.me/919999999999"
+                href="https://wa.me/919053070100"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500 text-white font-medium hover:bg-green-600 transition-colors text-sm shadow-lg shadow-green-200"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500 text-white font-medium hover:bg-green-600 transition-colors text-sm shadow-lg shadow-green-500/30"
               >
                 <MessageCircle className="h-4 w-4" />
                 <span className="hidden sm:inline">WhatsApp</span>
@@ -288,7 +288,7 @@ export default function Properties() {
                 placeholder="Search properties..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 outline-none text-sm"
+                className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder:text-gray-400 focus:border-indigo-500 outline-none text-sm"
               />
             </div>
           </div>
@@ -296,7 +296,7 @@ export default function Properties() {
       </header>
 
       {/* Filters Bar - Mobile friendly */}
-      <div className="sticky top-[73px] z-40 bg-white/90 backdrop-blur-xl border-b border-gray-100">
+      <div className="sticky top-[73px] z-40 bg-gray-100 backdrop-blur-xl border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
           <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-hide snap-x snap-mandatory">
             {/* Filter Button */}
@@ -454,7 +454,7 @@ export default function Properties() {
 
       {/* Floating WhatsApp */}
       <motion.a
-        href="https://wa.me/919999999999"
+        href="https://wa.me/919053070100"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}
