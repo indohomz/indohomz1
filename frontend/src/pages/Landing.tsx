@@ -397,7 +397,7 @@ export default function Landing() {
                 <img 
                   src="/logo.png" 
                   alt="IndoHomz" 
-                  className="h-10 sm:h-12 w-auto object-contain"
+                  className="h-14 sm:h-16 w-auto object-contain"
                 />
               </motion.div>
             </Link>
@@ -1056,7 +1056,7 @@ export default function Landing() {
                 <img 
                   src="/logo.png" 
                   alt="IndoHomz" 
-                  className="h-12 w-auto object-contain brightness-0 invert"
+                  className="h-16 w-auto object-contain brightness-0 invert"
                 />
               </div>
               <p className="text-gray-400 mb-5 max-w-sm">
