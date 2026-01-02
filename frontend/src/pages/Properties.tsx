@@ -236,7 +236,7 @@ export default function Properties() {
               <img 
                 src="/logo.png" 
                 alt="IndoHomz" 
-                className="h-20 w-auto object-contain"
+                className="h-28 w-auto object-contain"
               />
             </Link>
             
