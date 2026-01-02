@@ -386,7 +386,7 @@ export default function Landing() {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
@@ -397,7 +397,7 @@ export default function Landing() {
                 <img 
                   src="/logo.png" 
                   alt="IndoHomz" 
-                  className="h-28 sm:h-32 w-auto object-contain"
+                  className="h-12 sm:h-14 w-auto object-contain"
                 />
               </motion.div>
             </Link>
@@ -1056,7 +1056,7 @@ export default function Landing() {
                 <img 
                   src="/logo.png" 
                   alt="IndoHomz" 
-                  className="h-28 w-auto object-contain brightness-0 invert"
+                  className="h-14 w-auto object-contain brightness-0 invert"
                 />
               </div>
               <p className="text-gray-400 mb-5 max-w-sm">
