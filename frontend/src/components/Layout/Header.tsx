@@ -9,6 +9,7 @@ import {
   User,
   Moon,
   Sun,
+  Phone,
 } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
 import SecurityLock from './SecurityLock'
@@ -55,6 +56,15 @@ export default function Header({
 
       {/* Right-side Icons */}
       <div className="flex items-center gap-3">
+        {/* Contact Number */}
+        <a 
+          href="tel:+919053070100"
+          className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+        >
+          <Phone className="h-4 w-4" />
+          <span className="text-sm font-semibold">9053070100</span>
+        </a>
+
         <NotificationCenter />
 
         <button
