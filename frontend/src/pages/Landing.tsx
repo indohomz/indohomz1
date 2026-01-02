@@ -443,7 +443,7 @@ export default function Landing() {
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        {/* Video Background */}
+        {/* Video Background - Prominent and Clear */}
         <motion.div 
           style={{ y: heroY }}
           className="absolute inset-0"
@@ -455,11 +455,13 @@ export default function Landing() {
             loop
             playsInline
             className="w-full h-full object-cover"
-            poster="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop"
+            poster="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1920&h=1080&fit=crop"
           >
-            <source src="https://cdn.coverr.co/videos/coverr-a-couple-sitting-on-a-sofa-and-working-on-laptops-6595/1080p.mp4" type="video/mp4" />
+            {/* Multiple video sources for showing people enjoying co-living */}
+            <source src="https://cdn.coverr.co/videos/coverr-friends-celebrating-together-9743/1080p.mp4" type="video/mp4" />
+            <source src="https://cdn.coverr.co/videos/coverr-young-people-having-fun-at-home-8206/1080p.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/80 to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-white" />
         </motion.div>
         
         {/* Video Control */}
@@ -599,6 +601,146 @@ export default function Landing() {
             />
           </motion.div>
         </motion.div>
+      </section>
+
+      {/* Lifestyle Video Showcase Section - New */}
+      <section className="relative py-20 px-4 sm:px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <span className="text-sm font-semibold text-indigo-600 uppercase tracking-widest">Experience IndoHomz Life</span>
+            <h2 className="text-3xl sm:text-5xl font-bold mt-3 text-gray-900">
+              Where <span className="text-indigo-600">Memories</span> Are Made
+            </h2>
+            <p className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
+              Watch how our residents enjoy premium co-living spaces with modern amenities and vibrant community
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Main Video 1 - Bachelors Enjoying */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover:shadow-indigo-200 transition-all group"
+            >
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-[400px] object-cover"
+              >
+                <source src="https://cdn.coverr.co/videos/coverr-friends-playing-video-games-together-8204/1080p.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Bachelor's Haven</h3>
+                  <p className="text-white/90 text-sm">Modern spaces for young professionals</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Main Video 2 - Couples Enjoying */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover:shadow-purple-200 transition-all group"
+            >
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-[400px] object-cover"
+              >
+                <source src="https://cdn.coverr.co/videos/coverr-couple-cooking-together-in-the-kitchen-4253/1080p.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Couple-Friendly Homes</h3>
+                  <p className="text-white/90 text-sm">Perfect spaces for couples to thrive</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Additional Video 3 - Community Activities */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover:shadow-emerald-200 transition-all group"
+            >
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-[400px] object-cover"
+              >
+                <source src="https://cdn.coverr.co/videos/coverr-friends-celebrating-together-9743/1080p.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Vibrant Community</h3>
+                  <p className="text-white/90 text-sm">Connect with like-minded residents</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Additional Video 4 - Amenities */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover:shadow-amber-200 transition-all group"
+            >
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-[400px] object-cover"
+              >
+                <source src="https://cdn.coverr.co/videos/coverr-young-people-having-fun-at-home-8206/1080p.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Premium Amenities</h3>
+                  <p className="text-white/90 text-sm">Enjoy world-class facilities daily</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* CTA Below Videos */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="text-center mt-12"
+          >
+            <Link
+              to="/properties"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg shadow-xl shadow-indigo-200 hover:shadow-2xl hover:scale-105 transition-all"
+            >
+              <Play className="h-6 w-6" />
+              Explore Our Properties
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+          </motion.div>
+        </div>
       </section>
 
       {/* Stats Section */}
