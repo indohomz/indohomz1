@@ -56,7 +56,7 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
       className="group"
     >
       <Link to={`/property/${property.slug || property.id}`}>
-        <div className="relative bg-white rounded-t-2xl rounded-b-none sm:rounded-2xl overflow-hidden border border-gray-200 hover:border-indigo-300 transition-all duration-300 shadow-lg hover:shadow-2xl pb-24 md:pb-0 mb-6 hover:bg-gray-50">
+        <div className="relative bg-gray-800/95 rounded-t-2xl rounded-b-none sm:rounded-2xl overflow-hidden border border-gray-700 hover:border-indigo-500 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10 pb-24 md:pb-0 mb-6">
           {/* Image */}
           <div className="relative h-52 overflow-hidden rounded-t-2xl sm:rounded-t-2xl">
             <motion.img 
@@ -96,47 +96,47 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
           </div>
           {/* Content */}
           <div className="p-5">
-            <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 mb-2 line-clamp-1 group-hover:text-indigo-600 transition-colors">{property.title}</h3>
-            <div className="flex items-center gap-2 text-gray-500 mb-4">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2 line-clamp-1 group-hover:text-indigo-400 transition-colors">{property.title}</h3>
+            <div className="flex items-center gap-2 text-gray-400 mb-4">
               <MapPin className="h-4 w-4 text-indigo-500" />
               <span className="text-sm truncate">{property.location}</span>
             </div>
             {/* Details */}
-            <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100">
+            <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-700">
               {property.bedrooms != null && (
-                <span className="text-gray-600 text-sm flex items-center gap-1">
-                  <Bed className="h-4 w-4 text-gray-400" /> {property.bedrooms} Bed
+                <span className="text-gray-300 text-sm flex items-center gap-1">
+                  <Bed className="h-4 w-4 text-gray-500" /> {property.bedrooms} Bed
                 </span>
               )}
               {property.bathrooms != null && (
-                <span className="text-gray-600 text-sm flex items-center gap-1">
-                  <Bath className="h-4 w-4 text-gray-400" /> {property.bathrooms} Bath
+                <span className="text-gray-300 text-sm flex items-center gap-1">
+                  <Bath className="h-4 w-4 text-gray-500" /> {property.bathrooms} Bath
                 </span>
               )}
               {property.area_sqft && (
-                <span className="text-gray-600 text-sm">{property.area_sqft} sqft</span>
+                <span className="text-gray-300 text-sm">{property.area_sqft} sqft</span>
               )}
             </div>
             {/* Amenities */}
             <div className="flex flex-wrap gap-3 mb-6">
               {hasWifi && (
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-1">
-                  <Wifi className="h-4 w-4 text-indigo-500" /> WiFi
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 flex items-center gap-1">
+                  <Wifi className="h-4 w-4 text-indigo-400" /> WiFi
                 </span>
               )}
               {hasAC && (
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-1">
-                  <Wind className="h-4 w-4 text-indigo-500" /> AC
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 flex items-center gap-1">
+                  <Wind className="h-4 w-4 text-indigo-400" /> AC
                 </span>
               )}
               {hasGym && (
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-1">
-                  <Dumbbell className="h-4 w-4 text-indigo-500" /> Gym
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 flex items-center gap-1">
+                  <Dumbbell className="h-4 w-4 text-indigo-400" /> Gym
                 </span>
               )}
               {hasParking && (
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-1">
-                  <Car className="h-4 w-4 text-indigo-500" /> Parking
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 flex items-center gap-1">
+                  <Car className="h-4 w-4 text-indigo-400" /> Parking
                 </span>
               )}
             </div>
@@ -145,7 +145,7 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex-1 py-3 min-h-[44px] w-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-center flex items-center justify-center gap-2 text-base shadow-lg shadow-indigo-200 px-3"
+                className="flex-1 py-3 min-h-[44px] w-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold text-center flex items-center justify-center gap-2 text-base shadow-lg shadow-indigo-500/30 px-3"
                 tabIndex={0}
                 role="button"
                 aria-label="View Details"
@@ -159,7 +159,7 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
                 onClick={(e) => e.stopPropagation()}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="py-3 px-4 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors shadow-lg shadow-green-200"
+                className="py-3 px-4 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors shadow-lg shadow-green-500/30"
               >
                 <MessageCircle className="h-5 w-5" />
               </motion.a>
@@ -215,7 +215,7 @@ export default function Properties() {
   }, [properties])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-100 via-white to-gray-100 text-gray-900 w-full overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white w-full overflow-x-hidden">
       {/* SEO Meta Tags */}
       <SEO 
         title="Properties for Rent in Gurgaon"
@@ -228,7 +228,7 @@ export default function Properties() {
       <div className="fixed inset-0 pattern-dots opacity-30 pointer-events-none" />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-gray-900 backdrop-blur-xl border-b border-gray-800 shadow-lg">
+      <header className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-xl border-b border-gray-700 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
@@ -236,7 +236,7 @@ export default function Properties() {
               <img 
                 src="/logo.png" 
                 alt="IndoHomz" 
-                className="h-10 w-auto object-contain brightness-0 invert"
+                className="h-10 w-auto object-contain"
               />
             </Link>
             
@@ -249,11 +249,11 @@ export default function Properties() {
                   placeholder="Search by neighbourhood, amenities, or style..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all text-sm"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-800 border border-gray-600 text-white placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 outline-none transition-all text-sm"
                 />
                 {searchQuery && (
                   <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2">
-                    <X className="h-4 w-4 text-gray-400 hover:text-white" />
+                    <X className="h-4 w-4 text-gray-400 hover:text-gray-600" />
                   </button>
                 )}
               </div>
@@ -263,7 +263,7 @@ export default function Properties() {
             <div className="flex items-center gap-3">
               <a 
                 href="tel:+919053070100"
-                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl text-gray-300 hover:text-white hover:bg-gray-800 transition-all text-sm font-medium"
+                className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl text-gray-300 hover:text-white hover:bg-gray-700 transition-all text-sm font-medium"
               >
                 <Phone className="h-4 w-4" /> 9053070100
               </a>
@@ -288,7 +288,7 @@ export default function Properties() {
                 placeholder="Search properties..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder:text-gray-400 focus:border-indigo-500 outline-none text-sm"
+                className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-800 border border-gray-600 text-white placeholder:text-gray-400 focus:border-indigo-500 outline-none text-sm"
               />
             </div>
           </div>
@@ -296,7 +296,7 @@ export default function Properties() {
       </header>
 
       {/* Filters Bar - Mobile friendly */}
-      <div className="sticky top-[73px] z-40 bg-gray-100 backdrop-blur-xl border-b border-gray-200">
+      <div className="sticky top-[73px] z-40 bg-gray-800/95 backdrop-blur-xl border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
           <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-hide snap-x snap-mandatory">
             {/* Filter Button */}
@@ -304,8 +304,8 @@ export default function Properties() {
               onClick={() => setShowFilters(!showFilters)}
               className={`px-4 py-2.5 min-w-[44px] min-h-[44px] rounded-xl text-sm font-medium border flex items-center gap-2 flex-shrink-0 transition-all snap-start ${
                 showFilters 
-                  ? 'bg-indigo-50 border-indigo-200 text-indigo-700' 
-                  : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+                  ? 'bg-indigo-600/20 border-indigo-500 text-indigo-400' 
+                  : 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600'
               }`}
               aria-label="Show Filters"
             >
@@ -319,8 +319,8 @@ export default function Properties() {
               onClick={() => setSelectedType('all')}
               className={`px-4 py-2.5 min-w-[44px] min-h-[44px] rounded-xl text-sm font-medium whitespace-nowrap transition-all flex-shrink-0 snap-start ${
                 selectedType === 'all' 
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-200' 
-                  : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/30' 
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600 border border-gray-600'
               }`}
             >
               All Types
@@ -331,21 +331,21 @@ export default function Properties() {
                 onClick={() => setSelectedType(type)}
                 className={`px-4 py-2.5 min-w-[44px] min-h-[44px] rounded-xl text-sm font-medium whitespace-nowrap capitalize transition-all flex-shrink-0 snap-start ${
                   selectedType === type 
-                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-200' 
-                    : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/30' 
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600 border border-gray-600'
                 }`}
               >
                 {type.replace('_', ' ')}
               </button>
             ))}
             
-            <div className="h-8 w-px bg-gray-200 flex-shrink-0" />
+            <div className="h-8 w-px bg-gray-600 flex-shrink-0" />
             
             {/* Availability Filter */}
             <select
               value={availabilityFilter}
               onChange={(e) => setAvailabilityFilter(e.target.value as any)}
-              className="px-4 py-2.5 rounded-xl text-sm font-medium bg-white text-gray-600 border border-gray-200 focus:ring-2 focus:ring-indigo-100 outline-none flex-shrink-0"
+              className="px-4 py-2.5 rounded-xl text-sm font-medium bg-gray-700 text-gray-300 border border-gray-600 focus:ring-2 focus:ring-indigo-500/30 outline-none flex-shrink-0"
             >
               <option value="all">All Status</option>
               <option value="available">Available</option>
@@ -357,22 +357,22 @@ export default function Properties() {
               href={`https://www.google.com/maps/search/apartments+${encodeURIComponent(searchQuery || 'Gurgaon')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-xl text-sm font-medium bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center gap-2 flex-shrink-0 hover:bg-indigo-100 transition-all"
+              className="px-4 py-2.5 rounded-xl text-sm font-medium bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 flex items-center gap-2 flex-shrink-0 hover:bg-indigo-600/30 transition-all"
             >
               <Navigation className="h-4 w-4" /> View Map
             </a>
             
             {/* View Toggle */}
-            <div className="ml-auto hidden sm:flex items-center gap-1 bg-gray-100 p-1 rounded-xl flex-shrink-0">
+            <div className="ml-auto hidden sm:flex items-center gap-1 bg-gray-700 p-1 rounded-xl flex-shrink-0">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2.5 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white text-indigo-600 shadow' : 'text-gray-500'}`}
+                className={`p-2.5 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-gray-600 text-indigo-400 shadow' : 'text-gray-400'}`}
               >
                 <Grid3X3 className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-2.5 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white text-indigo-600 shadow' : 'text-gray-500'}`}
+                className={`p-2.5 rounded-lg transition-all ${viewMode === 'list' ? 'bg-gray-600 text-indigo-400 shadow' : 'text-gray-400'}`}
               >
                 <LayoutList className="h-4 w-4" />
               </button>
@@ -390,10 +390,10 @@ export default function Properties() {
           className="flex items-center justify-between mb-6 sm:mb-8"
         >
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              <span className="text-indigo-600">{filteredProperties.length}</span> Curated Residences
+            <h1 className="text-3xl font-bold text-white">
+              <span className="text-indigo-400">{filteredProperties.length}</span> Curated Residences
             </h1>
-            <p className="text-gray-500 mt-1">Exceptional living spaces across Gurgaon's premier localities</p>
+            <p className="text-gray-400 mt-1">Exceptional living spaces across Gurgaon's premier localities</p>
           </div>
         </motion.div>
 
@@ -401,7 +401,7 @@ export default function Properties() {
         {isLoading && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="bg-white rounded-2xl h-[420px] animate-pulse border border-gray-100" />
+              <div key={i} className="bg-gray-800 rounded-2xl h-[420px] animate-pulse border border-gray-700" />
             ))}
           </div>
         )}
@@ -431,11 +431,11 @@ export default function Properties() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-20"
           >
-            <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
-              <Home className="h-10 w-10 text-gray-400" />
+            <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-6">
+              <Home className="h-10 w-10 text-gray-500" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">No Matching Residences</h3>
-            <p className="text-gray-500 mb-8">Refine your search criteria to discover your perfect space</p>
+            <h3 className="text-2xl font-bold text-white mb-2">No Matching Residences</h3>
+            <p className="text-gray-400 mb-8">Refine your search criteria to discover your perfect space</p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -461,7 +461,7 @@ export default function Properties() {
         animate={{ scale: 1 }}
         transition={{ delay: 0.5, type: "spring" }}
         whileHover={{ scale: 1.1 }}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-2xl shadow-green-500/30 z-50"
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-2xl shadow-green-500/40 z-50"
       >
         <MessageCircle className="h-6 w-6" />
       </motion.a>

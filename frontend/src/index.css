@@ -8,9 +8,9 @@
 /* IndoHomz - Premium Light Theme PropTech Platform
    Clean, Professional, Eye-catching */
 
-/* Global font - Inter for clean modern look */
+/* Global font */
 * {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 html {
