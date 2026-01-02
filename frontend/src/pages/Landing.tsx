@@ -303,15 +303,16 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0, color = "indig
 // Testimonial Card
 const TestimonialCard = ({ testimonial, index }: { testimonial: typeof TESTIMONIALS[0]; index: number }) => (
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, y: 50, scale: 0.9 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
     viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
+    transition={{ duration: 0.6, delay: index * 0.15, type: "spring" }}
+    whileHover={{ y: -10, scale: 1.02 }}
     className="group"
   >
-    <div className="relative p-7 rounded-2xl bg-white border border-gray-100 hover:border-indigo-100 transition-all shadow-lg hover:shadow-xl h-full">
+    <div className="relative p-8 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-cyan-500/50 transition-all shadow-2xl hover:shadow-cyan-500/20 h-full">
       {/* Quote mark */}
-      <div className="absolute top-5 right-5 text-5xl font-serif text-indigo-100">"</div>
+      <div className="absolute top-5 right-5 text-5xl font-serif text-cyan-500/20">"</div>
       
       <div className="flex gap-1 mb-4">
         {[...Array(testimonial.rating)].map((_, i) => (
@@ -319,19 +320,19 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: typeof TESTIMONI
         ))}
       </div>
       
-      <p className="text-gray-600 leading-relaxed mb-6 text-sm">"{testimonial.text}"</p>
+      <p className="text-gray-300 leading-relaxed mb-6 text-sm">"{testimonial.text}"</p>
       
       <div className="flex items-center gap-4">
         <img 
           src={testimonial.avatar} 
           alt={testimonial.name}
-          className="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-100"
+          className="w-12 h-12 rounded-full object-cover ring-2 ring-cyan-500/50"
         />
         <div>
-          <p className="font-semibold text-gray-900">{testimonial.name}</p>
-          <p className="text-sm text-gray-500">{testimonial.role}</p>
+          <p className="font-semibold text-white">{testimonial.name}</p>
+          <p className="text-sm text-gray-400">{testimonial.role}</p>
         </div>
-        <span className="ml-auto px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center gap-1">
+        <span className="ml-auto px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center gap-1">
           <BadgeCheck className="h-3 w-3" /> Verified
         </span>
       </div>
@@ -461,7 +462,7 @@ export default function Landing() {
             <source src="https://cdn.coverr.co/videos/coverr-friends-celebrating-together-9743/1080p.mp4" type="video/mp4" />
             <source src="https://cdn.coverr.co/videos/coverr-young-people-having-fun-at-home-8206/1080p.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/40" />
         </motion.div>
         
         {/* Video Control */}
@@ -476,7 +477,9 @@ export default function Landing() {
         
         {/* Hero Content */}
         <motion.div 
-          style={{ opacity: heroOpacity }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto"
         >
           {/* Trust Badges */}
@@ -502,13 +505,13 @@ export default function Landing() {
           </div>
           
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 1, delay: 0.3, type: "spring", stiffness: 100 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight"
           >
-            <span className="block text-gray-900">Luxury Living,</span>
-            <span className="block bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="block text-white drop-shadow-2xl">Luxury Living,</span>
+            <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-lg">
               Thoughtfully Curated
             </span>
           </motion.h1>
@@ -516,11 +519,11 @@ export default function Landing() {
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.6, type: "spring" }}
+            className="text-lg sm:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-lg"
           >
             Experience meticulously designed co-living spaces crafted for discerning professionals. 
-            <span className="text-gray-900 font-medium"> Zero brokerage. Verified excellence. Instant move-in.</span>
+            <span className="text-white font-semibold"> Zero brokerage. Verified excellence. Instant move-in.</span>
           </motion.p>
           
           {/* Search Box with Google Maps */}
@@ -744,21 +747,22 @@ export default function Landing() {
       </section>
 
       {/* Stats Section */}
-      <section className="relative py-16 px-4 sm:px-6 bg-gradient-to-b from-white to-gray-50">
+      <section className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {STATS.map((stat, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-white border border-gray-100 shadow-lg hover:shadow-xl transition-all"
+                transition={{ delay: i * 0.15, type: "spring", stiffness: 100 }}
+                whileHover={{ scale: 1.05, y: -8 }}
+                className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 shadow-2xl hover:shadow-cyan-500/20 transition-all"
               >
-                <stat.icon className="h-8 w-8 mx-auto mb-3 text-indigo-500" />
-                <p className="text-3xl sm:text-4xl font-bold text-gray-900">{stat.value}</p>
-                <p className="text-gray-500 text-sm mt-1">{stat.label}</p>
+                <stat.icon className="h-10 w-10 mx-auto mb-4 text-cyan-400" />
+                <p className="text-3xl sm:text-4xl font-bold text-white">{stat.value}</p>
+                <p className="text-gray-400 text-sm mt-2">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -766,7 +770,7 @@ export default function Landing() {
       </section>
 
       {/* Google Maps Location Section */}
-      <section className="relative py-16 px-4 sm:px-6 bg-gray-50">
+      <section className="relative py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -882,12 +886,13 @@ export default function Landing() {
       </section>
 
       {/* Featured Properties */}
-      <section id="properties" className="relative py-20 px-4 sm:px-6 bg-gray-50">
+      <section id="properties" className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-100 via-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, type: "spring" }}
             className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-4"
           >
             <div>
@@ -915,19 +920,20 @@ export default function Landing() {
       </section>
 
       {/* Testimonials */}
-      <section className="relative py-20 px-4 sm:px-6 bg-white">
+      <section className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
         <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.7, type: "spring" }}
             className="text-center mb-14"
           >
-            <span className="text-sm font-semibold text-indigo-600 uppercase tracking-widest">Resident Stories</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mt-3 text-gray-900">
-              Endorsed by <span className="text-indigo-600">Industry Leaders</span>
+            <span className="text-sm font-semibold text-cyan-400 uppercase tracking-widest">Resident Stories</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3 text-white">
+              Endorsed by <span className="text-cyan-400">Industry Leaders</span>
             </h2>
-            <p className="text-gray-500 mt-3 max-w-lg mx-auto">Hear from professionals who've elevated their lifestyle with IndoHomz</p>
+            <p className="text-gray-400 mt-3 max-w-lg mx-auto">Hear from professionals who've elevated their lifestyle with IndoHomz</p>
           </motion.div>
           
           <div className="grid md:grid-cols-3 gap-6">
@@ -939,12 +945,43 @@ export default function Landing() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 px-4 sm:px-6 bg-gradient-to-br from-indigo-600 to-purple-700">
-        <div className="max-w-4xl mx-auto text-center relative">
+      <section className="relative py-24 px-4 sm:px-6 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              rotate: [0, -180, -360],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full blur-3xl"
+          />
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 80 }}
           >
             <motion.div
               initial={{ scale: 0 }}
