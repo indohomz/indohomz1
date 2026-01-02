@@ -136,6 +136,22 @@ export default function Header({
           </Transition>
         </Menu>
       </div>
+
+      {/* Property Details - Updated */}
+      <div className="flex justify-between items-center mt-6 mb-4">
+        <div className="flex flex-col items-center">
+          <span className="text-2xl font-bold">1</span>
+          <span className="text-sm text-gray-500">Bedroom</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-2xl font-bold">1</span>
+          <span className="text-sm text-gray-500">Bathroom</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <span className="text-2xl font-bold">600</span>
+          <span className="text-sm text-gray-500">Sq. Ft.</span>
+        </div>
+      </div>
     </header>
   )
 }
