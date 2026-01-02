@@ -292,7 +292,7 @@ export default function PropertyDetail() {
                   </span>
                 )}
                 <span className="px-3 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-600 flex items-center gap-1">
-                  <Star className="h-3 w-3 fill-amber-500" /> 4.8 Rating
+                  <Star className="h-3 w-3 fill-amber-500" /> 4.9 Rating
                 </span>
               </div>
               

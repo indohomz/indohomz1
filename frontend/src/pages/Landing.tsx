@@ -108,8 +108,8 @@ const PROPERTIES = REAL_PROPERTIES.map((p, index) => ({
   baths: p.bathrooms,
   sqft: p.area_sqft,
   amenities: p.amenities.split(',').slice(0, 3).map(a => a.trim()),
-  rating: 4.7 + (index * 0.1),
-  reviews: 50 + (index * 30),
+  rating: 4.9,
+  reviews: 5000,
   badge: index === 0 ? 'Premium Villa' : index === 1 ? 'Best Value' : index === 2 ? 'Luxury Living' : 'Top Rated',
   color: index === 0 ? 'indigo' : index === 1 ? 'emerald' : index === 2 ? 'amber' : 'cyan',
   slug: p.slug
@@ -140,7 +140,7 @@ const TESTIMONIALS = [
 ]
 
 const STATS = [
-  { value: "500+", label: "Satisfied Residents", icon: Users },
+  { value: "5000+", label: "Satisfied Residents", icon: Users },
   { value: "50+", label: "Curated Properties", icon: Building2 },
   { value: "4.9★", label: "Excellence Rating", icon: Star },
   { value: "24/7", label: "Dedicated Support", icon: Headphones }

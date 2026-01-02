@@ -42,9 +42,9 @@ const PropertyCard = ({ property, index }: { property: any; index: number }) => 
   const hasParking = amenitiesList.some((a: string) => a.includes('parking'))
   const hasAC = amenitiesList.some((a: string) => a.includes('ac'))
 
-  // Random rating for demo
-  const rating = (4.5 + Math.random() * 0.5).toFixed(1)
-  const reviews = Math.floor(50 + Math.random() * 200)
+  // Fixed rating and reviews
+  const rating = '4.9'
+  const reviews = 5000
 
   return (
     <motion.div
