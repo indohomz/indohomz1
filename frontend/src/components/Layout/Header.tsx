@@ -12,6 +12,7 @@ import {
   Sun,
 } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
+import SecurityLock from './SecurityLock'
 
 interface HeaderProps {
   onOpenMobileSidebar?: () => void
@@ -70,6 +71,8 @@ export default function Header({
           <span className="sr-only">Toggle theme</span>
           {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </button>
+
+        <SecurityLock />
 
         {/* Profile Dropdown */}
         <Menu as="div" className="relative">
