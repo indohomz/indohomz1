@@ -208,7 +208,7 @@ export default function PropertyDetail() {
             <img 
               src="/logo.png" 
               alt="IndoHomz" 
-              className="h-12 w-auto object-contain"
+              className="h-16 w-auto object-contain"
             />
           </Link>
           
