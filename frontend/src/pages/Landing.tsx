@@ -419,14 +419,23 @@ export default function Landing() {
             {/* CTA */}
             <div className="flex items-center gap-3">
               <motion.a 
-                href="https://wa.me/919999999999"
+                href="https://wa.me/919053070100"
                 target="_blank"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all text-sm font-medium"
+                className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500 hover:bg-green-600 text-white transition-all text-sm font-semibold shadow-lg"
               >
                 <MessageCircle className="h-4 w-4" />
-                Chat
+                9053070100
+              </motion.a>
+              <motion.a 
+                href="tel:+919053070100"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all text-sm font-medium"
+              >
+                <Phone className="h-4 w-4" />
+                Call Now
               </motion.a>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link 
@@ -607,7 +616,7 @@ export default function Landing() {
       </section>
 
       {/* Lifestyle Video Showcase Section - New */}
-      <section className="relative py-20 px-4 sm:px-6 bg-white">
+      <section className="relative py-20 px-4 sm:px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -615,11 +624,11 @@ export default function Landing() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <span className="text-sm font-semibold text-indigo-600 uppercase tracking-widest">Experience IndoHomz Life</span>
-            <h2 className="text-3xl sm:text-5xl font-bold mt-3 text-gray-900">
-              Where <span className="text-indigo-600">Memories</span> Are Made
+            <span className="text-sm font-semibold text-cyan-400 uppercase tracking-widest">Experience IndoHomz Life</span>
+            <h2 className="text-3xl sm:text-5xl font-bold mt-3 text-white">
+              Where <span className="text-cyan-400">Memories</span> Are Made
             </h2>
-            <p className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
+            <p className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto">
               Watch how our residents enjoy premium co-living spaces with modern amenities and vibrant community
             </p>
           </motion.div>
@@ -631,18 +640,19 @@ export default function Landing() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover:shadow-indigo-200 transition-all group"
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-cyan-500 transition-all group"
             >
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
+                poster="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
                 className="w-full h-[400px] object-cover"
               >
-                <source src="https://cdn.coverr.co/videos/coverr-friends-playing-video-games-together-8204/1080p.mp4" type="video/mp4" />
+                <source src="https://videos.pexels.com/video-files/3252157/3252157-uhd_2560_1440_25fps.mp4" type="video/mp4" />
               </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
                 <div className="absolute bottom-6 left-6 right-6">
                   <h3 className="text-white text-2xl font-bold mb-2">Bachelor's Haven</h3>
                   <p className="text-white/90 text-sm">Modern spaces for young professionals</p>
@@ -656,18 +666,19 @@ export default function Landing() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover:shadow-purple-200 transition-all group"
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-purple-500 transition-all group"
             >
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
+                poster="https://images.pexels.com/photos/4259140/pexels-photo-4259140.jpeg?auto=compress&cs=tinysrgb&w=800"
                 className="w-full h-[400px] object-cover"
               >
-                <source src="https://cdn.coverr.co/videos/coverr-couple-cooking-together-in-the-kitchen-4253/1080p.mp4" type="video/mp4" />
+                <source src="https://videos.pexels.com/video-files/4259285/4259285-uhd_2732_1440_25fps.mp4" type="video/mp4" />
               </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
                 <div className="absolute bottom-6 left-6 right-6">
                   <h3 className="text-white text-2xl font-bold mb-2">Couple-Friendly Homes</h3>
                   <p className="text-white/90 text-sm">Perfect spaces for couples to thrive</p>
@@ -681,18 +692,19 @@ export default function Landing() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover:shadow-emerald-200 transition-all group"
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-emerald-500 transition-all group"
             >
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
+                poster="https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=800"
                 className="w-full h-[400px] object-cover"
               >
-                <source src="https://cdn.coverr.co/videos/coverr-friends-celebrating-together-9743/1080p.mp4" type="video/mp4" />
+                <source src="https://videos.pexels.com/video-files/6271610/6271610-uhd_2732_1440_25fps.mp4" type="video/mp4" />
               </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
                 <div className="absolute bottom-6 left-6 right-6">
                   <h3 className="text-white text-2xl font-bold mb-2">Vibrant Community</h3>
                   <p className="text-white/90 text-sm">Connect with like-minded residents</p>
@@ -706,18 +718,19 @@ export default function Landing() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white hover:shadow-amber-200 transition-all group"
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-amber-500 transition-all group"
             >
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
+                poster="https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg?auto=compress&cs=tinysrgb&w=800"
                 className="w-full h-[400px] object-cover"
               >
-                <source src="https://cdn.coverr.co/videos/coverr-young-people-having-fun-at-home-8206/1080p.mp4" type="video/mp4" />
+                <source src="https://videos.pexels.com/video-files/4065919/4065919-uhd_2732_1440_24fps.mp4" type="video/mp4" />
               </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
                 <div className="absolute bottom-6 left-6 right-6">
                   <h3 className="text-white text-2xl font-bold mb-2">Premium Amenities</h3>
                   <p className="text-white/90 text-sm">Enjoy world-class facilities daily</p>
@@ -859,7 +872,7 @@ export default function Landing() {
       </section>
 
       {/* Features Section */}
-      <section className="relative py-20 px-4 sm:px-6 bg-white">
+      <section className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-200 via-gray-100 to-gray-200">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -871,7 +884,7 @@ export default function Landing() {
             <h2 className="text-3xl sm:text-4xl font-bold mt-3 text-gray-900">
               Renting, <span className="text-indigo-600">Elevated</span>
             </h2>
-            <p className="text-gray-500 mt-3 max-w-xl mx-auto">We're not just a rental platform—we're redefining the standard for urban living excellence.</p>
+            <p className="text-gray-600 mt-3 max-w-xl mx-auto">We're not just a rental platform—we're redefining the standard for urban living excellence.</p>
           </motion.div>
           
           <div className="grid md:grid-cols-3 gap-6">
@@ -1011,14 +1024,23 @@ export default function Landing() {
                 </Link>
               </motion.div>
               <motion.a 
-                href="https://wa.me/919999999999"
+                href="https://wa.me/919053070100"
                 target="_blank"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-green-500 text-white font-bold hover:bg-green-600 transition-all shadow-xl"
+              >
+                <MessageCircle className="h-5 w-5" />
+                9053070100
+              </motion.a>
+              <motion.a 
+                href="tel:+919053070100"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 backdrop-blur text-white font-bold border border-white/30 hover:bg-white/20 transition-all"
               >
-                <MessageCircle className="h-5 w-5 text-green-300" />
-                WhatsApp Us
+                <Phone className="h-5 w-5" />
+                Call Now
               </motion.a>
             </div>
           </motion.div>
@@ -1062,9 +1084,17 @@ export default function Landing() {
             <div>
               <h4 className="font-semibold mb-4">Contact</h4>
               <ul className="space-y-3 text-gray-400">
-                <li className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  +91 99999 99999
+                <li>
+                  <a href="tel:+919053070100" className="flex items-center gap-2 hover:text-white transition-colors">
+                    <Phone className="h-4 w-4" />
+                    +91 9053070100
+                  </a>
+                </li>
+                <li>
+                  <a href="https://wa.me/919053070100" target="_blank" className="flex items-center gap-2 hover:text-green-400 transition-colors">
+                    <MessageCircle className="h-4 w-4 text-green-400" />
+                    WhatsApp: 9053070100
+                  </a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
@@ -1084,17 +1114,35 @@ export default function Landing() {
         </div>
       </footer>
 
-      {/* Floating WhatsApp */}
+      {/* Floating WhatsApp Button */}
       <motion.a
-        href="https://wa.me/919999999999"
+        href="https://wa.me/919053070100"
         target="_blank"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ delay: 2, type: "spring" }}
-        whileHover={{ scale: 1.1 }}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-2xl shadow-green-500/30 z-50"
+        transition={{ delay: 1, type: "spring" }}
+        whileHover={{ scale: 1.15 }}
+        className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center shadow-2xl shadow-green-500/50 z-50 group"
       >
-        <MessageCircle className="h-6 w-6" />
+        <MessageCircle className="h-7 w-7" />
+        <span className="absolute right-full mr-3 px-3 py-2 bg-white text-gray-900 rounded-lg shadow-xl text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+          Chat on WhatsApp
+        </span>
+      </motion.a>
+
+      {/* Floating Call Button */}
+      <motion.a
+        href="tel:+919053070100"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 1.2, type: "spring" }}
+        whileHover={{ scale: 1.15 }}
+        className="fixed bottom-6 right-24 w-14 h-14 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-2xl shadow-indigo-500/50 z-50 group"
+      >
+        <Phone className="h-6 w-6" />
+        <span className="absolute right-full mr-3 px-3 py-2 bg-white text-gray-900 rounded-lg shadow-xl text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+          Call: 9053070100
+        </span>
       </motion.a>
     </div>
   )
