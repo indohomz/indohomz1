@@ -1,23 +1,32 @@
 # IndoHomz Robots.txt
 # https://indohomz.com
+# Updated: 2026-01-03
 
 User-agent: *
 Allow: /
 Allow: /properties
 Allow: /property/
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.png$
 
 # Disallow admin/API routes
 Disallow: /api/
 Disallow: /admin/
 Disallow: /dashboard/
+Disallow: /analytics/
 
 # Disallow search with parameters (prevent crawl traps)
 Disallow: /*?*sort=
 Disallow: /*?*filter=
 Disallow: /*?*page=
+Disallow: /*?*session=
 
 # Crawl-delay for politeness
 Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://indohomz.com/sitemap.xml
 
 # Sitemap location
 Sitemap: https://indohomz.com/sitemap.xml

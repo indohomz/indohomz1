@@ -54,25 +54,71 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
+    <!-- Google Analytics 4 -->
+    <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        'send_page_view': true,
+        'anonymize_ip': true
+      });
+    </script>
+    
+    <!-- Meta Pixel (Facebook) -->
+    <!-- Replace YOUR_PIXEL_ID with your actual Facebook Pixel ID -->
+    <!--
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'YOUR_PIXEL_ID');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+    /></noscript>
+    -->
+    
     <!-- Structured Data - Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "RealEstateAgent",
       "name": "IndoHomz",
-      "description": "Premium co-living and rental property platform in Gurgaon",
+      "description": "Premium co-living and rental property platform in Gurgaon. 5000+ tenants served with zero brokerage.",
       "url": "https://indohomz.com",
       "logo": "https://indohomz.com/logo.png",
-      "telephone": "+91-XXXXXXXXXX",
-      "email": "hello@indohomz.com",
+      "telephone": "+91-9053070100",
+      "email": "info@indohomz.com",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Gurgaon",
         "addressRegion": "Haryana",
+        "postalCode": "122001",
         "addressCountry": "IN"
       },
-      "areaServed": "Gurgaon",
-      "priceRange": "₹₹-₹₹₹"
+      "areaServed": {
+        "@type": "City",
+        "name": "Gurgaon",
+        "containedIn": "Haryana, India"
+      },
+      "priceRange": "₹8,000 - ₹25,000",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "5000"
+      },
+      "sameAs": [
+        "https://wa.me/919053070100"
+      ]
     }
     </script>
     

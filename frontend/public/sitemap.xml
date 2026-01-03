@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://indohomz.com/</loc>
-    <lastmod>2025-12-25</lastmod>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,26 +13,57 @@
   <!-- Properties Listing -->
   <url>
     <loc>https://indohomz.com/properties</loc>
-    <lastmod>2025-12-25</lastmod>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <!-- 
-    Dynamic property pages will be added here automatically
-    by the backend sitemap generator (Phase 2)
-    
-    Example:
-    <url>
-      <loc>https://indohomz.com/property/luxe-studio-dlf-cybercity</loc>
-      <lastmod>2025-12-25</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-      <image:image>
-        <image:loc>https://indohomz.com/images/properties/luxe-studio.jpg</image:loc>
-        <image:title>Luxe Studio in DLF Cybercity</image:title>
-      </image:image>
-    </url>
-  -->
+  <!-- Sky Living - DLF Phase IV -->
+  <url>
+    <loc>https://indohomz.com/property/sky-living-dlf-phase-4</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- IndoHomz 571 - Sushant Lok 3 -->
+  <url>
+    <loc>https://indohomz.com/property/indohomz-571-sushant-lok-3</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- IndoHomz - Sector 40 -->
+  <url>
+    <loc>https://indohomz.com/property/indohomz-sector-40</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- IndoHomz 241 -->
+  <url>
+    <loc>https://indohomz.com/property/indohomz-241</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- The Sky Living - Sushant Lok 1 -->
+  <url>
+    <loc>https://indohomz.com/property/the-sky-living-sushant-lok-1</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- IndoHomz 574 -->
+  <url>
+    <loc>https://indohomz.com/property/indohomz-574</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   
 </urlset>

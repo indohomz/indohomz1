@@ -38,6 +38,8 @@ import {
   Mail
 } from 'lucide-react'
 import SEO, { FAQSchema } from '../components/Common/SEO'
+import LeadModal from '../components/LeadCapture/LeadModal'
+import FloatingCTA from '../components/LeadCapture/FloatingCTA'
 import { PROPERTIES as REAL_PROPERTIES } from '../data/properties'
 
 // FAQ data for schema
@@ -343,6 +345,7 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: typeof TESTIMONI
 export default function Landing() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(true)
   const [searchLocation, setSearchLocation] = useState('')
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
   
@@ -1505,6 +1508,16 @@ export default function Landing() {
           Call: 9053070100
         </span>
       </motion.a>
+
+      {/* Lead Generation Modal */}
+      <LeadModal 
+        isOpen={isLeadModalOpen}
+        onClose={() => setIsLeadModalOpen(false)}
+        source="landing_page"
+      />
+
+      {/* Floating CTA */}
+      <FloatingCTA onContactClick={() => setIsLeadModalOpen(true)} />
     </div>
   )
 }
