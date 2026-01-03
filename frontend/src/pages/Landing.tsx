@@ -152,7 +152,7 @@ const LOCATIONS = [
   { name: "MG Road", count: 10 },
   { name: "Sohna Road", count: 10 },
   { name: "HUDA City Centre", count: 7 },
-  { name: "Sector 29", count: 9 }
+  { name: "Golf Course Extension Road", count: 9 }
 ]
 
 // Premium Property Card
