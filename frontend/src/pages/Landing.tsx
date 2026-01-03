@@ -570,7 +570,7 @@ export default function Landing() {
             
             {/* Quick Location Filters */}
             <div className="flex flex-wrap items-center justify-center gap-2 mt-5">
-              {['Cyberhub', 'Golf Course', 'MG Road', 'Sohna Road'].map((loc) => (
+              {['Cyberhub', 'Golf Course', 'MG Road', 'Sohna Road', 'Golf Course Extension Road'].map((loc) => (
                 <motion.button
                   key={loc}
                   whileHover={{ scale: 1.05 }}
@@ -581,15 +581,6 @@ export default function Landing() {
                   {loc}
                 </motion.button>
               ))}
-              <a
-                href="https://www.google.com/maps/search/co-living+spaces+near+Gurgaon"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium hover:bg-indigo-100 transition-all border border-indigo-100 flex items-center gap-1"
-              >
-                <Navigation className="h-3.5 w-3.5" />
-                View Map
-              </a>
             </div>
           </motion.div>
         </motion.div>
