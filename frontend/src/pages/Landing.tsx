@@ -773,6 +773,94 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Security & Trust Indicators */}
+      <section className="relative py-12 px-4 sm:px-6 bg-white border-y border-gray-200">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+            {/* SSL Secure */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center">
+                <Shield className="h-6 w-6 text-emerald-600" />
+              </div>
+              <div>
+                <div className="font-bold text-gray-900 text-sm">SSL Secured</div>
+                <div className="text-xs text-gray-600">256-bit Encryption</div>
+              </div>
+            </motion.div>
+
+            {/* Verified Listings */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center">
+                <BadgeCheck className="h-6 w-6 text-indigo-600" />
+              </div>
+              <div>
+                <div className="font-bold text-gray-900 text-sm">100% Verified</div>
+                <div className="text-xs text-gray-600">All Properties Checked</div>
+              </div>
+            </motion.div>
+
+            {/* Safe Payments */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center">
+                <CreditCard className="h-6 w-6 text-amber-600" />
+              </div>
+              <div>
+                <div className="font-bold text-gray-900 text-sm">Safe Payments</div>
+                <div className="text-xs text-gray-600">Secure Transactions</div>
+              </div>
+            </motion.div>
+
+            {/* 24/7 Support */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-12 h-12 rounded-full bg-cyan-50 flex items-center justify-center">
+                <Headphones className="h-6 w-6 text-cyan-600" />
+              </div>
+              <div>
+                <div className="font-bold text-gray-900 text-sm">24/7 Support</div>
+                <div className="text-xs text-gray-600">Always Here to Help</div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Additional Security Note */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center mt-6"
+          >
+            <p className="text-xs text-gray-500 flex items-center justify-center gap-2">
+              <Shield className="h-4 w-4 text-emerald-600" />
+              Your personal data is protected with industry-standard encryption
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Google Maps Location Section */}
       <section className="relative py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
