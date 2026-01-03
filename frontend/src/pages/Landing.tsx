@@ -148,8 +148,8 @@ const STATS = [
 
 const LOCATIONS = [
   { name: "DLF Cybercity", count: 12 },
-  { name: "Golf Course Road", count: 8 },
-  { name: "MG Road", count: 15 },
+  { name: "Golf Course Road", count: 9 },
+  { name: "MG Road", count: 10 },
   { name: "Sohna Road", count: 10 },
   { name: "HUDA City Centre", count: 7 },
   { name: "Sector 29", count: 9 }
