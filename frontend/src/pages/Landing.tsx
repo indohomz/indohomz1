@@ -1127,6 +1127,109 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* About IndoHomz Section */}
+      <section id="about" className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-50 via-white to-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <span className="text-sm font-semibold text-indigo-600 uppercase tracking-widest">About IndoHomz</span>
+              <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-6 text-gray-900">
+                Your Rented Home, <span className="text-indigo-600">Wherever You Need</span>
+              </h2>
+              <div className="space-y-4 text-gray-600">
+                <p className="text-lg">
+                  IndoHomz provides a wide range of options from hostels, PGs to studio apartments to fully furnished flats. Have a look at our properties and choose for yourself.
+                </p>
+                <p>
+                  We understand that finding the perfect home is more than just four walls and a roof. It's about finding a space that complements your lifestyle, supports your ambitions, and feels truly yours.
+                </p>
+                <p>
+                  With <span className="font-semibold text-gray-900">5,000+ tenants served</span> and <span className="font-semibold text-gray-900">3.2 Lacs+ nights stayed</span>, we've built a trusted community of professionals and students who call IndoHomz their home.
+                </p>
+              </div>
+              <div className="mt-8 grid grid-cols-2 gap-6">
+                <div className="bg-white rounded-xl p-4 shadow-md border border-gray-100">
+                  <div className="text-3xl font-bold text-indigo-600 mb-1">0-3 yrs</div>
+                  <div className="text-sm text-gray-600">Properties Age</div>
+                </div>
+                <div className="bg-white rounded-xl p-4 shadow-md border border-gray-100">
+                  <div className="text-3xl font-bold text-indigo-600 mb-1">100%</div>
+                  <div className="text-sm text-gray-600">Digital Experience</div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/images/properties/dlf-phase-4/1.webp" 
+                  alt="IndoHomz Property" 
+                  className="w-full h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-white/95 backdrop-blur rounded-xl p-5 shadow-xl">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center">
+                        <Home className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-gray-900">Premium Living Spaces</div>
+                        <div className="text-sm text-gray-600">Curated for modern professionals</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating Stats Cards */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-6 -right-6 bg-white rounded-xl p-4 shadow-xl border border-gray-100"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-gray-900">Verified</div>
+                    <div className="text-xs text-gray-600">All Properties</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl border border-gray-100"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center">
+                    <Shield className="h-5 w-5 text-indigo-600" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-gray-900">Zero Brokerage</div>
+                    <div className="text-xs text-gray-600">Save Money</div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-24 px-4 sm:px-6 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 overflow-hidden">
         {/* Animated Background Elements */}
@@ -1177,10 +1280,10 @@ export default function Landing() {
             </motion.div>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-white">
-              Ready to Elevate Your <span className="text-amber-300">Lifestyle?</span>
+              Your Rented Home, <span className="text-amber-300">Wherever You Need</span>
             </h2>
             <p className="text-lg text-white/80 mb-8 max-w-md mx-auto">
-              Join an exclusive community of 500+ professionals. Premium living awaits.
+              Join 5,000+ happy tenants. Experience thoughtfully curated co-living spaces.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1230,13 +1333,13 @@ export default function Landing() {
                 />
               </div>
               <p className="text-gray-400 mb-5 max-w-sm">
-                Redefining urban living for ambitious professionals. Where exceptional spaces meet extraordinary communities.
+                IndoHomz provides a wide range of options from hostels, PGs to studio apartments to fully furnished flats in Gurgaon. Your trusted partner for quality living.
               </p>
               <div className="flex gap-3">
-                <a href="https://wa.me/919999999999" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-green-600 transition-colors">
+                <a href="https://wa.me/919053070100" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-green-600 transition-colors">
                   <MessageCircle className="h-5 w-5" />
                 </a>
-                <a href="tel:+919999999999" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-indigo-600 transition-colors">
+                <a href="tel:+919053070100" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-indigo-600 transition-colors">
                   <Phone className="h-5 w-5" />
                 </a>
               </div>
