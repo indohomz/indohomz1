@@ -140,10 +140,10 @@ const TESTIMONIALS = [
 ]
 
 const STATS = [
-  { value: "5000+", label: "Satisfied Residents", icon: Users },
-  { value: "50+", label: "Curated Properties", icon: Building2 },
-  { value: "4.9★", label: "Excellence Rating", icon: Star },
-  { value: "24/7", label: "Dedicated Support", icon: Headphones }
+  { value: "5,000+", label: "Tenants Served", icon: Users },
+  { value: "7", label: "Premium Properties", icon: Building2 },
+  { value: "3.2 Lacs+", label: "Nights Stayed", icon: Star },
+  { value: "0-3 yrs", label: "Properties Age", icon: Building2 }
 ]
 
 const LOCATIONS = [
@@ -945,6 +945,185 @@ export default function Landing() {
               <TestimonialCard key={index} testimonial={testimonial} index={index} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* What Makes IndoHomz Different - Inspired by Live Site */}
+      <section className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-white via-gray-50 to-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <span className="text-sm font-semibold text-indigo-600 uppercase tracking-widest">Your Digital Living Partner</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mt-3 text-gray-900">
+              What Makes <span className="text-indigo-600">IndoHomz</span> Different?
+            </h2>
+            <p className="text-gray-600 mt-3 max-w-2xl mx-auto">Experience 10X better living with our comprehensive digital ecosystem designed for modern professionals</p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Smart KYC */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="w-14 h-14 rounded-xl bg-indigo-50 flex items-center justify-center mb-4">
+                <CheckCircle2 className="h-7 w-7 text-indigo-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Smart KYC</h3>
+              <p className="text-gray-600">One click KYC within 30 seconds valid through all IndoHomz properties. Instant verification, no paperwork hassles.</p>
+            </motion.div>
+
+            {/* Exclusive Tenant Membership */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="w-14 h-14 rounded-xl bg-purple-50 flex items-center justify-center mb-4">
+                <Award className="h-7 w-7 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Exclusive Tenant Membership</h3>
+              <p className="text-gray-600">One membership that gives you exclusive access to amazing benefits which differentiates us from rest of the places.</p>
+            </motion.div>
+
+            {/* Digital Payment */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+                <CreditCard className="h-7 w-7 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Digital Payment & Rewards</h3>
+              <p className="text-gray-600">Handle rent payments digitally with smart receipts and earn rewards on every rent payment. Cashback on your rent!</p>
+            </motion.div>
+
+            {/* Tenant Smart App */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="w-14 h-14 rounded-xl bg-cyan-50 flex items-center justify-center mb-4">
+                <Zap className="h-7 w-7 text-cyan-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Tenant Smart App</h3>
+              <p className="text-gray-600">Stay 10X better with a smart app that makes your stay frictionless. Food menu, complaints, guest invites - all in one app.</p>
+            </motion.div>
+
+            {/* Tenant Insurance */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center mb-4">
+                <Shield className="h-7 w-7 text-amber-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Tenant Insurance</h3>
+              <p className="text-gray-600">Stay smart with our complimentary tenant insurance plan, which ensures a safer stay with complete peace of mind.</p>
+            </motion.div>
+
+            {/* Faster Complaint Resolution */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+            >
+              <div className="w-14 h-14 rounded-xl bg-rose-50 flex items-center justify-center mb-4">
+                <Headphones className="h-7 w-7 text-rose-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Faster Complaint Resolution</h3>
+              <p className="text-gray-600">Make your stay hassle-free with 10X faster complaint resolution through our tenant smart app. Help at your fingertips.</p>
+            </motion.div>
+          </div>
+
+          {/* 100% Digital Experience Highlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.7 }}
+            className="mt-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl"
+          >
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">100% Digital Experience</h3>
+                <p className="text-indigo-100 mb-6">From what's in today's food menu to entry-exit log to inviting a guest in your room or informing when going on leave, everything happens on our tenant app.</p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-300" />
+                    <span className="text-sm">Digital Check-in & KYC</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-300" />
+                    <span className="text-sm">Online Rent Payment</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-300" />
+                    <span className="text-sm">Rent Rewards & Cashback</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-300" />
+                    <span className="text-sm">In-App Food Menu</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-300" />
+                    <span className="text-sm">Faster Complaint Resolution</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-emerald-300" />
+                    <span className="text-sm">Move Across Properties</span>
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <motion.div
+                  animate={{
+                    y: [0, -20, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="relative z-10"
+                >
+                  <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-emerald-400 flex items-center justify-center">
+                          <CheckCircle2 className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <p className="font-semibold">All-in-One App</p>
+                          <p className="text-sm text-indigo-200">Complete control at your fingertips</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
