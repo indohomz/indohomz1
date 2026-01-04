@@ -8,8 +8,14 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Lock, Mail, Eye, EyeOff, Shield, Building2, AlertCircle } from 'lucide-react'
 
-// API Base URL - Update for production
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+// API Base URL - Works for both development and production
+const getApiBaseUrl = () => {
+  if (import.meta.env.PROD) {
+    return import.meta.env.VITE_API_BASE_URL || window.location.origin
+  }
+  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+}
+const API_BASE = getApiBaseUrl()
 
 export default function AdminLogin() {
   const navigate = useNavigate()
