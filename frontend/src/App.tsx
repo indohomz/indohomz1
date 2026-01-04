@@ -3,7 +3,7 @@
  * Main Application Router
  */
 
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 import Landing from './pages/Landing'
 import ErrorBoundary from './components/Common/ErrorBoundary'
@@ -11,6 +11,10 @@ import ErrorBoundary from './components/Common/ErrorBoundary'
 // Code-split pages
 const Properties = lazy(() => import('./pages/Properties'))
 const PropertyDetail = lazy(() => import('./pages/PropertyDetail'))
+
+// Admin pages (code-split)
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'))
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 
 // Loading Spinner - Light theme
 const PageLoader = () => (
@@ -74,6 +78,25 @@ function App() {
       <Route path="/home" element={<Landing />} />
       <Route path="/dashboard" element={<Landing />} />
       <Route path="/products" element={<Suspense fallback={<PageLoader />}><Properties /></Suspense>} />
+      
+      {/* Admin Routes */}
+      <Route 
+        path="/admin/login" 
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <AdminLogin />
+          </Suspense>
+        } 
+      />
+      <Route 
+        path="/admin/dashboard" 
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <AdminDashboard />
+          </Suspense>
+        } 
+      />
+      <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
     </Routes>
     </ErrorBoundary>
   )
