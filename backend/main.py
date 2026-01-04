@@ -203,6 +203,16 @@ async def api_info():
 # ADMIN SETUP ENDPOINT (One-time use)
 # =============================================================================
 
+@app.get("/api/v1/setup/init-db", tags=["setup"])
+async def init_database():
+    """Initialize database tables - safe to call multiple times"""
+    try:
+        models.Base.metadata.create_all(bind=engine)
+        return {"status": "success", "message": "Database tables initialized"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
 @app.post("/api/v1/setup/admin", tags=["setup"])
 async def setup_admin(
     setup_key: str,
