@@ -223,7 +223,7 @@ async def setup_admin(
     Requires setup key: INDOHOMZ_SETUP_2024
     """
     try:
-        from app.core.security import get_password_hash
+        from passlib.hash import bcrypt
         from app.database.models import User
         
         # Security: Verify setup key
@@ -238,10 +238,13 @@ async def setup_admin(
         if existing_admin:
             return {"message": "Admin user already exists", "email": "admin@indohomz.com"}
         
-        # Create admin user
+        # Create admin user with direct bcrypt hash (avoiding passlib context issues)
+        password = "Admin@2024"
+        password_hash = bcrypt.using(rounds=12).hash(password)
+        
         admin_user = User(
             email="admin@indohomz.com",
-            password_hash=get_password_hash("IndoHomz@2024"),
+            password_hash=password_hash,
             name="IndoHomz Admin",
             phone="9053070100",
             role="admin",
@@ -257,7 +260,7 @@ async def setup_admin(
         return {
             "message": "Admin user created successfully!",
             "email": "admin@indohomz.com",
-            "password": "IndoHomz@2024",
+            "password": password,
             "note": "Please change the password after first login"
         }
     except Exception as e:
