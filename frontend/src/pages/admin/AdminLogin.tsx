@@ -10,10 +10,14 @@ import { Lock, Mail, Eye, EyeOff, Shield, Building2, AlertCircle } from 'lucide-
 
 // API Base URL - Works for both development and production
 const getApiBaseUrl = () => {
-  if (import.meta.env.PROD) {
-    return import.meta.env.VITE_API_BASE_URL || window.location.origin
+  // Always use the Render backend URL in production
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL
   }
-  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+  if (import.meta.env.PROD) {
+    return 'https://indohomz-backend.onrender.com'
+  }
+  return 'http://localhost:8000'
 }
 const API_BASE = getApiBaseUrl()
 
