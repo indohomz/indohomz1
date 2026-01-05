@@ -222,42 +222,50 @@ async def setup_admin(
     One-time admin user creation.
     Requires setup key: INDOHOMZ_SETUP_2024
     """
-    from app.core.security import get_password_hash
-    from app.database.models import User
-    
-    # Security: Verify setup key
-    if setup_key != "INDOHOMZ_SETUP_2024":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Invalid setup key"
+    try:
+        from app.core.security import get_password_hash
+        from app.database.models import User
+        
+        # Security: Verify setup key
+        if setup_key != "INDOHOMZ_SETUP_2024":
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Invalid setup key"
+            )
+        
+        # Check if admin already exists
+        existing_admin = db.query(User).filter(User.email == "admin@indohomz.com").first()
+        if existing_admin:
+            return {"message": "Admin user already exists", "email": "admin@indohomz.com"}
+        
+        # Create admin user
+        admin_user = User(
+            email="admin@indohomz.com",
+            password_hash=get_password_hash("IndoHomz@2024"),
+            name="IndoHomz Admin",
+            phone="9053070100",
+            role="admin",
+            is_active=True,
+            is_verified=True,
+            created_at=datetime.utcnow()
         )
-    
-    # Check if admin already exists
-    existing_admin = db.query(User).filter(User.email == "admin@indohomz.com").first()
-    if existing_admin:
-        return {"message": "Admin user already exists", "email": "admin@indohomz.com"}
-    
-    # Create admin user
-    admin_user = User(
-        email="admin@indohomz.com",
-        password_hash=get_password_hash("IndoHomz@2024"),
-        name="IndoHomz Admin",
-        phone="9053070100",
-        role="admin",
-        is_active=True,
-        is_verified=True,
-        created_at=datetime.utcnow()
-    )
-    
-    db.add(admin_user)
-    db.commit()
-    
-    return {
-        "message": "Admin user created successfully!",
-        "email": "admin@indohomz.com",
-        "password": "IndoHomz@2024",
-        "note": "Please change the password after first login"
-    }
+        
+        db.add(admin_user)
+        db.commit()
+        db.refresh(admin_user)
+        
+        return {
+            "message": "Admin user created successfully!",
+            "email": "admin@indohomz.com",
+            "password": "IndoHomz@2024",
+            "note": "Please change the password after first login"
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e),
+            "type": str(type(e).__name__)
+        }
 
 
 # =============================================================================
