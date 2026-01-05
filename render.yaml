@@ -1,8 +1,8 @@
-# Render Blueprint for Retail Analytics Platform
+# Render Blueprint for IndoHomz Platform
 services:
   # Backend API Service
   - type: web
-    name: retail-analytics-backend
+    name: indohomz-backend
     env: python
     plan: free
     buildCommand: pip install -r backend/requirements.txt
@@ -11,51 +11,12 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.7
       - key: DATABASE_URL
-        value: sqlite:///./retail_analytics.db
+        value: sqlite:///./indohomz.db
       - key: ENVIRONMENT
         value: production
       - key: DEBUG
         value: false
-      - key: ALLOWED_ORIGINS
-        value: '["https://retail-analytics-frontend.onrender.com", "https://retail-analytics-platform-hjhh.onrender.com", "https://retail-analytics-platformfinal.onrender.com"]'
-
-  # Frontend Service
-  - type: web
-    name: retail-analytics-frontend
-    env: node
-    plan: free
-    buildCommand: cd frontend && npm install && npm run build
-    startCommand: cd frontend && npm run preview -- --host 0.0.0.0 --port $PORT
-    envVars:
-      - key: VITE_API_BASE_URL
-        value: https://retail-analytics-backend.onrender.com
       - key: SECRET_KEY
         value: pmca05CPsHxV3avL7KtTWC_kkB3pl4mrZ3fmPraJacA
-      - key: OPENAI_API_KEY
-        value: your-openai-api-key-here
-      - key: ALGORITHM
-        value: HS256
-      - key: ACCESS_TOKEN_EXPIRE_MINUTES
-        value: 30
-      - key: ENVIRONMENT
-        value: production
-      - key: DEBUG
-        value: false
       - key: ALLOWED_ORIGINS
-        value: '["https://retail-analytics-frontend.onrender.com"]'
-      - key: MODEL_PATH
-        value: ./models/
-      - key: RETRAIN_INTERVAL_HOURS
-        value: 24
-
-  # Frontend
-  - type: web
-    name: retail-analytics-frontend
-    env: node
-    plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm run preview -- --host 0.0.0.0 --port $PORT
-    rootDir: ./frontend
-    envVars:
-      - key: VITE_API_BASE_URL
-        value: https://retail-analytics-backend.onrender.com
+        value: '["https://indohomz1.vercel.app", "https://indohomz-frontend.onrender.com"]'
