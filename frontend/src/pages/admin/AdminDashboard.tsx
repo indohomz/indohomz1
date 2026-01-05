@@ -88,8 +88,12 @@ export default function AdminDashboard() {
   // Get auth token
   const getToken = () => localStorage.getItem('admin_token')
   const getUser = () => {
-    const user = localStorage.getItem('admin_user')
-    return user ? JSON.parse(user) : null
+    try {
+      const user = localStorage.getItem('admin_user')
+      return user ? JSON.parse(user) : { name: 'Admin', email: 'admin@indohomz.com' }
+    } catch (e) {
+      return { name: 'Admin', email: 'admin@indohomz.com' }
+    }
   }
 
   // Check authentication

@@ -47,7 +47,20 @@ export default function AdminLogin() {
 
       // Store token
       localStorage.setItem('admin_token', data.access_token)
-      localStorage.setItem('admin_user', JSON.stringify(data.user))
+      
+      // Decode user info from JWT token
+      try {
+        const tokenParts = data.access_token.split('.')
+        const payload = JSON.parse(atob(tokenParts[1]))
+        localStorage.setItem('admin_user', JSON.stringify({
+          id: payload.user_id,
+          email: payload.email,
+          role: payload.role,
+          name: payload.email.split('@')[0]
+        }))
+      } catch (e) {
+        console.error('Failed to decode token:', e)
+      }
       
       // Redirect to admin dashboard
       navigate('/admin/dashboard')
