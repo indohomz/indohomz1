@@ -609,8 +609,7 @@ export default function Landing() {
         </motion.div>
       </section>
 
-      {/* Lifestyle Video Showcase Section - New */}
-      <div className="relative py-20 px-4 sm:px-6 bg-gray-900">
+      {/* Lifestyle Video Showcase Section - New */}<div className="relative py-20 px-4 sm:px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1570,6 +1569,7 @@ export default function Landing() {
 
       {/* Floating CTA */}
       <FloatingCTA onContactClick={() => setIsLeadModalOpen(true)} />
+    </div>
     </div>
   )
 }
