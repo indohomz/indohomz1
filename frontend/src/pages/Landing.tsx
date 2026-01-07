@@ -610,7 +610,7 @@ export default function Landing() {
       </section>
 
       {/* Lifestyle Video Showcase Section - New */}
-      <section className="relative py-20 px-4 sm:px-6 bg-gray-900">
+      <div className="relative py-20 px-4 sm:px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -678,6 +678,8 @@ export default function Landing() {
               >
                 <source src="https://videos.pexels.com/video-files/4259285/4259285-uhd_2732_1440_25fps.mp4" type="video/mp4" />
               </video>
+            </motion.div>
+
             {/* Weekend Parties - Clickable */}
             <Link to="/properties?type=apartment">
               <motion.div
@@ -773,9 +775,8 @@ export default function Landing() {
                 </div>
               </motion.div>
             </Link>
-          </div>
 
-          {/* CTA Below Videos */}
+            {/* CTA Below Videos */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -793,7 +794,7 @@ export default function Landing() {
             </Link>
           </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* Stats Section */}
       <section className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
