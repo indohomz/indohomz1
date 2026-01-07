@@ -392,7 +392,32 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3">
+            <Link 
+              to="/" 
+              className="flex items-center gap-3"
+              onClick={(e) => {
+                const now = Date.now()
+                const clicks = (window as any).logoClicks || []
+                clicks.push(now)
+                
+                // Keep only clicks from last 2 seconds
+                const recentClicks = clicks.filter((time: number) => now - time < 2000)
+                ;(window as any).logoClicks = recentClicks
+                
+                // If 5+ clicks in 2 seconds, open admin
+                if (recentClicks.length >= 5) {
+                  e.preventDefault()
+                  const password = prompt('🔐 Admin Access\\nEnter password:')
+                  if (password === 'indohomz2024') {
+                    window.open('/admin/login', '_blank')
+                    alert('✅ Admin portal opened!')
+                  } else if (password) {
+                    alert('❌ Incorrect password!')
+                  }
+                  ;(window as any).logoClicks = []
+                }
+              }}
+            >
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
@@ -626,7 +651,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* 360° Virtual Tours */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -634,7 +659,10 @@ export default function Landing() {
               viewport={{ once: true }}
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.3 }}
-              onClick={() => window.open('https://my.matterport.com/show/?m=JztZHWRzMNF', '_blank')}
+              onClick={() => {
+                alert('Virtual Tour Demo - Experience our 360° property walkthrough!\n\nFeatures:\n• Interactive 3D navigation\n• Room-by-room exploration\n• High-definition visuals\n• Measure distances\n\nContact us to schedule your personal virtual tour!')
+                setIsLeadModalOpen(true)
+              }}
               className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-cyan-500 transition-all group cursor-pointer"
             >
               <img
@@ -669,7 +697,11 @@ export default function Landing() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              onClick={() => window.open('https://calendly.com/indohomz/property-tour', '_blank')}
+              onClick={() => {
+                const message = `Hi! I want to schedule a LIVE VIDEO TOUR of IndoHomz properties. Please let me know available time slots.`
+                const whatsappUrl = `https://wa.me/919053070100?text=${encodeURIComponent(message)}`
+                window.open(whatsappUrl, '_blank')
+              }}
               className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-green-500 transition-all group cursor-pointer"
             >
               <img
@@ -736,32 +768,32 @@ export default function Landing() {
               </div>
             </motion.div>
 
-            {/* Admin Portal Access */}
+            {/* Modern Apartment Buildings */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.3, delay: 0.2 }}
-              onClick={() => window.open('/admin/login', '_blank')}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-indigo-500 transition-all group cursor-pointer"
+              onClick={() => setIsLeadModalOpen(true)}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-purple-500 transition-all group cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
-                alt="Admin dashboard interface"
+                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop"
+                alt="Modern apartment building"
                 className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-                <div className="absolute top-4 right-4 bg-indigo-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
-                  🔐 Admin Access →
+                <div className="absolute top-4 right-4 bg-purple-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                  🏢 Explore Buildings →
                 </div>
                 <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="text-white text-2xl font-bold mb-2">Admin Portal</h3>
-                  <p className="text-white/90 text-sm mb-3">Manage properties | View analytics | Handle bookings | Customer support</p>
+                  <h3 className="text-white text-2xl font-bold mb-2">Premium Buildings</h3>
+                  <p className="text-white/90 text-sm mb-3">High-rise apartments | Modern amenities | Prime locations | Security 24/7</p>
                   <div className="flex gap-2">
-                    <span className="px-3 py-1 bg-indigo-500/20 backdrop-blur text-indigo-300 rounded-full text-xs">Property Management</span>
-                    <span className="px-3 py-1 bg-indigo-500/20 backdrop-blur text-indigo-300 rounded-full text-xs">Analytics</span>
-                    <span className="px-3 py-1 bg-indigo-500/20 backdrop-blur text-indigo-300 rounded-full text-xs">Bookings</span>
+                    <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">High-Rise</span>
+                    <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">Furnished</span>
+                    <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">Security</span>
                   </div>
                 </div>
               </div>
@@ -798,7 +830,39 @@ export default function Landing() {
               </div>
             </motion.div>
 
-            {/* CTA Below Experiences */}
+            {/* Co-Working Spaces */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3, delay: 0.4 }}
+              onClick={() => setIsLeadModalOpen(true)}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-orange-500 transition-all group cursor-pointer"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop"
+                alt="Modern co-working space"
+                className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                <div className="absolute top-4 right-4 bg-orange-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                  💼 Work & Live →
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Co-Working Spaces</h3>
+                  <p className="text-white/90 text-sm mb-3">Integrated workspace | High-speed internet | Meeting rooms | Networking events</p>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-orange-500/20 backdrop-blur text-orange-300 rounded-full text-xs">Work Space</span>
+                    <span className="px-3 py-1 bg-orange-500/20 backdrop-blur text-orange-300 rounded-full text-xs">Fast WiFi</span>
+                    <span className="px-3 py-1 bg-orange-500/20 backdrop-blur text-orange-300 rounded-full text-xs">Networking</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* CTA Below Experiences */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1592,7 +1656,6 @@ export default function Landing() {
 
       {/* Floating CTA */}
       <FloatingCTA onContactClick={() => setIsLeadModalOpen(true)} />
-    </div>
     </div>
   )
 }
