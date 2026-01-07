@@ -618,41 +618,47 @@ export default function Landing() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <span className="text-sm font-semibold text-cyan-400 uppercase tracking-widest">Experience IndoHomz Life</span>
+            <span className="text-sm font-semibold text-cyan-400 uppercase tracking-widest">Experience the Vibe</span>
             <h2 className="text-3xl sm:text-5xl font-bold mt-3 text-white">
-              Where <span className="text-cyan-400">Memories</span> Are Made
+              Where <span className="text-cyan-400">Work Meets Play</span>
             </h2>
             <p className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto">
-              Watch how our residents enjoy premium co-living spaces with modern amenities and vibrant community
+              Young professionals | Chill vibes | Weekend parties | Co-working | Your tribe awaits
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Main Video 1 - Bachelors Enjoying */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-cyan-500 transition-all group"
-            >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
-                className="w-full h-[400px] object-cover"
+            {/* Working Professionals - Clickable */}
+            <Link to="/properties?type=pg">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3 }}
+                className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-cyan-500 transition-all group cursor-pointer"
               >
-                <source src="https://videos.pexels.com/video-files/3252157/3252157-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="text-white text-2xl font-bold mb-2">Bachelor's Haven</h3>
-                  <p className="text-white/90 text-sm">Modern spaces for young professionals</p>
+                <img
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop"
+                  alt="Young professionals working together"
+                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                  <div className="absolute top-4 right-4 bg-cyan-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                    Click to Explore →
+                  </div>
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <h3 className="text-white text-2xl font-bold mb-2">Young Professionals Hub</h3>
+                    <p className="text-white/90 text-sm mb-3">Co-working spaces | High-speed WiFi | Coffee & conversations</p>
+                    <div className="flex gap-2">
+                      <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">Networking</span>
+                      <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">24/7 WiFi</span>
+                      <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">Study Rooms</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
 
             {/* Main Video 2 - Couples Enjoying */}
             <motion.div
@@ -672,65 +678,101 @@ export default function Landing() {
               >
                 <source src="https://videos.pexels.com/video-files/4259285/4259285-uhd_2732_1440_25fps.mp4" type="video/mp4" />
               </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="text-white text-2xl font-bold mb-2">Couple-Friendly Homes</h3>
-                  <p className="text-white/90 text-sm">Perfect spaces for couples to thrive</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Additional Video 3 - Community Activities */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-emerald-500 transition-all group"
-            >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=800"
-                className="w-full h-[400px] object-cover"
+            {/* Weekend Parties - Clickable */}
+            <Link to="/properties?type=apartment">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-purple-500 transition-all group cursor-pointer"
               >
-                <source src="https://videos.pexels.com/video-files/6271610/6271610-uhd_2732_1440_25fps.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="text-white text-2xl font-bold mb-2">Vibrant Community</h3>
-                  <p className="text-white/90 text-sm">Connect with like-minded residents</p>
+                <img
+                  src="https://images.unsplash.com/photo-1530099486328-e021101a494a?w=800&h=600&fit=crop"
+                  alt="Friends celebrating at party"
+                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                  <div className="absolute top-4 right-4 bg-purple-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                    Click to Explore →
+                  </div>
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <h3 className="text-white text-2xl font-bold mb-2">Weekend Party Zones</h3>
+                    <p className="text-white/90 text-sm mb-3">Rooftop terraces | Music nights | Celebration ready</p>
+                    <div className="flex gap-2">
+                      <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">Rooftop</span>
+                      <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">Music System</span>
+                      <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">BBQ Area</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
 
-            {/* Additional Video 4 - Amenities */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-amber-500 transition-all group"
-            >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg?auto=compress&cs=tinysrgb&w=800"
-                className="w-full h-[400px] object-cover"
+            {/* Chill & Hangout - Clickable */}
+            <Link to="/properties">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+                className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-amber-500 transition-all group cursor-pointer"
               >
-                <source src="https://videos.pexels.com/video-files/4065919/4065919-uhd_2732_1440_24fps.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="text-white text-2xl font-bold mb-2">Premium Amenities</h3>
-                  <p className="text-white/90 text-sm">Enjoy world-class facilities daily</p>
+                <img
+                  src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&h=600&fit=crop"
+                  alt="Friends chilling with beer"
+                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                  <div className="absolute top-4 right-4 bg-amber-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                    Click to Explore →
+                  </div>
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <h3 className="text-white text-2xl font-bold mb-2">Chill & Relax Spaces</h3>
+                    <p className="text-white/90 text-sm mb-3">Common lounge | Gaming zone | Movie nights</p>
+                    <div className="flex gap-2">
+                      <span className="px-3 py-1 bg-amber-500/20 backdrop-blur text-amber-300 rounded-full text-xs">Gaming</span>
+                      <span className="px-3 py-1 bg-amber-500/20 backdrop-blur text-amber-300 rounded-full text-xs">Netflix</span>
+                      <span className="px-3 py-1 bg-amber-500/20 backdrop-blur text-amber-300 rounded-full text-xs">Pool Table</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
+
+            {/* Fitness & Wellness - Clickable */}
+            <Link to="/properties">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+                className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-emerald-500 transition-all group cursor-pointer"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop"
+                  alt="People working out at gym"
+                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                  <div className="absolute top-4 right-4 bg-emerald-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                    Click to Explore →
+                  </div>
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <h3 className="text-white text-2xl font-bold mb-2">Fitness & Wellness</h3>
+                    <p className="text-white/90 text-sm mb-3">Modern gym | Yoga studio | Morning runs</p>
+                    <div className="flex gap-2">
+                      <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">Gym</span>
+                      <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">Yoga</span>
+                      <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">Sports</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
           </div>
 
           {/* CTA Below Videos */}
@@ -1442,6 +1484,15 @@ export default function Landing() {
                 <li><Link to="/properties" className="hover:text-white transition-colors">Properties</Link></li>
                 <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
                 <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
+                <li>
+                  <Link 
+                    to="/admin/login" 
+                    className="flex items-center gap-1.5 hover:text-indigo-400 transition-colors text-xs opacity-60 hover:opacity-100 mt-4"
+                  >
+                    <Shield className="h-3.5 w-3.5" />
+                    Admin Portal
+                  </Link>
+                </li>
               </ul>
             </div>
             
