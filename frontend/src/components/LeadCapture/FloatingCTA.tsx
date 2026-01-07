@@ -18,13 +18,22 @@ export default function FloatingCTA({ onContactClick }: FloatingCTAProps) {
   const [formData, setFormData] = useState({ name: '', phone: '' })
 
   useEffect(() => {
+    // Auto-show WhatsApp popup after 5 seconds
+    const autoShowTimer = setTimeout(() => {
+      setShowChatPopup(true)
+    }, 5000)
+
     const handleScroll = () => {
       // Show FAB after scrolling 300px
       setIsVisible(window.scrollY > 300)
     }
 
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      clearTimeout(autoShowTimer)
+    }
   }, [])
 
   const handleWhatsAppSubmit = () => {

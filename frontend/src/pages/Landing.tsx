@@ -627,155 +627,178 @@ export default function Landing() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Working Professionals - Clickable */}
-            <Link to="/properties?type=pg">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.3 }}
-                className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-cyan-500 transition-all group cursor-pointer"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop"
-                  alt="Young professionals working together"
-                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-                  <div className="absolute top-4 right-4 bg-cyan-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
-                    Click to Explore →
-                  </div>
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="text-white text-2xl font-bold mb-2">Young Professionals Hub</h3>
-                    <p className="text-white/90 text-sm mb-3">Co-working spaces | High-speed WiFi | Coffee & conversations</p>
-                    <div className="flex gap-2">
-                      <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">Networking</span>
-                      <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">24/7 WiFi</span>
-                      <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">Study Rooms</span>
-                    </div>
+            {/* 360° Virtual Tours */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => window.open('https://my.matterport.com/show/?m=JztZHWRzMNF', '_blank')}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-cyan-500 transition-all group cursor-pointer"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop"
+                alt="360 degree virtual tour"
+                className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                <div className="absolute top-4 right-4 bg-cyan-500 text-white px-4 py-1.5 rounded-full text-sm font-bold animate-pulse">
+                  Take Virtual Tour →
+                </div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-4 border-white/50">
+                    <div className="w-6 h-6 bg-white rounded-full animate-ping"></div>
                   </div>
                 </div>
-              </motion.div>
-            </Link>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">360° Virtual Tours</h3>
+                  <p className="text-white/90 text-sm mb-3">Walk through properties | Interactive 3D experience | Every corner visible</p>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">3D View</span>
+                    <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">Interactive</span>
+                    <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur text-cyan-300 rounded-full text-xs">HD Quality</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
 
-            {/* Main Video 2 - Couples Enjoying */}
+            {/* Live Video Calls with Property Managers */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-purple-500 transition-all group"
+              onClick={() => window.open('https://calendly.com/indohomz/property-tour', '_blank')}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-green-500 transition-all group cursor-pointer"
             >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="https://images.pexels.com/photos/4259140/pexels-photo-4259140.jpeg?auto=compress&cs=tinysrgb&w=800"
-                className="w-full h-[400px] object-cover"
-              >
-                <source src="https://videos.pexels.com/video-files/4259285/4259285-uhd_2732_1440_25fps.mp4" type="video/mp4" />
-              </video>
+              <img
+                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop"
+                alt="Live video call with property manager"
+                className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                <div className="absolute top-4 right-4 bg-green-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                  Schedule Live Tour →
+                </div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-16 h-16 bg-green-500/80 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Live Video Tours</h3>
+                  <p className="text-white/90 text-sm mb-3">Real-time property tours | Ask questions instantly | Meet your future neighbors</p>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-green-500/20 backdrop-blur text-green-300 rounded-full text-xs">Live Chat</span>
+                    <span className="px-3 py-1 bg-green-500/20 backdrop-blur text-green-300 rounded-full text-xs">HD Video</span>
+                    <span className="px-3 py-1 bg-green-500/20 backdrop-blur text-green-300 rounded-full text-xs">Instant Booking</span>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
-            {/* Weekend Parties - Clickable */}
-            <Link to="/properties?type=apartment">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
-                className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-purple-500 transition-all group cursor-pointer"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1530099486328-e021101a494a?w=800&h=600&fit=crop"
-                  alt="Friends celebrating at party"
-                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-                  <div className="absolute top-4 right-4 bg-purple-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
-                    Click to Explore →
-                  </div>
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="text-white text-2xl font-bold mb-2">Weekend Party Zones</h3>
-                    <p className="text-white/90 text-sm mb-3">Rooftop terraces | Music nights | Celebration ready</p>
-                    <div className="flex gap-2">
-                      <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">Rooftop</span>
-                      <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">Music System</span>
-                      <span className="px-3 py-1 bg-purple-500/20 backdrop-blur text-purple-300 rounded-full text-xs">BBQ Area</span>
+            {/* Real Reviews & Testimonials */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-yellow-500 transition-all group"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop"
+                alt="Happy residents giving reviews"
+                className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                <div className="absolute top-4 right-4 bg-yellow-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                  ⭐ 4.8/5 Rating
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Real Reviews</h3>
+                  <p className="text-white/90 text-sm mb-3 italic">"Best PG in Gurgaon! Amazing food, clean rooms, friendly staff. Highly recommended!"</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="flex text-yellow-400">
+                      <span>⭐⭐⭐⭐⭐</span>
                     </div>
+                    <span className="text-white/80 text-xs">- Priya Singh, Software Engineer</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-yellow-500/20 backdrop-blur text-yellow-300 rounded-full text-xs">Verified Reviews</span>
+                    <span className="px-3 py-1 bg-yellow-500/20 backdrop-blur text-yellow-300 rounded-full text-xs">500+ Reviews</span>
+                    <span className="px-3 py-1 bg-yellow-500/20 backdrop-blur text-yellow-300 rounded-full text-xs">Real Residents</span>
                   </div>
                 </div>
-              </motion.div>
-            </Link>
+              </div>
+            </motion.div>
 
-            {/* Chill & Hangout - Clickable */}
-            <Link to="/properties">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
-                className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-amber-500 transition-all group cursor-pointer"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&h=600&fit=crop"
-                  alt="Friends chilling with beer"
-                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-                  <div className="absolute top-4 right-4 bg-amber-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
-                    Click to Explore →
-                  </div>
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="text-white text-2xl font-bold mb-2">Chill & Relax Spaces</h3>
-                    <p className="text-white/90 text-sm mb-3">Common lounge | Gaming zone | Movie nights</p>
-                    <div className="flex gap-2">
-                      <span className="px-3 py-1 bg-amber-500/20 backdrop-blur text-amber-300 rounded-full text-xs">Gaming</span>
-                      <span className="px-3 py-1 bg-amber-500/20 backdrop-blur text-amber-300 rounded-full text-xs">Netflix</span>
-                      <span className="px-3 py-1 bg-amber-500/20 backdrop-blur text-amber-300 rounded-full text-xs">Pool Table</span>
-                    </div>
+            {/* Admin Portal Access */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              onClick={() => window.open('/admin/login', '_blank')}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-indigo-500 transition-all group cursor-pointer"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+                alt="Admin dashboard interface"
+                className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                <div className="absolute top-4 right-4 bg-indigo-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
+                  🔐 Admin Access →
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Admin Portal</h3>
+                  <p className="text-white/90 text-sm mb-3">Manage properties | View analytics | Handle bookings | Customer support</p>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-indigo-500/20 backdrop-blur text-indigo-300 rounded-full text-xs">Property Management</span>
+                    <span className="px-3 py-1 bg-indigo-500/20 backdrop-blur text-indigo-300 rounded-full text-xs">Analytics</span>
+                    <span className="px-3 py-1 bg-indigo-500/20 backdrop-blur text-indigo-300 rounded-full text-xs">Bookings</span>
                   </div>
                 </div>
-              </motion.div>
-            </Link>
+              </div>
+            </motion.div>
 
-            {/* Fitness & Wellness - Clickable */}
-            <Link to="/properties">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.3, delay: 0.3 }}
-                className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-emerald-500 transition-all group cursor-pointer"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop"
-                  alt="People working out at gym"
-                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-                  <div className="absolute top-4 right-4 bg-emerald-500 text-white px-4 py-1.5 rounded-full text-sm font-bold">
-                    Click to Explore →
-                  </div>
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="text-white text-2xl font-bold mb-2">Fitness & Wellness</h3>
-                    <p className="text-white/90 text-sm mb-3">Modern gym | Yoga studio | Morning runs</p>
-                    <div className="flex gap-2">
-                      <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">Gym</span>
-                      <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">Yoga</span>
-                      <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">Sports</span>
-                    </div>
+            {/* Instant Property Booking */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+              onClick={() => setIsLeadModalOpen(true)}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 hover:border-emerald-500 transition-all group cursor-pointer"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop"
+                alt="Instant booking interface"
+                className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                <div className="absolute top-4 right-4 bg-emerald-500 text-white px-4 py-1.5 rounded-full text-sm font-bold animate-bounce">
+                  ⚡ Book Instantly →
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-2xl font-bold mb-2">Instant Booking</h3>
+                  <p className="text-white/90 text-sm mb-3">Zero brokerage | Instant confirmation | Move-in ready properties</p>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">No Brokerage</span>
+                    <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">Instant Confirm</span>
+                    <span className="px-3 py-1 bg-emerald-500/20 backdrop-blur text-emerald-300 rounded-full text-xs">Ready to Move</span>
                   </div>
                 </div>
-              </motion.div>
-            </Link>
+              </div>
+            </motion.div>
 
-            {/* CTA Below Videos */}
+            {/* CTA Below Experiences */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -783,14 +806,14 @@ export default function Landing() {
             transition={{ delay: 0.8 }}
             className="text-center mt-12"
           >
-            <Link
-              to="/properties"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg shadow-xl shadow-indigo-200 hover:shadow-2xl hover:scale-105 transition-all"
+            <button
+              onClick={() => setIsLeadModalOpen(true)}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-lg shadow-xl shadow-green-200 hover:shadow-2xl hover:scale-105 transition-all"
             >
-              <Play className="h-6 w-6" />
-              Explore Our Properties
+              <MessageCircle className="h-6 w-6" />
+              Start Your Journey Today
               <ArrowRight className="h-5 w-5" />
-            </Link>
+            </button>
           </motion.div>
         </div>
       </div>
