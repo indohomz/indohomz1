@@ -51,17 +51,22 @@ async def lifespan(app: FastAPI):
     if settings.ENVIRONMENT == "production":
         try:
             from app.database.connection import SessionLocal
-            from app.core.security import get_password_hash
             from datetime import datetime
+            import bcrypt
             
             db = SessionLocal()
             admin_email = "admin@indohomz.com"
             existing_admin = db.query(models.User).filter(models.User.email == admin_email).first()
             
             if not existing_admin:
+                # Use bcrypt directly to avoid passlib compatibility issues
+                password = "Admin@2024"
+                salt = bcrypt.gensalt()
+                password_hash = bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
+                
                 admin = models.User(
                     email=admin_email,
-                    password_hash=get_password_hash("Admin@2024"),
+                    password_hash=password_hash,
                     name="Admin User",
                     role="admin",
                     is_active=True,
