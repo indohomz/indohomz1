@@ -47,6 +47,36 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"✗ Database initialization error: {e}")
     
+    # Auto-create admin user on first startup (production)
+    if settings.ENVIRONMENT == "production":
+        try:
+            from app.database.connection import SessionLocal
+            from app.core.security import get_password_hash
+            from datetime import datetime
+            
+            db = SessionLocal()
+            admin_email = "admin@indohomz.com"
+            existing_admin = db.query(models.User).filter(models.User.email == admin_email).first()
+            
+            if not existing_admin:
+                admin = models.User(
+                    email=admin_email,
+                    password_hash=get_password_hash("Admin@2024"),
+                    name="Admin User",
+                    role="admin",
+                    is_active=True,
+                    is_verified=True,
+                    created_at=datetime.utcnow()
+                )
+                db.add(admin)
+                db.commit()
+                print(f"✓ Admin user created: {admin_email}")
+            else:
+                print(f"✓ Admin user exists: {admin_email}")
+            db.close()
+        except Exception as e:
+            print(f"⚠ Admin user creation skipped: {e}")
+    
     # Initialize rate limiting (async to support Redis)
     using_redis = await init_rate_limiting()
     print(f"✓ Rate limiting initialized {'(Redis)' if using_redis else '(in-memory)'}")
