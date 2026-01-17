@@ -306,6 +306,10 @@ export const leadService = {
   updateLeadStatus: (id: number, status: string) =>
     api.patch(`/leads/${id}/status`, null, { params: { new_status: status } }),
 
+  // Delete lead
+  deleteLead: (id: number) =>
+    api.delete(`/leads/${id}`),
+
   // Get lead stats
   getLeadStats: () =>
     api.get<LeadStats>('/leads/stats/overview'),

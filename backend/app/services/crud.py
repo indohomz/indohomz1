@@ -355,6 +355,16 @@ class LeadService:
         db.refresh(db_lead)
         return db_lead
     
+    def delete_lead(self, db: Session, lead_id: int) -> bool:
+        """Permanently delete a lead"""
+        db_lead = self.get_lead(db, lead_id)
+        if not db_lead:
+            return False
+        
+        db.delete(db_lead)
+        db.commit()
+        return True
+    
     def get_lead_stats(self, db: Session) -> dict:
         """Get lead statistics for dashboard"""
         total = db.query(func.count(models.Lead.id)).scalar() or 0

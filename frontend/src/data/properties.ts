@@ -3,6 +3,8 @@
  * Real properties with optimized images hosted on Vercel
  */
 
+export type AvailabilityStatus = 'available-now' | 'available-soon' | 'limited' | 'fully-booked'
+
 export interface Property {
   id: number
   title: string
@@ -24,6 +26,8 @@ export interface Property {
   latitude: number
   longitude: number
   is_available: boolean
+  availability_status: AvailabilityStatus
+  availability_text: string
   created_at: string
 }
 
@@ -41,9 +45,9 @@ export const PROPERTIES: Property[] = [
     bathrooms: 1,
     area_sqft: 450,
     furnishing: "furnished",
-    image_url: "/images/properties/dlf-phase-4/1.webp",
+    image_url: "/images/properties/dlf-phase-4/5.webp",
     images: [
-      "/images/properties/dlf-phase-4/1.webp",
+      "/images/properties/dlf-phase-4/5.webp",
       "/images/properties/dlf-phase-4/2.webp",
       "/images/properties/dlf-phase-4/3.webp",
       "/images/properties/dlf-phase-4/4.webp",
@@ -63,6 +67,8 @@ export const PROPERTIES: Property[] = [
     latitude: 28.4675,
     longitude: 77.0839,
     is_available: true,
+    availability_status: 'limited',
+    availability_text: 'Only 2 rooms left',
     created_at: "2024-12-26T00:00:00Z"
   },
   {
@@ -78,9 +84,9 @@ export const PROPERTIES: Property[] = [
     bathrooms: 1,
     area_sqft: 400,
     furnishing: "furnished",
-    image_url: "/images/properties/sushant-lok-2/1.webp",
+    image_url: "/images/properties/sushant-lok-2/3S7A1332_3_4.webp",
     images: [
-      "/images/properties/sushant-lok-2/1.webp",
+      "/images/properties/sushant-lok-2/3S7A1332_3_4.webp",
       "/images/properties/sushant-lok-2/2.webp",
       "/images/properties/sushant-lok-2/3S7A1308_09_10.webp",
       "/images/properties/sushant-lok-2/3S7A1324_5_6.webp",
@@ -98,6 +104,8 @@ export const PROPERTIES: Property[] = [
     latitude: 28.4401,
     longitude: 77.0819,
     is_available: true,
+    availability_status: 'available-now',
+    availability_text: 'Available Now',
     created_at: "2024-12-26T00:00:00Z"
   },
   {
@@ -113,9 +121,9 @@ export const PROPERTIES: Property[] = [
     bathrooms: 1,
     area_sqft: 350,
     furnishing: "furnished",
-    image_url: "/images/properties/sector-40/1.webp",
+    image_url: "/images/properties/sector-40/4.webp",
     images: [
-      "/images/properties/sector-40/1.webp",
+      "/images/properties/sector-40/4.webp",
       "/images/properties/sector-40/2.webp",
       "/images/properties/sector-40/3.webp",
       "/images/properties/sector-40/4.webp",
@@ -131,6 +139,8 @@ export const PROPERTIES: Property[] = [
     latitude: 28.4598,
     longitude: 77.0489,
     is_available: true,
+    availability_status: 'available-now',
+    availability_text: 'Available Now',
     created_at: "2024-12-26T00:00:00Z"
   },
   {
@@ -146,9 +156,9 @@ export const PROPERTIES: Property[] = [
     bathrooms: 1,
     area_sqft: 300,
     furnishing: "furnished",
-    image_url: "/images/properties/malibu-town/1.webp",
+    image_url: "/images/properties/malibu-town/DSC08740_1_2.webp",
     images: [
-      "/images/properties/malibu-town/1.webp",
+      "/images/properties/malibu-town/DSC08740_1_2.webp",
       "/images/properties/malibu-town/2.webp",
       "/images/properties/malibu-town/3.webp",
       "/images/properties/malibu-town/4.webp",
@@ -161,6 +171,8 @@ export const PROPERTIES: Property[] = [
     latitude: 28.4500,
     longitude: 77.0500,
     is_available: true,
+    availability_status: 'available-now',
+    availability_text: 'Available Now',
     created_at: "2024-12-26T00:00:00Z"
   },
   {
@@ -176,9 +188,9 @@ export const PROPERTIES: Property[] = [
     bathrooms: 1,
     area_sqft: 450,
     furnishing: "furnished",
-    image_url: "/images/properties/dlf-phase-4/2.webp",
+    image_url: "/images/properties/dlf-phase-4/6.webp",
     images: [
-      "/images/properties/dlf-phase-4/2.webp",
+      "/images/properties/dlf-phase-4/6.webp",
       "/images/properties/dlf-phase-4/3.webp",
       "/images/properties/dlf-phase-4/4.webp",
       "/images/properties/dlf-phase-4/5.webp",
@@ -192,6 +204,8 @@ export const PROPERTIES: Property[] = [
     latitude: 28.4690,
     longitude: 77.0730,
     is_available: true,
+    availability_status: 'limited',
+    availability_text: 'Only 3 rooms left',
     created_at: "2024-12-26T00:00:00Z"
   },
   {
@@ -207,9 +221,9 @@ export const PROPERTIES: Property[] = [
     bathrooms: 1,
     area_sqft: 400,
     furnishing: "furnished",
-    image_url: "/images/properties/sector-40/2.webp",
+    image_url: "/images/properties/sector-40/5.webp",
     images: [
-      "/images/properties/sector-40/2.webp",
+      "/images/properties/sector-40/5.webp",
       "/images/properties/sector-40/3.webp",
       "/images/properties/sector-40/4.webp",
       "/images/properties/sector-40/5.webp",
@@ -222,6 +236,8 @@ export const PROPERTIES: Property[] = [
     latitude: 28.4550,
     longitude: 77.0600,
     is_available: true,
+    availability_status: 'available-soon',
+    availability_text: 'Available Feb 1',
     created_at: "2024-12-26T00:00:00Z"
   }
 ]

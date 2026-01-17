@@ -40,7 +40,7 @@ const mockNotifications: Notification[] = [
     id: '4',
     type: 'alert',
     title: 'Revenue Milestone',
-    message: 'You've reached 80% of monthly target!',
+    message: "You've reached 80% of monthly target!",
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5),
     read: true,
   },

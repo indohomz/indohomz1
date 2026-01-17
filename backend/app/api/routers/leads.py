@@ -228,6 +228,26 @@ async def update_lead_status(
     return {"message": f"Lead status updated to {new_status}", "lead_id": lead_id}
 
 
+@router.delete("/{lead_id}")
+async def delete_lead(
+    lead_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    """
+    Delete a lead permanently.
+    
+    Requires authentication.
+    """
+    success = lead_service.delete_lead(db=db, lead_id=lead_id)
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Lead not found"
+        )
+    return {"message": "Lead deleted successfully", "lead_id": lead_id}
+
+
 # =============================================================================
 # STATISTICS
 # =============================================================================

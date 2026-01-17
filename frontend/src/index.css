@@ -1,56 +1,111 @@
 /* Import Google Fonts - must be first */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* IndoHomz - Premium Light Theme PropTech Platform
-   Clean, Professional, Eye-catching */
+/* Indohomz - Premium Lifestyle-First Living Platform
+   Calm. Premium. Global. Aspirational. */
 
-/* Global font */
-* {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+/* Theme CSS Variables */
+:root {
+  --bg-primary: #fafaf9;
+  --bg-secondary: #f5f5f4;
+  --text-primary: #1c1917;
+  --text-secondary: #78716c;
+  --accent: #1c1917;
 }
 
-/* Elegant headings */
-h1, h2, h3, .font-serif {
-  font-family: 'Playfair Display', Georgia, serif;
+/* Night Mode Theme */
+.night-mode {
+  --bg-primary: #1c1917;
+  --bg-secondary: #292524;
+  --text-primary: #fafaf9;
+  --text-secondary: #a8a29e;
+  --accent: #fafaf9;
+}
+
+.night-mode body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.night-mode .bg-white {
+  background-color: var(--bg-primary) !important;
+}
+
+.night-mode .bg-stone-50 {
+  background-color: var(--bg-secondary) !important;
+}
+
+.night-mode .text-stone-900 {
+  color: var(--text-primary) !important;
+}
+
+.night-mode .text-stone-600,
+.night-mode .text-stone-500 {
+  color: var(--text-secondary) !important;
+}
+
+.night-mode .border-stone-100,
+.night-mode .border-stone-200 {
+  border-color: #44403c !important;
+}
+
+/* Global font - Inter for everything, clean and modern */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+/* All headings use Inter - no serif, modern and clean */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Light theme scrollbar */
+body {
+  background-color: #ffffff;
+  color: #1C1917;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Premium minimal scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #6366f1, #8b5cf6);
-  border-radius: 4px;
+  background: #D6D3D1;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #4f46e5, #7c3aed);
+  background: #A8A29E;
 }
 
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #6366f1 #f8fafc;
+  scrollbar-color: #D6D3D1 transparent;
 }
 
-/* Selection */
+/* Selection - subtle stone tones */
 ::selection {
-  background-color: #c7d2fe;
-  color: #3730a3;
+  background-color: #E7E5E4;
+  color: #1C1917;
 }
 
 /* Hide scrollbar for horizontal scroll containers */
