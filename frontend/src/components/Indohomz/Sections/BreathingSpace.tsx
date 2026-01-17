@@ -1,74 +1,113 @@
 /**
- * BreathingSpace - Dramatic pause sections
- * Premium brands use restraint. This is intentional silence.
+ * Indohomz - Breathing Space Section
+ * Elegant quote sections that create visual pauses
+ * Luxury typography with gold accents
  */
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
-interface Props {
+interface BreathingSpaceProps {
   quote: string
   author?: string
+  size?: 'sm' | 'md' | 'lg'
   variant?: 'light' | 'dark'
-  size?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
 export default function BreathingSpace({ 
   quote, 
   author,
-  variant = 'light',
-  size = 'md' 
-}: Props) {
-  const sizeClasses = {
-    sm: 'py-24 md:py-32',
-    md: 'py-36 md:py-52',
-    lg: 'py-48 md:py-64',
-    xl: 'py-56 md:py-80'
+  size = 'md', 
+  variant = 'light' 
+}: BreathingSpaceProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const isDark = variant === 'dark'
+  
+  const sizeStyles = {
+    sm: {
+      padding: 'py-24 md:py-32',
+      fontSize: 'text-2xl md:text-3xl lg:text-4xl',
+      maxWidth: 'max-w-2xl',
+    },
+    md: {
+      padding: 'py-32 md:py-44',
+      fontSize: 'text-3xl md:text-4xl lg:text-5xl',
+      maxWidth: 'max-w-3xl',
+    },
+    lg: {
+      padding: 'py-40 md:py-56',
+      fontSize: 'text-4xl md:text-5xl lg:text-6xl',
+      maxWidth: 'max-w-4xl',
+    },
   }
 
-  const textSizes = {
-    sm: 'text-xl md:text-2xl',
-    md: 'text-2xl md:text-4xl',
-    lg: 'text-3xl md:text-5xl',
-    xl: 'text-4xl md:text-6xl'
-  }
+  const styles = sizeStyles[size]
 
   return (
     <section 
-      className={`${sizeClasses[size]} ${
-        variant === 'dark' ? 'bg-stone-900' : 'bg-stone-50'
-      } relative overflow-hidden`}
+      ref={ref}
+      className={`relative overflow-hidden ${styles.padding} ${
+        isDark ? 'bg-luxury-charcoal' : 'bg-luxury-cream'
+      }`}
     >
-      {/* Subtle grain texture */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-      }} />
+      {/* Subtle pattern */}
+      <div className={`absolute inset-0 bg-pattern-luxury ${isDark ? 'opacity-5' : 'opacity-30'}`} />
+      
+      {/* Gold accent lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent" />
+      
+      {/* Decorative corners */}
+      <div className="absolute top-8 left-8 w-16 h-16 border-t border-l border-gold-500/20 hidden lg:block" />
+      <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-gold-500/20 hidden lg:block" />
 
-      <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center relative">
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.4, ease: [0.25, 0.1, 0.25, 1] }}
-          className={`font-extralight leading-[1.3] tracking-tight ${textSizes[size]} ${
-            variant === 'dark' ? 'text-stone-200' : 'text-stone-800'
-          }`}
+      <div className={`${styles.maxWidth} mx-auto px-6 lg:px-12 text-center relative z-10`}>
+        {/* Top gold accent */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={isInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          className="w-12 h-px bg-gold-500 mx-auto mb-12"
+        />
+
+        {/* Quote */}
+        <motion.blockquote
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          {quote}
-        </motion.p>
+          <p className={`font-display font-light leading-tight tracking-tight ${styles.fontSize} ${
+            isDark ? 'text-white' : 'text-luxury-charcoal'
+          }`}>
+            <span className="text-gold-500">"</span>
+            {quote}
+            <span className="text-gold-500">"</span>
+          </p>
+        </motion.blockquote>
 
+        {/* Author (if provided) */}
         {author && (
           <motion.p
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className={`mt-10 text-xs uppercase tracking-[0.3em] ${
-              variant === 'dark' ? 'text-stone-500' : 'text-stone-400'
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className={`mt-8 font-sans text-sm tracking-wide ${
+              isDark ? 'text-stone-400' : 'text-stone-500'
             }`}
           >
-            {author}
+            — {author}
           </motion.p>
         )}
+
+        {/* Bottom gold accent */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={isInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+          className="w-12 h-px bg-gold-500 mx-auto mt-12"
+        />
       </div>
     </section>
   )

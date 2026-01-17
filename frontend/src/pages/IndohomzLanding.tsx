@@ -1,10 +1,12 @@
 /**
- * Indohomz - Premium Landing Page
+ * Indohomz - Luxury Landing Page
+ * Premium lifestyle-first living platform
  * Calm. Premium. Global. Aspirational.
  * "What kind of life will I live here?"
  */
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import {
   Header,
   Footer,
@@ -36,17 +38,17 @@ export default function IndohomzLanding() {
         {/* Intro Reveal - Delayed Entry */}
         <IntroReveal onComplete={() => setIntroComplete(true)} />
 
-        <div className={`min-h-screen bg-white transition-opacity duration-500 ${
+        <div className={`min-h-screen bg-luxury-cream transition-opacity duration-700 ${
           introComplete ? 'opacity-100' : 'opacity-0'
         }`}>
           {/* SEO */}
           <SEO 
             title="Indohomz | Live Better. Not Louder."
-            description="Curated homes for people who value comfort, privacy, and simplicity. Premium co-living spaces in Gurgaon, Bangalore, and Pune."
+            description="Curated homes for people who value comfort, privacy, and simplicity. Premium co-living spaces in Gurgaon's finest neighborhoods."
           />
 
           {/* Header */}
-          <Header variant="light" />
+          <Header variant="dark" />
 
           {/* Main Content */}
           <main>
@@ -63,24 +65,41 @@ export default function IndohomzLanding() {
             <LivingExperiences />
 
             {/* Guided Discovery CTA - Dramatic pause */}
-            <section className="py-32 md:py-44 bg-stone-100">
-              <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
-                <p className="text-stone-400 text-xs uppercase tracking-[0.3em] mb-8">
-                  Not sure where to start?
-                </p>
-                <button
-                  onClick={() => setShowDiscovery(true)}
-                  className="group inline-flex items-center gap-5 text-stone-800 hover:text-stone-900 transition-all duration-500"
+            <section className="py-32 md:py-44 bg-luxury-sand relative overflow-hidden">
+              {/* Subtle pattern */}
+              <div className="absolute inset-0 bg-pattern-luxury opacity-30" />
+              
+              {/* Gold accents */}
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent" />
+              
+              <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center relative z-10">
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="text-gold-600 text-xs font-sans uppercase tracking-[0.3em] mb-8"
                 >
-                  <span className="text-2xl md:text-3xl font-light tracking-tight">
+                  Not sure where to start?
+                </motion.p>
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  onClick={() => setShowDiscovery(true)}
+                  className="group inline-flex items-center gap-6"
+                >
+                  <span className="font-display text-2xl md:text-4xl font-light text-luxury-charcoal tracking-tight group-hover:text-gold-600 transition-colors duration-500">
                     Help me find my space
                   </span>
-                  <span className="w-14 h-14 rounded-full border border-stone-300 flex items-center justify-center group-hover:bg-stone-900 group-hover:border-stone-900 transition-all duration-500">
-                    <svg className="w-5 h-5 text-stone-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <span className="w-14 h-14 rounded-full border-2 border-gold-500/40 flex items-center justify-center group-hover:bg-gold-500 group-hover:border-gold-500 transition-all duration-500">
+                    <svg className="w-5 h-5 text-gold-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </span>
-                </button>
+                </motion.button>
               </div>
             </section>
 
