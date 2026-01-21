@@ -29,23 +29,23 @@ async def lifespan(app: FastAPI):
     """Application lifespan events"""
     # Startup
     print("=" * 50)
-    print(f"🏠 Starting {settings.APP_NAME} API v{settings.APP_VERSION}")
+    print(f"[+] Starting {settings.APP_NAME} API v{settings.APP_VERSION}")
     print("=" * 50)
     print(f"   Environment: {settings.ENVIRONMENT}")
     print(f"   Debug Mode: {settings.DEBUG}")
     print(f"   Database: {'Supabase' if 'supabase' in settings.DATABASE_URL else 'SQLite (local)'}")
-    print(f"   OpenAI: {'✓ Configured' if settings.OPENAI_API_KEY else '✗ Not configured'}")
-    print(f"   reCAPTCHA: {'✓ Enabled' if settings.RECAPTCHA_ENABLED else '✗ Disabled'}")
-    print(f"   Google Maps: {'✓ Configured' if settings.GOOGLE_MAPS_API_KEY else '✗ Not configured'}")
-    print(f"   Redis Cache: {'✓ Enabled' if settings.REDIS_ENABLED else '✗ Disabled (using in-memory)'}")
+    print(f"   OpenAI: {'[OK]' if settings.OPENAI_API_KEY else '[X] Not configured'}")
+    print(f"   reCAPTCHA: {'[OK]' if settings.RECAPTCHA_ENABLED else '[X] Disabled'}")
+    print(f"   Google Maps: {'[OK]' if settings.GOOGLE_MAPS_API_KEY else '[X] Not configured'}")
+    print(f"   Redis Cache: {'[OK]' if settings.REDIS_ENABLED else '[X] Disabled (using in-memory)'}")
     print("=" * 50)
     
     # Create database tables
     try:
         models.Base.metadata.create_all(bind=engine)
-        print("✓ Database tables ready")
+        print("[OK] Database tables ready")
     except Exception as e:
-        print(f"✗ Database initialization error: {e}")
+        print(f"[X] Database initialization error: {e}")
     
     # Auto-create admin user on first startup (production)
     if settings.ENVIRONMENT == "production":
@@ -73,25 +73,25 @@ async def lifespan(app: FastAPI):
                 )
                 db.add(admin)
                 db.commit()
-                print(f"✓ Admin user created: {admin_email}")
+                print(f"[OK] Admin user created: {admin_email}")
             else:
                 # Update existing admin password to fix any hash issues
                 password_hash = get_password_hash("Admin@2024")
                 existing_admin.password_hash = password_hash
                 db.commit()
-                print(f"✓ Admin user password updated: {admin_email}")
+                print(f"[OK] Admin user password updated: {admin_email}")
             db.close()
         except Exception as e:
-            print(f"⚠ Admin user creation skipped: {e}")
+            print(f"[!] Admin user creation skipped: {e}")
     
     # Initialize rate limiting (async to support Redis)
     using_redis = await init_rate_limiting()
-    print(f"✓ Rate limiting initialized {'(Redis)' if using_redis else '(in-memory)'}")
+    print(f"[OK] Rate limiting initialized {'(Redis)' if using_redis else '(in-memory)'}")
     
     yield
     
     # Shutdown
-    print(f"👋 Shutting down {settings.APP_NAME} API...")
+    print(f"[*] Shutting down {settings.APP_NAME} API...")
 
 
 # Initialize FastAPI app
