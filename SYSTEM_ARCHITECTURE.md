@@ -50,7 +50,7 @@
 
 **Admin Access**:
 ```
-Email: admin@indohomz.com
+Email: info@indohomz.com
 Password: Admin@2024
 ```
 
@@ -175,7 +175,7 @@ Users Table:
 ```
 Admin Portal Access:
 1. Go to: https://indohomz1.vercel.app/admin/login
-2. Email: admin@indohomz.com
+2. Email: info@indohomz.com
 3. Password: Admin@2024
 4. Click "Sign In"
 5. Add/Edit/Delete properties
@@ -335,7 +335,7 @@ Customer submits form → Backend DB → Sir sees in admin panel
 - Vercel env variable set: VITE_API_BASE_URL
 
 **Q: Can't login to admin?**
-- Use exact credentials: admin@indohomz.com / Admin@2024
+- Use exact credentials: info@indohomz.com / Admin@2024
 - Check browser console for errors
 
 **Q: Leads not appearing in admin?**
@@ -351,7 +351,7 @@ Customer submits form → Backend DB → Sir sees in admin panel
 ## 📞 Contact
 
 **WhatsApp**: 9053070100
-**Email**: admin@indohomz.com
+**Email**: info@indohomz.com
 
 ---
 

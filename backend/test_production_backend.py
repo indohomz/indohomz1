@@ -39,7 +39,7 @@ def test_backend(backend_url):
     try:
         response = requests.post(
             f"{backend_url}/api/v1/auth/login",
-            json={"email": "admin@indohomz.com", "password": "Admin@2024"},
+            json={"email": "info@indohomz.com", "password": "Admin@2024"},
             timeout=10
         )
         print(f"   Status: {response.status_code}")

@@ -185,8 +185,8 @@ export default function Header({ variant = 'light' }: HeaderProps) {
                 <a href="tel:+919053070100" className="text-stone-400 text-sm font-sans hover:text-gold-500 transition-colors">
                   +91 90530 70100
                 </a>
-                <a href="mailto:hello@indohomz.com" className="text-stone-500 text-sm font-sans hover:text-gold-500 transition-colors">
-                  hello@indohomz.com
+                <a href="mailto:info@indohomz.com" className="text-stone-500 text-sm font-sans hover:text-gold-500 transition-colors">
+                  info@indohomz.com
                 </a>
               </motion.div>
             </div>

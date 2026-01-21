@@ -5,7 +5,7 @@ import json
 # Test the login endpoint
 url = "http://localhost:8000/api/v1/auth/login"
 payload = {
-    "email": "admin@indohomz.com",
+    "email": "info@indohomz.com",
     "password": "Admin@2024"
 }
 

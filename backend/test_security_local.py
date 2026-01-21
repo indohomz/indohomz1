@@ -25,7 +25,7 @@ if not verify_result:
 # Test database
 print("\n2. Testing database...")
 db = SessionLocal()
-user = db.query(User).filter(User.email == "admin@indohomz.com").first()
+user = db.query(User).filter(User.email == "info@indohomz.com").first()
 if user:
     print(f"   Admin exists: {user.email}")
     # Update password

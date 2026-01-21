@@ -10,7 +10,7 @@
 - All packages now compatible with Python 3.13
 
 ### 2. **Admin User Created** ✓
-- **Email**: admin@indohomz.com
+- **Email**: info@indohomz.com
 - **Password**: Admin@2024
 - **Role**: admin
 - **Status**: Active and verified
@@ -32,7 +32,7 @@
 ### Local Development (Working Now!)
 1. Open: **http://localhost:5173/admin/login**
 2. Enter credentials:
-   - Email: `admin@indohomz.com`
+   - Email: `info@indohomz.com`
    - Password: `Admin@2024`
 3. Click "Sign In to Admin"
 
@@ -48,7 +48,7 @@ To fix the production login:
 2. **Option B - Create Admin in Production:**
    ```bash
    # You need to connect to your production database and run:
-   python create_admin.py --email admin@indohomz.com --password "Admin@2024" --name "Admin User"
+   python create_admin.py --email info@indohomz.com --password "Admin@2024" --name "Admin User"
    ```
 
 ---
@@ -90,7 +90,7 @@ cd c:\Users\hp\Retail-Analytics-Platform
 ## 🔑 Admin Credentials
 
 ```
-Email: admin@indohomz.com
+Email: info@indohomz.com
 Password: Admin@2024
 ```
 

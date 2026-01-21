@@ -9,7 +9,7 @@ from app.database.models import User
 db = SessionLocal()
 
 try:
-    user = db.query(User).filter(User.email == 'admin@indohomz.com').first()
+    user = db.query(User).filter(User.email == 'info@indohomz.com').first()
     
     if user:
         print(f"✓ User found: {user.email}")

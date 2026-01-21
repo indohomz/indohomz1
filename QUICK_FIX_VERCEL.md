@@ -63,7 +63,7 @@ Once deployed, go to Render dashboard:
 2. **Click** "Shell" (terminal icon in top right)
 3. **Run** in the shell:
    ```bash
-   python create_admin.py --email admin@indohomz.com --password "Admin@2024" --name "Admin User"
+   python create_admin.py --email info@indohomz.com --password "Admin@2024" --name "Admin User"
    ```
 
 #### 4. Update Vercel Frontend
@@ -83,7 +83,7 @@ Once deployed, go to Render dashboard:
 Visit: **https://indohomz1.vercel.app/admin/login**
 
 Login:
-- Email: `admin@indohomz.com`
+- Email: `info@indohomz.com`
 - Password: `Admin@2024`
 
 ✅ **DONE!**
@@ -139,7 +139,7 @@ Check these common issues:
 
 2. **Test login endpoint**:
    ```powershell
-   Invoke-RestMethod -Uri "https://your-backend-url.onrender.com/api/v1/auth/login" -Method POST -Body '{"email":"admin@indohomz.com","password":"Admin@2024"}' -ContentType "application/json"
+   Invoke-RestMethod -Uri "https://your-backend-url.onrender.com/api/v1/auth/login" -Method POST -Body '{"email":"info@indohomz.com","password":"Admin@2024"}' -ContentType "application/json"
    ```
 
 3. **Check CORS**: Make sure `ALLOWED_ORIGINS` includes your Vercel URL

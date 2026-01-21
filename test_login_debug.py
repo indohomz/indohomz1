@@ -32,7 +32,7 @@ print("2️⃣  Testing Login API...")
 try:
     response = requests.post(
         "https://indohomz-backend.onrender.com/api/v1/auth/login",
-        json={"email": "admin@indohomz.com", "password": "Admin@2024"},
+        json={"email": "info@indohomz.com", "password": "Admin@2024"},
         timeout=10
     )
     

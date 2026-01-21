@@ -107,7 +107,7 @@ def main():
     parser.add_argument(
         '--email', 
         type=str, 
-        default='admin@indohomz.com',
+        default='info@indohomz.com',
         help='Admin email address'
     )
     parser.add_argument(

@@ -114,7 +114,7 @@ def main():
     parser.add_argument("--db", choices=["sqlite", "postgresql"], default="sqlite",
                        help="Database type")
     parser.add_argument("--url", help="Database URL (for postgresql)")
-    parser.add_argument("--email", default="admin@indohomz.com",
+    parser.add_argument("--email", default="info@indohomz.com",
                        help="Admin email")
     parser.add_argument("--password", default="Admin@2024",
                        help="Admin password")

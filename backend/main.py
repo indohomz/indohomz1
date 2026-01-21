@@ -55,7 +55,7 @@ async def lifespan(app: FastAPI):
             from datetime import datetime
             
             db = SessionLocal()
-            admin_email = "admin@indohomz.com"
+            admin_email = "info@indohomz.com"
             existing_admin = db.query(models.User).filter(models.User.email == admin_email).first()
             
             if not existing_admin:
@@ -271,9 +271,9 @@ async def setup_admin(
             )
         
         # Check if admin already exists
-        existing_admin = db.query(User).filter(User.email == "admin@indohomz.com").first()
+        existing_admin = db.query(User).filter(User.email == "info@indohomz.com").first()
         if existing_admin:
-            return {"message": "Admin user already exists", "email": "admin@indohomz.com"}
+            return {"message": "Admin user already exists", "email": "info@indohomz.com"}
         
         # Create admin user - use bcrypt library directly
         password = "Admin@2024"
@@ -282,7 +282,7 @@ async def setup_admin(
         password_hash = bcrypt.hashpw(password_bytes, salt).decode('utf-8')
         
         admin_user = User(
-            email="admin@indohomz.com",
+            email="info@indohomz.com",
             password_hash=password_hash,
             name="IndoHomz Admin",
             phone="9053070100",
@@ -298,7 +298,7 @@ async def setup_admin(
         
         return {
             "message": "Admin user created successfully!",
-            "email": "admin@indohomz.com",
+            "email": "info@indohomz.com",
             "password": password,
             "note": "Please change the password after first login"
         }

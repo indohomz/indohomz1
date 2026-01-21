@@ -91,7 +91,7 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="mailto:hello@indohomz.com" 
+                  href="mailto:info@indohomz.com" 
                   className="group flex items-center gap-3 text-stone-400 hover:text-gold-500 transition-colors duration-300"
                 >
                   <span className="w-8 h-8 rounded-full border border-stone-700 flex items-center justify-center group-hover:border-gold-500 transition-colors duration-300">
@@ -99,7 +99,7 @@ export default function Footer() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </span>
-                  <span className="font-sans font-light">hello@indohomz.com</span>
+                  <span className="font-sans font-light">info@indohomz.com</span>
                 </a>
               </li>
               <li>

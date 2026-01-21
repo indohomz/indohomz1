@@ -61,7 +61,7 @@ cd c:\Users\hp\Retail-Analytics-Platform\backend
 # You'll need to SSH into Render or use their shell
 # For now, manually create via Render's shell:
 
-python create_admin.py --email admin@indohomz.com --password "Admin@2024"
+python create_admin.py --email info@indohomz.com --password "Admin@2024"
 ```
 
 #### Step 3: Update Vercel Frontend
@@ -80,7 +80,7 @@ python create_admin.py --email admin@indohomz.com --password "Admin@2024"
 Visit: **https://indohomz1.vercel.app/admin/login**
 
 Login with:
-- Email: admin@indohomz.com
+- Email: info@indohomz.com
 - Password: Admin@2024
 
 ---
@@ -125,7 +125,7 @@ cd c:\Users\hp\Retail-Analytics-Platform\backend
 
 python create_admin_production.py --db postgresql \
   --url "postgresql://postgres.[your-project]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres" \
-  --email admin@indohomz.com \
+  --email info@indohomz.com \
   --password "Admin@2024"
 ```
 
@@ -140,7 +140,7 @@ If you already have a backend deployed somewhere, just run:
 # Look at Vercel environment variables for VITE_API_BASE_URL
 
 # Test the backend
-Invoke-WebRequest https://your-backend-url.com/api/v1/auth/login -Method POST -Body '{"email":"admin@indohomz.com","password":"Admin@2024"}' -ContentType "application/json"
+Invoke-WebRequest https://your-backend-url.com/api/v1/auth/login -Method POST -Body '{"email":"info@indohomz.com","password":"Admin@2024"}' -ContentType "application/json"
 
 # If it returns 401 (Unauthorized), admin user doesn't exist
 # You need to create it in that backend's database
@@ -164,7 +164,7 @@ I can help you:
 ## Current Status
 
 - ✅ Local development working perfectly
-- ✅ Admin user created locally (admin@indohomz.com / Admin@2024)
+- ✅ Admin user created locally (info@indohomz.com / Admin@2024)
 - ✅ Backend running on localhost:8000
 - ✅ Frontend running on localhost:5173
 - ⚠️ **Production deployment needs backend deployed**

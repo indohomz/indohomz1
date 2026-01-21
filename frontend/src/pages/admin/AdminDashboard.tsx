@@ -121,9 +121,9 @@ export default function AdminDashboard() {
   const getUser = () => {
     try {
       const user = localStorage.getItem('admin_user')
-      return user ? JSON.parse(user) : { name: 'Admin', email: 'admin@indohomz.com' }
+      return user ? JSON.parse(user) : { name: 'Admin', email: 'info@indohomz.com' }
     } catch (e) {
-      return { name: 'Admin', email: 'admin@indohomz.com' }
+      return { name: 'Admin', email: 'info@indohomz.com' }
     }
   }
 

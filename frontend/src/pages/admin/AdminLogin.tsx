@@ -163,7 +163,7 @@ export default function AdminLogin() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-luxury-charcoal/50 border border-stone-700/50 text-white font-sora placeholder:text-stone-600 focus:border-gold-500/50 focus:ring-2 focus:ring-gold-500/20 outline-none transition-all"
-                  placeholder="admin@indohomz.com"
+                  placeholder="info@indohomz.com"
                   required
                 />
               </div>
@@ -251,7 +251,7 @@ export default function AdminLogin() {
           className="text-center mt-6 p-4 rounded-lg bg-gold-500/5 border border-gold-500/10"
         >
           <p className="text-xs text-stone-500 font-sora">
-            <span className="text-gold-500">Demo:</span> admin@indohomz.com / Admin@2024
+            <span className="text-gold-500">Demo:</span> info@indohomz.com / Admin@2024
           </p>
         </motion.div>
       </motion.div>
