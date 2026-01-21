@@ -94,12 +94,12 @@ interface AdminStats {
 type ActiveTab = 'properties' | 'leads'
 
 const LEAD_STATUSES = [
-  { value: 'new', label: 'New', color: 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-600/20' },
+  { value: 'new', label: 'New', color: 'bg-gold-50 text-gold-700 ring-1 ring-inset ring-gold-600/20' },
   { value: 'contacted', label: 'Contacted', color: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20' },
   { value: 'site_visit', label: 'Site Visit', color: 'bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-600/20' },
   { value: 'negotiation', label: 'Negotiation', color: 'bg-orange-50 text-orange-700 ring-1 ring-inset ring-orange-600/20' },
   { value: 'converted', label: 'Converted', color: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20' },
-  { value: 'lost', label: 'Lost', color: 'bg-neutral-100 text-neutral-500 ring-1 ring-inset ring-neutral-500/20' },
+  { value: 'lost', label: 'Lost', color: 'bg-stone-100 text-stone-500 ring-1 ring-inset ring-stone-500/20' },
 ]
 
 export default function AdminDashboard() {
@@ -337,7 +337,7 @@ export default function AdminDashboard() {
   const user = getUser()
 
   return (
-    <div className="min-h-screen bg-neutral-50/50">
+    <div className="min-h-screen bg-luxury-cream font-sora">
       {/* Notification */}
       <AnimatePresence>
         {notification && (
@@ -345,8 +345,8 @@ export default function AdminDashboard() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg ${
-              notification.type === 'success' ? 'bg-emerald-500' : 'bg-red-500'
+            className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-5 py-3.5 rounded-xl shadow-lg font-sora text-sm ${
+              notification.type === 'success' ? 'bg-emerald-600' : 'bg-red-600'
             } text-white`}
           >
             {notification.type === 'success' ? (
@@ -359,102 +359,88 @@ export default function AdminDashboard() {
         )}
       </AnimatePresence>
 
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl border-b border-neutral-200/60 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-6 py-3">
+      {/* Luxury Header */}
+      <header className="bg-luxury-charcoal sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Link to="/" className="flex items-center gap-2.5 group">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neutral-900 to-neutral-700 flex items-center justify-center shadow-sm">
-                  <Building2 className="h-4 w-4 text-white" />
-                </div>
-                <span className="text-[15px] font-semibold text-neutral-900 tracking-tight">IndoHomz</span>
-                <span className="text-[11px] font-medium text-neutral-400 uppercase tracking-wider">Admin</span>
+            <div className="flex items-center gap-4">
+              <Link to="/" className="flex items-center gap-3 group">
+                <img src="/logo.png" alt="IndoHomz" className="h-8 brightness-0 invert opacity-90" />
+                <div className="h-6 w-px bg-stone-600" />
+                <span className="text-xs font-sora font-medium text-gold-500 uppercase tracking-widest">Admin Portal</span>
               </Link>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-100/80">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-900 flex items-center justify-center">
-                  <span className="text-[10px] font-semibold text-white">{(user?.name || 'A')[0].toUpperCase()}</span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-luxury-espresso/50 border border-stone-700/30">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold-600 to-gold-500 flex items-center justify-center">
+                  <span className="text-xs font-semibold text-luxury-charcoal">{(user?.name || 'A')[0].toUpperCase()}</span>
                 </div>
-                <span className="text-[13px] font-medium text-neutral-700">{user?.name || 'Admin'}</span>
+                <span className="text-sm font-medium text-stone-300">{user?.name || 'Admin'}</span>
               </div>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 transition-all text-[13px]"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-stone-400 hover:text-white hover:bg-stone-700/50 transition-all text-sm"
               >
-                <LogOut className="h-3.5 w-3.5" />
+                <LogOut className="h-4 w-4" />
                 <span className="hidden sm:inline">Logout</span>
               </button>
             </div>
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex gap-1 mt-3 pt-3 border-t border-neutral-100">
+          <div className="flex gap-2 mt-4 pt-4 border-t border-stone-700/30">
             <button
               onClick={() => setActiveTab('properties')}
-              className={`relative flex items-center gap-2 px-3 py-2 text-[13px] font-medium transition-all ${
+              className={`relative flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${
                 activeTab === 'properties'
-                  ? 'text-neutral-900'
-                  : 'text-neutral-500 hover:text-neutral-700'
+                  ? 'text-luxury-charcoal bg-gold-500'
+                  : 'text-stone-400 hover:text-white hover:bg-stone-700/50'
               }`}
             >
               <Home className="h-4 w-4" />
               Properties
-              <span className={`px-1.5 py-0.5 rounded text-[11px] font-semibold ${
-                activeTab === 'properties' ? 'bg-neutral-900 text-white' : 'bg-neutral-100 text-neutral-500'
+              <span className={`px-2 py-0.5 rounded-md text-xs font-semibold ${
+                activeTab === 'properties' ? 'bg-luxury-charcoal/20 text-luxury-charcoal' : 'bg-stone-700/50 text-stone-400'
               }`}>
                 {properties.length}
               </span>
-              {activeTab === 'properties' && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-x-0 -bottom-3 h-0.5 bg-neutral-900 rounded-full"
-                />
-              )}
             </button>
             <button
               onClick={() => setActiveTab('leads')}
-              className={`relative flex items-center gap-2 px-3 py-2 text-[13px] font-medium transition-all ${
+              className={`relative flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${
                 activeTab === 'leads'
-                  ? 'text-neutral-900'
-                  : 'text-neutral-500 hover:text-neutral-700'
+                  ? 'text-luxury-charcoal bg-gold-500'
+                  : 'text-stone-400 hover:text-white hover:bg-stone-700/50'
               }`}
             >
               <Users className="h-4 w-4" />
               Leads
-              <span className={`px-1.5 py-0.5 rounded text-[11px] font-semibold ${
-                activeTab === 'leads' ? 'bg-neutral-900 text-white' : 'bg-neutral-100 text-neutral-500'
+              <span className={`px-2 py-0.5 rounded-md text-xs font-semibold ${
+                activeTab === 'leads' ? 'bg-luxury-charcoal/20 text-luxury-charcoal' : 'bg-stone-700/50 text-stone-400'
               }`}>
                 {leads.length}
               </span>
-              {activeTab === 'leads' && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-x-0 -bottom-3 h-0.5 bg-neutral-900 rounded-full"
-                />
-              )}
             </button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-6">
+      <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-xl p-5 border border-neutral-200/60 hover:border-neutral-300 transition-colors"
+            className="bg-white rounded-2xl p-6 border border-stone-200/50 shadow-sm hover:shadow-md hover:border-gold-200 transition-all group"
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[11px] font-medium text-neutral-500 uppercase tracking-wider">Properties</p>
-                <p className="text-2xl font-semibold text-neutral-900 mt-1 tabular-nums">{stats?.total_properties || properties.length}</p>
+                <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Properties</p>
+                <p className="text-3xl font-cormorant font-semibold text-luxury-charcoal mt-2 tabular-nums">{stats?.total_properties || properties.length}</p>
               </div>
-              <div className="w-9 h-9 rounded-lg bg-neutral-100 flex items-center justify-center">
-                <Home className="h-4 w-4 text-neutral-600" />
+              <div className="w-11 h-11 rounded-xl bg-luxury-sand flex items-center justify-center group-hover:bg-gold-100 transition-colors">
+                <Home className="h-5 w-5 text-luxury-charcoal" />
               </div>
             </div>
           </motion.div>
@@ -463,17 +449,17 @@ export default function AdminDashboard() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="bg-white rounded-xl p-5 border border-neutral-200/60 hover:border-neutral-300 transition-colors"
+            className="bg-white rounded-2xl p-6 border border-stone-200/50 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all group"
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[11px] font-medium text-neutral-500 uppercase tracking-wider">Available</p>
-                <p className="text-2xl font-semibold text-emerald-600 mt-1 tabular-nums">
+                <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Available</p>
+                <p className="text-3xl font-cormorant font-semibold text-emerald-600 mt-2 tabular-nums">
                   {stats?.available_properties || properties.filter(p => p.is_available).length}
                 </p>
               </div>
-              <div className="w-9 h-9 rounded-lg bg-emerald-50 flex items-center justify-center">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+              <div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
+                <CheckCircle2 className="h-5 w-5 text-emerald-600" />
               </div>
             </div>
           </motion.div>
@@ -482,15 +468,15 @@ export default function AdminDashboard() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white rounded-xl p-5 border border-neutral-200/60 hover:border-neutral-300 transition-colors"
+            className="bg-white rounded-2xl p-6 border border-stone-200/50 shadow-sm hover:shadow-md hover:border-gold-200 transition-all group"
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[11px] font-medium text-neutral-500 uppercase tracking-wider">Total Leads</p>
-                <p className="text-2xl font-semibold text-neutral-900 mt-1 tabular-nums">{stats?.total_leads || leads.length}</p>
+                <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">Total Leads</p>
+                <p className="text-3xl font-cormorant font-semibold text-luxury-charcoal mt-2 tabular-nums">{stats?.total_leads || leads.length}</p>
               </div>
-              <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center">
-                <Users className="h-4 w-4 text-amber-600" />
+              <div className="w-11 h-11 rounded-xl bg-gold-50 flex items-center justify-center group-hover:bg-gold-100 transition-colors">
+                <Users className="h-5 w-5 text-gold-600" />
               </div>
             </div>
           </motion.div>
@@ -499,15 +485,15 @@ export default function AdminDashboard() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="bg-white rounded-xl p-5 border border-neutral-200/60 hover:border-neutral-300 transition-colors"
+            className="bg-gradient-to-br from-luxury-charcoal to-luxury-espresso rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all group"
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[11px] font-medium text-neutral-500 uppercase tracking-wider">This Month</p>
-                <p className="text-2xl font-semibold text-neutral-900 mt-1 tabular-nums">{stats?.recent_leads || 0}</p>
+                <p className="text-xs font-medium text-gold-400 uppercase tracking-wider">This Month</p>
+                <p className="text-3xl font-cormorant font-semibold text-white mt-2 tabular-nums">{stats?.recent_leads || 0}</p>
               </div>
-              <div className="w-9 h-9 rounded-lg bg-violet-50 flex items-center justify-center">
-                <TrendingUp className="h-4 w-4 text-violet-600" />
+              <div className="w-11 h-11 rounded-xl bg-gold-500/20 flex items-center justify-center group-hover:bg-gold-500/30 transition-colors">
+                <TrendingUp className="h-5 w-5 text-gold-400" />
               </div>
             </div>
           </motion.div>
@@ -517,17 +503,17 @@ export default function AdminDashboard() {
         {activeTab === 'properties' && (
           <>
             {/* Actions Bar */}
-            <div className="bg-white rounded-xl p-3 mb-4 border border-neutral-200/60">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
+            <div className="bg-white rounded-2xl p-4 mb-6 border border-stone-200/50 shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
                     <input
                       type="text"
                       placeholder="Search properties..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-9 pr-4 py-2 w-56 text-[13px] bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 focus:bg-white outline-none transition-all placeholder:text-neutral-400"
+                      className="pl-10 pr-4 py-2.5 w-64 text-sm bg-luxury-sand/30 border border-stone-200 rounded-xl focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500/50 focus:bg-white outline-none transition-all placeholder:text-stone-400"
                     />
                   </div>
                   <button
@@ -535,33 +521,33 @@ export default function AdminDashboard() {
                       setIsLoading(true)
                       fetchProperties().finally(() => setIsLoading(false))
                     }}
-                    className="flex items-center gap-1.5 px-3 py-2 text-[13px] text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-all"
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm text-stone-600 hover:text-luxury-charcoal hover:bg-luxury-sand/50 rounded-xl transition-all"
                   >
-                    <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />
+                    <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
                     <span className="hidden sm:inline">Refresh</span>
                   </button>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center bg-neutral-100 rounded-lg p-0.5">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center bg-luxury-sand/30 rounded-xl p-1">
                     <button
                       onClick={() => setViewMode('grid')}
-                      className={`p-1.5 rounded-md transition-all ${viewMode === 'grid' ? 'bg-white shadow-sm text-neutral-900' : 'text-neutral-500 hover:text-neutral-700'}`}
+                      className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white shadow-sm text-luxury-charcoal' : 'text-stone-500 hover:text-stone-700'}`}
                     >
                       <LayoutGrid className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => setViewMode('list')}
-                      className={`p-1.5 rounded-md transition-all ${viewMode === 'list' ? 'bg-white shadow-sm text-neutral-900' : 'text-neutral-500 hover:text-neutral-700'}`}
+                      className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white shadow-sm text-luxury-charcoal' : 'text-stone-500 hover:text-stone-700'}`}
                     >
                       <List className="h-4 w-4" />
                     </button>
                   </div>
                   <button
                     onClick={() => setShowAddModal(true)}
-                    className="flex items-center gap-1.5 px-3 py-2 bg-neutral-900 text-white text-[13px] font-medium rounded-lg hover:bg-neutral-800 transition-all"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-gold-600 to-gold-500 text-luxury-charcoal text-sm font-semibold rounded-xl hover:from-gold-500 hover:to-gold-400 transition-all shadow-md shadow-gold-500/20"
                   >
-                    <Plus className="h-3.5 w-3.5" />
+                    <Plus className="h-4 w-4" />
                     Add Property
                   </button>
                 </div>
@@ -575,69 +561,72 @@ export default function AdminDashboard() {
                 <p className="text-[13px] text-neutral-500">Loading properties...</p>
               </div>
         ) : viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProperties.map((property, index) => (
               <motion.div
                 key={property.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.03 }}
-                className="group bg-white rounded-xl overflow-hidden border border-neutral-200/60 hover:border-neutral-300 hover:shadow-md transition-all"
+                className="group bg-white rounded-2xl overflow-hidden border border-stone-200/50 shadow-sm hover:shadow-lg hover:border-gold-200 transition-all"
               >
                 {/* Image */}
-                <div className="relative h-40 bg-neutral-100">
+                <div className="relative h-44 bg-luxury-sand/30">
                   <img
                     src={property.image_url || '/images/placeholder.jpg'}
                     alt={property.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-2.5 left-2.5">
-                    <span className={`px-2 py-1 rounded-md text-[11px] font-medium ${
+                  <div className="absolute inset-0 bg-gradient-to-t from-luxury-charcoal/40 to-transparent" />
+                  <div className="absolute top-3 left-3">
+                    <span className={`px-3 py-1.5 rounded-lg text-xs font-semibold backdrop-blur-sm ${
                       property.is_available
                         ? 'bg-emerald-500/90 text-white'
-                        : 'bg-neutral-800/80 text-white'
+                        : 'bg-stone-800/90 text-stone-200'
                     }`}>
                       {property.is_available ? 'Available' : 'Rented'}
                     </span>
                   </div>
+                  <div className="absolute bottom-3 left-3">
+                    <p className="text-lg font-cormorant font-semibold text-white">{property.price}</p>
+                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-3.5">
-                  <h3 className="font-medium text-neutral-900 text-[14px] mb-1 line-clamp-1">{property.title}</h3>
-                  <p className="text-[12px] text-neutral-500 mb-2 flex items-center gap-1">
-                    <MapPin className="h-3 w-3" />
+                <div className="p-4">
+                  <h3 className="font-semibold text-luxury-charcoal text-sm mb-1.5 line-clamp-1">{property.title}</h3>
+                  <p className="text-xs text-stone-500 mb-3 flex items-center gap-1.5">
+                    <MapPin className="h-3.5 w-3.5 text-gold-500" />
                     {property.area || property.location}
                   </p>
-                  <p className="text-[15px] font-semibold text-neutral-900 mb-2.5">{property.price}</p>
 
-                  <div className="flex items-center gap-3 text-[12px] text-neutral-500 mb-3">
-                    <span className="flex items-center gap-1">
+                  <div className="flex items-center gap-4 text-xs text-stone-500 mb-4">
+                    <span className="flex items-center gap-1.5">
                       <Bed className="h-3.5 w-3.5" />
-                      {property.bedrooms || 1}
+                      {property.bedrooms || 1} Bed
                     </span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1.5">
                       <Bath className="h-3.5 w-3.5" />
-                      {property.bathrooms || 1}
+                      {property.bathrooms || 1} Bath
                     </span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1.5">
                       <Maximize2 className="h-3.5 w-3.5" />
                       {property.area_sqft || '-'} sqft
                     </span>
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-1.5 pt-3 border-t border-neutral-100">
+                  <div className="flex items-center gap-2 pt-4 border-t border-stone-100">
                     <button
                       onClick={() => setEditingProperty(property)}
-                      className="flex-1 flex items-center justify-center gap-1 px-2.5 py-1.5 text-[12px] text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-md transition-all"
+                      className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium text-stone-600 hover:text-luxury-charcoal hover:bg-luxury-sand/50 rounded-lg transition-all"
                     >
                       <Edit2 className="h-3.5 w-3.5" />
                       Edit
                     </button>
                     <button
                       onClick={() => toggleAvailability(property.id, property.is_available)}
-                      className={`flex-1 flex items-center justify-center gap-1 px-2.5 py-1.5 text-[12px] rounded-md transition-all ${
+                      className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg transition-all ${
                         property.is_available
                           ? 'text-amber-600 hover:bg-amber-50'
                           : 'text-emerald-600 hover:bg-emerald-50'
@@ -648,7 +637,7 @@ export default function AdminDashboard() {
                     </button>
                     <button
                       onClick={() => deleteProperty(property.id)}
-                      className="flex items-center justify-center px-2 py-1.5 text-neutral-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-all"
+                      className="flex items-center justify-center px-2.5 py-2 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                     </button>
@@ -748,17 +737,17 @@ export default function AdminDashboard() {
         {activeTab === 'leads' && (
           <>
             {/* Leads Actions Bar */}
-            <div className="bg-white rounded-lg p-3 mb-5 border border-neutral-200/80">
-              <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="bg-white rounded-2xl p-4 mb-6 border border-stone-200/50 shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div className="relative">
-                    <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-neutral-400" />
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
                     <input
                       type="text"
                       placeholder="Search leads..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-8 pr-3 py-1.5 w-56 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none placeholder:text-neutral-400"
+                      className="pl-10 pr-4 py-2.5 w-64 text-sm bg-luxury-sand/30 border border-stone-200 rounded-xl focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500/50 focus:bg-white outline-none transition-all placeholder:text-stone-400"
                     />
                   </div>
                   
@@ -767,14 +756,14 @@ export default function AdminDashboard() {
                     <select
                       value={leadStatusFilter}
                       onChange={(e) => setLeadStatusFilter(e.target.value)}
-                      className="appearance-none pl-3 pr-8 py-1.5 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none bg-white"
+                      className="appearance-none pl-4 pr-10 py-2.5 text-sm border border-stone-200 rounded-xl focus:ring-2 focus:ring-gold-500/20 focus:border-gold-500/50 outline-none bg-white cursor-pointer"
                     >
                       <option value="all">All Status</option>
                       {LEAD_STATUSES.map(s => (
                         <option key={s.value} value={s.value}>{s.label}</option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-neutral-400 pointer-events-none" />
+                    <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400 pointer-events-none" />
                   </div>
 
                   <button
@@ -782,19 +771,19 @@ export default function AdminDashboard() {
                       setIsLoading(true)
                       fetchLeads().finally(() => setIsLoading(false))
                     }}
-                    className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-neutral-600 hover:bg-neutral-100 rounded-md transition-colors"
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm text-stone-600 hover:text-luxury-charcoal hover:bg-luxury-sand/50 rounded-xl transition-all"
                   >
-                    <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />
+                    <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
                     Refresh
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   {LEAD_STATUSES.map(s => {
                     const count = leads.filter(l => l.status === s.value).length
                     if (count === 0) return null
                     return (
-                      <span key={s.value} className={`px-2 py-0.5 rounded text-[10px] font-medium ${s.color}`}>
+                      <span key={s.value} className={`px-3 py-1 rounded-lg text-xs font-medium ${s.color}`}>
                         {count} {s.label}
                       </span>
                     )
