@@ -37,12 +37,14 @@ import {
   PropertyComparison,
   TestimonialSlider,
   CompareButton,
+  MobileBottomBar,
 } from '../components/Premium'
 
 export default function IndohomzLanding() {
   const [introComplete, setIntroComplete] = useState(false)
   const [showDiscovery, setShowDiscovery] = useState(false)
   const [showComparison, setShowComparison] = useState(false)
+  const [showChat, setShowChat] = useState(false)
 
   return (
     <ThemeProvider>
@@ -160,20 +162,34 @@ export default function IndohomzLanding() {
           {/* Footer */}
           <Footer />
 
-          {/* Floating Features */}
-          <QuietModeToggle />
-          <SmartHomeMatch />
-          <WhatsAppFloat phoneNumber="919053070100" />
+          {/* Desktop Floating Features - Hidden on mobile */}
+          <div className="hidden md:block">
+            <QuietModeToggle />
+            <SmartHomeMatch />
+            <WhatsAppFloat phoneNumber="919053070100" />
+            <AIChatbot />
+            <CompareButton onClick={() => setShowComparison(true)} />
+            {/* Theme Toggle - Desktop only */}
+            <div className="fixed bottom-6 left-6 z-50">
+              <ThemeToggle />
+            </div>
+          </div>
           
-          {/* AI Chatbot */}
-          <AIChatbot />
+          {/* Mobile Bottom Bar - Clean organized toolbar */}
+          <MobileBottomBar
+            onOpenChat={() => setShowChat(true)}
+            onOpenCompare={() => setShowComparison(true)}
+            onOpenSearch={() => setShowDiscovery(true)}
+            whatsappNumber="919053070100"
+          />
           
-          {/* Property Comparison Button */}
-          <CompareButton onClick={() => setShowComparison(true)} />
-          
-          {/* Theme Toggle - Bottom Left */}
-          <div className="fixed bottom-6 left-6 z-50">
-            <ThemeToggle />
+          {/* Mobile Chat - Controlled externally */}
+          <div className="md:hidden">
+            <AIChatbot 
+              isOpen={showChat} 
+              onClose={() => setShowChat(false)}
+              hideButton
+            />
           </div>
         </div>
 

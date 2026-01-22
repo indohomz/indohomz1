@@ -10,4 +10,5 @@ export { default as PropertyComparison } from './PropertyComparison'
 export { default as TestimonialSlider } from './TestimonialSlider'
 export { default as PremiumIntro } from './PremiumIntro'
 export { default as CompareButton } from './CompareButton'
+export { default as MobileBottomBar } from './MobileBottomBar'
 

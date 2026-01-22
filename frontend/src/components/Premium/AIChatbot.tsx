@@ -72,8 +72,22 @@ function getBotResponse(message: string): { text: string; suggestions?: string[]
   return BOT_RESPONSES['default']
 }
 
-export default function AIChatbot() {
-  const [isOpen, setIsOpen] = useState(false)
+interface ChatbotProps {
+  isOpen?: boolean
+  onClose?: () => void
+  hideButton?: boolean
+}
+
+export default function AIChatbot({ isOpen: externalOpen, onClose, hideButton = false }: ChatbotProps = {}) {
+  const [internalOpen, setInternalOpen] = useState(false)
+  const isOpen = externalOpen !== undefined ? externalOpen : internalOpen
+  const setIsOpen = (open: boolean) => {
+    if (externalOpen !== undefined && onClose && !open) {
+      onClose()
+    } else {
+      setInternalOpen(open)
+    }
+  }
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState('')
   const [isTyping, setIsTyping] = useState(false)
@@ -129,25 +143,26 @@ export default function AIChatbot() {
 
   return (
     <>
-      {/* Chat Button - Mobile Optimized */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 2, type: 'spring' }}
-        onClick={() => setIsOpen(true)}
-        className={`fixed z-50 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 text-white shadow-lg shadow-gold-500/30 flex items-center justify-center active:scale-95 md:hover:scale-110 transition-transform touch-feedback
-                    /* Mobile: Larger button, better position */
-                    bottom-20 right-4 w-14 h-14
-                    /* Desktop */
-                    md:bottom-24 md:right-6 md:w-14 md:h-14 ${
-          isOpen ? 'hidden' : ''
-        }`}
-        style={{ bottom: 'calc(5rem + env(safe-area-inset-bottom, 0px))' }}
-      >
-        <MessageCircle className="w-6 h-6" />
-        {/* Pulse effect */}
-        <span className="absolute inset-0 rounded-full bg-gold-500 animate-ping opacity-30" />
-      </motion.button>
+      {/* Chat Button - Mobile Optimized (hidden on mobile if hideButton is true) */}
+      {!hideButton && (
+        <motion.button
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 2, type: 'spring' }}
+          onClick={() => setIsOpen(true)}
+          className={`fixed z-50 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 text-white shadow-lg shadow-gold-500/30 flex items-center justify-center active:scale-95 md:hover:scale-110 transition-transform touch-feedback
+                      /* Hidden on mobile when using MobileBottomBar */
+                      hidden md:flex
+                      /* Desktop */
+                      md:bottom-24 md:right-6 md:w-14 md:h-14 ${
+            isOpen ? 'md:hidden' : ''
+          }`}
+        >
+          <MessageCircle className="w-6 h-6" />
+          {/* Pulse effect */}
+          <span className="absolute inset-0 rounded-full bg-gold-500 animate-ping opacity-30" />
+        </motion.button>
+      )}
 
       {/* Chat Window - Mobile Optimized */}
       <AnimatePresence>
