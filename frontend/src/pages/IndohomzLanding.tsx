@@ -28,9 +28,21 @@ import LivingInsights from '../components/Indohomz/Sections/LivingInsights'
 import BreathingSpace from '../components/Indohomz/Sections/BreathingSpace'
 import { ThemeProvider, ThemeToggle } from '../components/Indohomz/Features/ThemeProvider'
 
+// Premium Components
+import {
+  ParticlesBackground,
+  AnimatedStats,
+  ScrollProgress,
+  AIChatbot,
+  PropertyComparison,
+  TestimonialSlider,
+  CompareButton,
+} from '../components/Premium'
+
 export default function IndohomzLanding() {
   const [introComplete, setIntroComplete] = useState(false)
   const [showDiscovery, setShowDiscovery] = useState(false)
+  const [showComparison, setShowComparison] = useState(false)
 
   return (
     <ThemeProvider>
@@ -46,6 +58,12 @@ export default function IndohomzLanding() {
             title="Indohomz | Live Better. Not Louder."
             description="Curated homes for people who value comfort, privacy, and simplicity. Premium co-living spaces in Gurgaon's finest neighborhoods."
           />
+
+          {/* Scroll Progress Indicator */}
+          <ScrollProgress color="#D4A574" height={3} />
+
+          {/* Floating Particles Background */}
+          <ParticlesBackground particleCount={30} color="#D4A574" />
 
           {/* Header */}
           <Header variant="dark" />
@@ -116,8 +134,14 @@ export default function IndohomzLanding() {
             {/* Brand Philosophy */}
             <BrandPhilosophy />
 
+            {/* Animated Statistics */}
+            <AnimatedStats />
+
             {/* Living Insights - Data Section */}
             <LivingInsights />
+
+            {/* Premium Testimonials */}
+            <TestimonialSlider />
 
             {/* Gurgaon Map - Dark Section */}
             <GurgaonMap />
@@ -141,6 +165,12 @@ export default function IndohomzLanding() {
           <SmartHomeMatch />
           <WhatsAppFloat phoneNumber="919053070100" />
           
+          {/* AI Chatbot */}
+          <AIChatbot />
+          
+          {/* Property Comparison Button */}
+          <CompareButton onClick={() => setShowComparison(true)} />
+          
           {/* Theme Toggle - Bottom Left */}
           <div className="fixed bottom-6 left-6 z-50">
             <ThemeToggle />
@@ -151,6 +181,12 @@ export default function IndohomzLanding() {
         <GuidedDiscovery 
           isOpen={showDiscovery} 
           onClose={() => setShowDiscovery(false)} 
+        />
+        
+        {/* Property Comparison Modal */}
+        <PropertyComparison 
+          isOpen={showComparison}
+          onClose={() => setShowComparison(false)}
         />
       </QuietModeProvider>
     </ThemeProvider>

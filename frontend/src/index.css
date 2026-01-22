@@ -599,3 +599,178 @@ body {
   background: var(--espresso);
   border-color: rgba(212, 165, 116, 0.15);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PREMIUM MICRO-INTERACTIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Magnetic hover effect for buttons */
+.magnetic-hover {
+  transition: transform 0.3s var(--ease-luxury);
+}
+
+.magnetic-hover:hover {
+  transform: scale(1.02);
+}
+
+/* Shine effect on hover */
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.shine-effect:hover::before {
+  left: 100%;
+}
+
+/* Glassmorphism cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card-dark {
+  background: rgba(26, 25, 24, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 165, 116, 0.1);
+}
+
+/* Glow effects */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(212, 165, 116, 0.3),
+              0 0 40px rgba(212, 165, 116, 0.2),
+              0 0 60px rgba(212, 165, 116, 0.1);
+}
+
+.glow-text-gold {
+  text-shadow: 0 0 10px rgba(212, 165, 116, 0.5),
+               0 0 20px rgba(212, 165, 116, 0.3);
+}
+
+/* Gradient text */
+.gradient-text-gold {
+  background: linear-gradient(135deg, #D4A574, #FBBF24, #D4A574);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientFlow 3s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating animation variants */
+.float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+/* Premium button styles */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  transition: all 0.5s ease-out;
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.btn-premium:hover::before {
+  transform: translateX(0);
+}
+
+.btn-premium-gold {
+  background: #D4A574;
+  color: #1A1918;
+  box-shadow: 0 4px 20px rgba(212, 165, 116, 0.3);
+}
+
+.btn-premium-gold:hover {
+  background: #FBBF24;
+  box-shadow: 0 8px 30px rgba(212, 165, 116, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Card hover lift */
+.card-lift {
+  transition: transform 0.3s var(--ease-luxury), box-shadow 0.3s var(--ease-luxury);
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(26, 25, 24, 0.1);
+}
+
+/* Image zoom on hover */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 0.6s var(--ease-luxury);
+}
+
+.img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Pattern backgrounds */
+.bg-pattern-dots {
+  background-image: radial-gradient(circle at 2px 2px, rgba(212, 165, 116, 0.15) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+.bg-pattern-grid {
+  background-image: 
+    linear-gradient(rgba(212, 165, 116, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 165, 116, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
