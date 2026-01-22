@@ -45,7 +45,19 @@ export default function AdminLogin() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.detail || 'Login failed')
+        // Handle different error formats
+        let errorMsg = 'Login failed'
+        if (typeof data.detail === 'string') {
+          errorMsg = data.detail
+        } else if (Array.isArray(data.detail)) {
+          // Pydantic validation errors
+          errorMsg = data.detail.map((e: any) => e.msg || e.message).join(', ')
+        } else if (data.detail?.message) {
+          errorMsg = data.detail.message
+        } else if (data.message) {
+          errorMsg = data.message
+        }
+        throw new Error(errorMsg)
       }
 
       // Store token
@@ -68,7 +80,8 @@ export default function AdminLogin() {
       // Redirect to admin dashboard
       navigate('/admin/dashboard')
     } catch (err: any) {
-      setError(err.message || 'Login failed. Please try again.')
+      const errorMessage = typeof err === 'string' ? err : err?.message || 'Login failed. Please try again.'
+      setError(errorMessage)
     } finally {
       setIsLoading(false)
     }

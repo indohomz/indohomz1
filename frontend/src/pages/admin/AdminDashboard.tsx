@@ -956,6 +956,7 @@ function PropertyFormModal({
     area_sqft: 0,
     furnishing: 'furnished',
     image_url: '',
+    images: '',
     amenities: '',
     highlights: '',
     description: '',
@@ -979,6 +980,7 @@ function PropertyFormModal({
         area_sqft: property.area_sqft || 0,
         furnishing: property.furnishing || 'furnished',
         image_url: property.image_url || '',
+        images: property.images || '',
         amenities: property.amenities || '',
         highlights: property.highlights || '',
         description: property.description || '',
@@ -998,6 +1000,7 @@ function PropertyFormModal({
         area_sqft: 0,
         furnishing: 'furnished',
         image_url: '',
+        images: '',
         amenities: '',
         highlights: '',
         description: '',
@@ -1168,16 +1171,68 @@ function PropertyFormModal({
             </div>
           </div>
 
-          {/* Image URL */}
-          <div>
-            <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wide mb-1.5">Main Image URL</label>
-            <input
-              type="url"
-              value={formData.image_url}
-              onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none placeholder:text-neutral-400"
-              placeholder="https://example.com/image.jpg"
-            />
+          {/* Image URLs */}
+          <div className="space-y-3">
+            <div>
+              <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wide mb-1.5">
+                Main Image URL (Cover Photo)
+              </label>
+              <input
+                type="url"
+                value={formData.image_url}
+                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                className="w-full px-3 py-2 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none placeholder:text-neutral-400"
+                placeholder="https://example.com/cover-image.jpg"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wide mb-1.5">
+                Gallery Images (Multiple URLs - one per line)
+              </label>
+              <textarea
+                value={formData.images}
+                onChange={(e) => setFormData({ ...formData, images: e.target.value })}
+                rows={4}
+                className="w-full px-3 py-2 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none resize-none placeholder:text-neutral-400 font-mono"
+                placeholder={"https://example.com/image1.jpg\nhttps://example.com/image2.jpg\nhttps://example.com/image3.jpg"}
+              />
+              <p className="mt-1 text-[10px] text-neutral-500">
+                Add multiple image URLs for property gallery. One URL per line.
+              </p>
+            </div>
+            {/* Image Preview */}
+            {(formData.image_url || formData.images) && (
+              <div className="p-3 bg-neutral-50 rounded-lg border border-neutral-200">
+                <p className="text-[10px] font-medium text-neutral-500 uppercase tracking-wide mb-2">Preview</p>
+                <div className="flex gap-2 flex-wrap">
+                  {formData.image_url && (
+                    <div className="relative group">
+                      <img 
+                        src={formData.image_url} 
+                        alt="Cover" 
+                        className="w-16 h-16 object-cover rounded-md border-2 border-gold-500"
+                        onError={(e) => { (e.target as HTMLImageElement).src = '/images/placeholder.jpg' }}
+                      />
+                      <span className="absolute -top-1 -right-1 bg-gold-500 text-white text-[8px] px-1 rounded">Cover</span>
+                    </div>
+                  )}
+                  {formData.images && formData.images.split('\n').filter(url => url.trim()).slice(0, 8).map((url, idx) => (
+                    <img 
+                      key={idx}
+                      src={url.trim()} 
+                      alt={`Gallery ${idx + 1}`} 
+                      className="w-16 h-16 object-cover rounded-md border border-neutral-200"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                    />
+                  ))}
+                  {formData.images && formData.images.split('\n').filter(url => url.trim()).length > 8 && (
+                    <div className="w-16 h-16 bg-neutral-200 rounded-md flex items-center justify-center text-[10px] text-neutral-600 font-medium">
+                      +{formData.images.split('\n').filter(url => url.trim()).length - 8} more
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Amenities */}
