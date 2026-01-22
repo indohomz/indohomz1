@@ -83,18 +83,18 @@ export default function WhatsAppFloat({
             animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 30, scale: 0.8 }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-          className="fixed bottom-8 right-8 z-50"
+          className="fixed z-50 bottom-6 right-4 md:bottom-8 md:right-8"
+          style={{ bottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Main Button */}
+          {/* Main Button - Mobile Optimized */}
           <motion.button
             onClick={handleClick}
-            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="group relative flex items-center gap-3 bg-luxury-charcoal text-white 
-                       rounded-full shadow-xl hover:shadow-2xl transition-all duration-500
-                       overflow-hidden"
+                       rounded-full shadow-xl active:shadow-lg md:hover:shadow-2xl transition-all duration-500
+                       overflow-hidden touch-feedback min-h-[52px]"
           >
             {/* Glow effect */}
             <motion.div 

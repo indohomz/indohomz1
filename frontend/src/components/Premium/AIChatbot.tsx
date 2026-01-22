@@ -129,32 +129,47 @@ export default function AIChatbot() {
 
   return (
     <>
-      {/* Chat Button */}
+      {/* Chat Button - Mobile Optimized */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2, type: 'spring' }}
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 text-white shadow-lg shadow-gold-500/30 flex items-center justify-center hover:scale-110 transition-transform ${
+        className={`fixed z-50 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 text-white shadow-lg shadow-gold-500/30 flex items-center justify-center active:scale-95 md:hover:scale-110 transition-transform touch-feedback
+                    /* Mobile: Larger button, better position */
+                    bottom-20 right-4 w-14 h-14
+                    /* Desktop */
+                    md:bottom-24 md:right-6 md:w-14 md:h-14 ${
           isOpen ? 'hidden' : ''
         }`}
+        style={{ bottom: 'calc(5rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <MessageCircle className="w-6 h-6" />
         {/* Pulse effect */}
         <span className="absolute inset-0 rounded-full bg-gold-500 animate-ping opacity-30" />
       </motion.button>
 
-      {/* Chat Window */}
+      {/* Chat Window - Mobile Optimized */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 w-[380px] h-[600px] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-stone-200"
+            className="fixed z-50 bg-white shadow-2xl overflow-hidden flex flex-col border border-stone-200
+                       /* Mobile: Full screen sheet */
+                       inset-0 rounded-none
+                       /* Tablet & Desktop: Floating window */
+                       md:inset-auto md:bottom-6 md:right-6 md:w-[380px] md:h-[600px] md:rounded-2xl md:max-h-[80vh]"
+            style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
           >
+            {/* Mobile drag handle */}
+            <div className="md:hidden w-full flex justify-center pt-3 pb-1 bg-gradient-to-r from-luxury-charcoal to-luxury-espresso">
+              <div className="w-10 h-1 bg-stone-600 rounded-full" />
+            </div>
+
             {/* Header */}
-            <div className="bg-gradient-to-r from-luxury-charcoal to-luxury-espresso p-4 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-luxury-charcoal to-luxury-espresso p-4 pt-2 md:pt-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-gold-500" />
@@ -169,9 +184,9 @@ export default function AIChatbot() {
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="text-stone-400 hover:text-white transition-colors"
+                className="text-stone-400 hover:text-white transition-colors tap-target"
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               </button>
             </div>
 

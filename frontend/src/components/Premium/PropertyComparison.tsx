@@ -68,26 +68,36 @@ export default function PropertyComparison({ isOpen, onClose }: Props) {
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.95, y: 20 }}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-5xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
+        className="w-full bg-white shadow-2xl overflow-hidden
+                   /* Mobile: Full screen sheet from bottom */
+                   fixed inset-x-0 bottom-0 rounded-t-3xl max-h-[95vh]
+                   /* Desktop: Centered modal */
+                   md:relative md:inset-auto md:max-w-5xl md:max-h-[90vh] md:rounded-2xl md:mx-4"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
+        {/* Mobile drag handle */}
+        <div className="md:hidden w-full flex justify-center pt-3 bg-luxury-charcoal">
+          <div className="w-12 h-1.5 bg-stone-600 rounded-full" />
+        </div>
+
         {/* Header */}
-        <div className="bg-luxury-charcoal px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Scale className="w-6 h-6 text-gold-500" />
+        <div className="bg-luxury-charcoal px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 md:gap-3">
+            <Scale className="w-5 h-5 md:w-6 md:h-6 text-gold-500" />
             <div>
-              <h2 className="text-white font-display text-xl">Compare Properties</h2>
-              <p className="text-stone-400 text-sm">Select up to 3 properties to compare</p>
+              <h2 className="text-white font-display text-lg md:text-xl">Compare Properties</h2>
+              <p className="text-stone-400 text-xs md:text-sm hidden sm:block">Select up to 3 properties to compare</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-stone-400 hover:text-white transition-colors">
+          <button onClick={onClose} className="text-stone-400 hover:text-white transition-colors tap-target">
             <X className="w-6 h-6" />
           </button>
         </div>
 
         {/* Content */}
         <div className="overflow-auto max-h-[calc(90vh-80px)]">
-          {/* Property Slots */}
-          <div className="grid grid-cols-3 gap-4 p-6 bg-stone-50 border-b">
+          {/* Property Slots - Horizontal scroll on mobile */}
+          <div className="flex md:grid md:grid-cols-3 gap-3 md:gap-4 p-4 md:p-6 bg-stone-50 border-b overflow-x-auto snap-x scrollbar-hide">
             {[0, 1, 2].map((slot) => {
               const property = selectedData[slot]
               
@@ -125,7 +135,7 @@ export default function PropertyComparison({ isOpen, onClose }: Props) {
                 <button
                   key={slot}
                   onClick={() => setShowSelector(true)}
-                  className="h-64 border-2 border-dashed border-stone-300 rounded-xl flex flex-col items-center justify-center gap-3 hover:border-gold-500 hover:bg-gold-50/50 transition-all group"
+                  className="flex-shrink-0 w-[200px] md:w-auto h-56 md:h-64 border-2 border-dashed border-stone-300 rounded-xl flex flex-col items-center justify-center gap-3 hover:border-gold-500 active:border-gold-500 hover:bg-gold-50/50 active:bg-gold-50/50 transition-all group snap-center touch-feedback"
                 >
                   <div className="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center group-hover:bg-gold-100 transition-colors">
                     <Plus className="w-6 h-6 text-stone-400 group-hover:text-gold-600" />

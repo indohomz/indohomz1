@@ -87,10 +87,10 @@ export default function Header({ variant = 'light' }: HeaderProps) {
               </Link>
             </motion.div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Touch optimized */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center items-center"
+              className="md:hidden relative z-50 w-12 h-12 flex flex-col justify-center items-center touch-feedback rounded-full active:bg-white/10"
               aria-label="Toggle menu"
             >
               <motion.span
@@ -122,7 +122,7 @@ export default function Header({ variant = 'light' }: HeaderProps) {
         </nav>
       </header>
 
-      {/* Mobile Menu - Fullscreen Overlay */}
+      {/* Mobile Menu - Fullscreen Overlay with Safe Areas */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -131,6 +131,10 @@ export default function Header({ variant = 'light' }: HeaderProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-40 md:hidden bg-luxury-charcoal"
+            style={{ 
+              paddingTop: 'env(safe-area-inset-top)', 
+              paddingBottom: 'env(safe-area-inset-bottom)' 
+            }}
           >
             {/* Background pattern */}
             <div className="absolute inset-0 bg-pattern-luxury opacity-5" />
