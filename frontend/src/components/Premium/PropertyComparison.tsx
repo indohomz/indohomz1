@@ -6,7 +6,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Plus, Scale, Check, Minus, MapPin, Bed, Bath, Square, Wifi, Car, Shield, Zap } from 'lucide-react'
-import { properties as allProperties } from '../../data/properties'
+import { PROPERTIES as allProperties } from '../../data/properties'
 
 interface Props {
   isOpen: boolean
