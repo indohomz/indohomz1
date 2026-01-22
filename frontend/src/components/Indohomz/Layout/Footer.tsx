@@ -68,6 +68,24 @@ export default function Footer() {
               <FooterLink to="/about">About Us</FooterLink>
               <FooterLink to="/contact">Contact</FooterLink>
             </ul>
+            
+            {/* Business Section - Subtle but Professional */}
+            <div className="mt-10 pt-8 border-t border-stone-800">
+              <h4 className="text-stone-500 text-xs font-sans font-medium uppercase tracking-[0.15em] mb-4">
+                For Partners
+              </h4>
+              <Link 
+                to="/admin/login" 
+                className="inline-flex items-center gap-2 text-stone-400 text-sm font-sans font-light hover:text-gold-500 transition-all duration-300 group"
+              >
+                <span className="w-6 h-6 rounded border border-stone-700 flex items-center justify-center group-hover:border-gold-500 group-hover:bg-gold-500/10 transition-all duration-300">
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </span>
+                Admin Dashboard
+              </Link>
+            </div>
           </div>
 
           {/* Contact Info */}
@@ -136,7 +154,7 @@ export default function Footer() {
           <p className="text-stone-500 text-sm font-sans font-light">
             © {currentYear} Indohomz. All rights reserved.
           </p>
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6 md:gap-8">
             <Link 
               to="/privacy" 
               className="text-stone-500 text-sm font-sans font-light hover:text-gold-500 transition-colors duration-300"
@@ -148,6 +166,21 @@ export default function Footer() {
               className="text-stone-500 text-sm font-sans font-light hover:text-gold-500 transition-colors duration-300"
             >
               Terms of Service
+            </Link>
+            {/* Partner Portal - Professional Admin Access */}
+            <Link 
+              to="/admin/login" 
+              className="text-stone-600 text-sm font-sans font-light hover:text-gold-500 transition-colors duration-300 flex items-center gap-1.5 group"
+            >
+              <svg 
+                className="w-3.5 h-3.5 text-stone-600 group-hover:text-gold-500 transition-colors" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              Partner Portal
             </Link>
           </div>
         </div>
