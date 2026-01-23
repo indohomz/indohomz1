@@ -29,9 +29,10 @@ export default function ScrollProgress({
   const [percentage, setPercentage] = useState(0)
 
   useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
+    const unsubscribe = scrollYProgress.on('change', (latest) => {
       setPercentage(Math.round(latest * 100))
     })
+    return () => unsubscribe()
   }, [scrollYProgress])
 
   return (
