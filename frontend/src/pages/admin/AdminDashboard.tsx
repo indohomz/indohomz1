@@ -1015,7 +1015,7 @@ function PropertyFormModal({
     setIsLoading(true)
 
     const token = localStorage.getItem('admin_token')
-    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+    const API_BASE = getApiBaseUrl()
 
     try {
       const url = property

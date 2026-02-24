@@ -3,12 +3,12 @@
  * Story-driven, not data table
  */
 
-import { useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Header, Footer, QuietModeProvider, useQuietMode, WhatsAppFloat } from '../components/Indohomz'
 import SEO from '../components/Common/SEO'
-import { getPropertyBySlug, getPropertyById } from '../data/properties'
+import { findLivePropertyBySlug, type LiveProperty } from '../services/liveProperties'
 import AvailabilityBadge from '../components/Indohomz/UI/AvailabilityBadge'
 import ImageGallery from '../components/Indohomz/Features/ImageGallery'
 import InquiryForm from '../components/Indohomz/Features/InquiryForm'
@@ -28,6 +28,8 @@ function PropertyDetailContent() {
   const [activeImage, setActiveImage] = useState(0)
   const [showGallery, setShowGallery] = useState(false)
   const [galleryStartIndex, setGalleryStartIndex] = useState(0)
+  const [property, setProperty] = useState<LiveProperty | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
   const heroRef = useRef<HTMLDivElement>(null)
   
   const { scrollYProgress } = useScroll({
@@ -38,12 +40,36 @@ function PropertyDetailContent() {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
   const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.6])
 
-  // Get property from static data
-  const property = slug ? (
-    isNaN(Number(slug)) 
-      ? getPropertyBySlug(slug) 
-      : getPropertyById(Number(slug))
-  ) : undefined
+  useEffect(() => {
+    let isMounted = true
+
+    const loadProperty = async () => {
+      if (!slug) {
+        if (isMounted) setIsLoading(false)
+        return
+      }
+
+      const foundProperty = await findLivePropertyBySlug(slug)
+      if (isMounted) {
+        setProperty(foundProperty || null)
+        setIsLoading(false)
+      }
+    }
+
+    loadProperty()
+
+    return () => {
+      isMounted = false
+    }
+  }, [slug])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center px-6">
+        <p className="text-stone-500 text-sm">Loading home details...</p>
+      </div>
+    )
+  }
 
   if (!property) {
     return (
@@ -333,6 +359,8 @@ function PropertyDetailContent() {
                   />
                 </motion.div>
 
+                <PaymentCard propertyTitle={property.title} />
+
                 {/* Location */}
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
@@ -429,5 +457,45 @@ function PriceDisplay({ price }: { price: string }) {
     <p className="text-white/60 text-lg font-light">
       Starting from {price}
     </p>
+  )
+}
+
+function PaymentCard({ propertyTitle }: { propertyTitle: string }) {
+  const upiId = import.meta.env.VITE_UPI_ID
+  const tokenAmount = import.meta.env.VITE_BOOKING_TOKEN_AMOUNT || '2000'
+
+  const handlePayment = () => {
+    const message = `Hi IndoHomz, I want to confirm booking token payment for ${propertyTitle}.`
+    if (upiId) {
+      const upiUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent('IndoHomz')}&am=${encodeURIComponent(tokenAmount)}&cu=INR&tn=${encodeURIComponent(`Booking token - ${propertyTitle}`)}`
+      window.open(upiUrl, '_blank')
+      return
+    }
+
+    window.open(`https://wa.me/919053070100?text=${encodeURIComponent(message)}`, '_blank')
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.25 }}
+      className="bg-stone-900 text-white rounded-2xl p-6 md:p-8"
+    >
+      <h3 className="text-sm uppercase tracking-[0.2em] text-white/60 mb-3">Booking Payment</h3>
+      <p className="text-lg font-light mb-4">
+        Secure this home quickly with a refundable booking token.
+      </p>
+      <button
+        onClick={handlePayment}
+        className="w-full rounded-xl bg-gold-500 text-luxury-charcoal py-3.5 font-medium hover:bg-gold-400 transition-colors"
+      >
+        Pay Booking Token
+      </button>
+      <p className="text-xs text-white/60 mt-3">
+        Amount: Rs {tokenAmount}. If UPI is not configured, WhatsApp confirmation opens automatically.
+      </p>
+    </motion.div>
   )
 }

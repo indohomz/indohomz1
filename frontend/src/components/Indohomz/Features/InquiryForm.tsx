@@ -23,9 +23,15 @@ interface FormData {
   sharingType: string
 }
 
+const getApiBaseUrl = () => {
+  if (import.meta.env.VITE_API_BASE_URL) return import.meta.env.VITE_API_BASE_URL as string
+  if (import.meta.env.PROD) return 'https://indohomz-backend.onrender.com'
+  return 'http://localhost:8000'
+}
+
 export default function InquiryForm({ 
   propertyTitle = '', 
-  propertySlug: _propertySlug = '',
+  propertySlug = '',
   onSubmit,
   className = '' 
 }: Props) {
@@ -41,6 +47,7 @@ export default function InquiryForm({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState<Partial<FormData>>({})
+  const API_BASE = getApiBaseUrl()
 
   const validateForm = (): boolean => {
     const newErrors: Partial<FormData> = {}
@@ -65,9 +72,42 @@ export default function InquiryForm({
     if (!validateForm()) return
     
     setIsSubmitting(true)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
+
+    let propertyId: number | undefined
+
+    if (propertySlug) {
+      try {
+        const propertyResponse = await fetch(`${API_BASE}/api/v1/properties?limit=100`)
+        if (propertyResponse.ok) {
+          const propertyData = await propertyResponse.json() as { items?: Array<{ id: number; slug?: string }> }
+          const matched = propertyData.items?.find((item) => item.slug === propertySlug)
+          if (matched) {
+            propertyId = matched.id
+          }
+        }
+      } catch {
+        // If lookup fails, still submit inquiry without property mapping.
+      }
+    }
+
+    try {
+      await fetch(`${API_BASE}/api/v1/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email || undefined,
+          phone: formData.phone,
+          property_id: propertyId,
+          message: `${formData.message}\nPreferred Move-in: ${formData.moveInDate || 'Flexible'}\nSharing: ${formData.sharingType}`,
+          source: 'website',
+        }),
+      })
+    } catch {
+      // Keep UX uninterrupted even if backend is temporarily unavailable.
+    }
     
     // Send WhatsApp message
     const whatsappMessage = encodeURIComponent(

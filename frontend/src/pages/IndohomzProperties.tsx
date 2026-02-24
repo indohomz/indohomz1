@@ -3,13 +3,13 @@
  * Clean, minimal, experience-focused with gold accents
  */
 
-import { useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import { Header, Footer, QuietModeProvider, useQuietMode, MoveInFilterInline } from '../components/Indohomz'
 import type { MoveInTimeline } from '../components/Indohomz/Features/MoveInFilter'
 import SEO from '../components/Common/SEO'
-import { PROPERTIES } from '../data/properties'
+import { fetchLiveProperties, type LiveProperty } from '../services/liveProperties'
 import AvailabilityBadge from '../components/Indohomz/UI/AvailabilityBadge'
 
 export default function IndohomzProperties() {
@@ -26,10 +26,30 @@ function PropertiesContent() {
   const [activeLocation, setActiveLocation] = useState<string | null>(
     searchParams.get('location')
   )
+  const [properties, setProperties] = useState<LiveProperty[]>([])
+  const [isLoadingProperties, setIsLoadingProperties] = useState(true)
 
-  const locations = [...new Set(PROPERTIES.map(p => p.area))]
+  useEffect(() => {
+    let isMounted = true
 
-  const filteredProperties = PROPERTIES.filter(p => {
+    const loadProperties = async () => {
+      const items = await fetchLiveProperties()
+      if (isMounted) {
+        setProperties(items)
+        setIsLoadingProperties(false)
+      }
+    }
+
+    loadProperties()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const locations = [...new Set(properties.map((p) => p.area))]
+
+  const filteredProperties = properties.filter(p => {
     if (activeLocation && p.area.toLowerCase() !== activeLocation.toLowerCase()) {
       return false
     }
@@ -129,36 +149,44 @@ function PropertiesContent() {
       {/* Properties Grid */}
       <section className="pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-16">
-          <div className="space-y-28">
-            {filteredProperties.map((property, index) => (
-              <PropertyCard 
-                key={property.id} 
-                property={property} 
-                index={index}
-              />
-            ))}
-          </div>
+          {isLoadingProperties ? (
+            <div className="text-center py-24">
+              <p className="text-stone-500 font-sans text-sm">Loading homes...</p>
+            </div>
+          ) : (
+            <>
+              <div className="space-y-28">
+                {filteredProperties.map((property, index) => (
+                  <PropertyCard 
+                    key={property.id} 
+                    property={property} 
+                    index={index}
+                  />
+                ))}
+              </div>
 
-          {filteredProperties.length === 0 && (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center py-24"
-            >
-              <div className="w-16 h-px bg-gold-500 mx-auto mb-8" />
-              <p className="text-stone-400 font-display text-2xl mb-4">
-                No homes found
-              </p>
-              <p className="text-stone-500 font-sans text-sm mb-8">
-                Try adjusting your filters to see more options.
-              </p>
-              <button
-                onClick={() => setActiveLocation(null)}
-                className="px-6 py-3 bg-luxury-charcoal text-white font-sans text-sm rounded-full hover:bg-gold-500 transition-colors duration-300"
-              >
-                Clear all filters
-              </button>
-            </motion.div>
+              {filteredProperties.length === 0 && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center py-24"
+                >
+                  <div className="w-16 h-px bg-gold-500 mx-auto mb-8" />
+                  <p className="text-stone-400 font-display text-2xl mb-4">
+                    No homes found
+                  </p>
+                  <p className="text-stone-500 font-sans text-sm mb-8">
+                    Try adjusting your filters to see more options.
+                  </p>
+                  <button
+                    onClick={() => setActiveLocation(null)}
+                    className="px-6 py-3 bg-luxury-charcoal text-white font-sans text-sm rounded-full hover:bg-gold-500 transition-colors duration-300"
+                  >
+                    Clear all filters
+                  </button>
+                </motion.div>
+              )}
+            </>
           )}
         </div>
       </section>
@@ -191,7 +219,7 @@ function FilterButton({
   )
 }
 
-function PropertyCard({ property, index }: { property: typeof PROPERTIES[0]; index: number }) {
+function PropertyCard({ property, index }: { property: LiveProperty; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardRef, { once: true, margin: '-100px' })
   const isEven = index % 2 === 0

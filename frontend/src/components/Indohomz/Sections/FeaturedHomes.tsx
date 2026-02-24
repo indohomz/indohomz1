@@ -8,10 +8,10 @@ import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { PROPERTIES, type AvailabilityStatus } from '../../../data/properties'
+import { normalizeImageUrl } from '../../../services/liveProperties'
 import AvailabilityBadge from '../UI/AvailabilityBadge'
 
 export default function FeaturedHomes() {
-  const containerRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
@@ -26,7 +26,7 @@ export default function FeaturedHomes() {
     location: p.area,
     description: p.description.slice(0, 120) + '...',
     price: p.price,
-    image: p.image_url,
+    image: normalizeImageUrl(p.image_url, p.id),
     bedrooms: p.bedrooms,
     sqft: p.area_sqft,
     availability_status: p.availability_status,
@@ -134,7 +134,6 @@ export default function FeaturedHomes() {
           <LuxuryHomeCard 
             key={home.id} 
             home={home} 
-            isActive={index === activeIndex}
             index={index}
           />
         ))}
@@ -210,7 +209,6 @@ function NavigationButton({
 // Luxury Home Card Component
 function LuxuryHomeCard({ 
   home, 
-  isActive,
   index
 }: { 
   home: {
@@ -226,7 +224,6 @@ function LuxuryHomeCard({
     availability_status?: AvailabilityStatus
     availability_text?: string
   }
-  isActive: boolean
   index: number
 }) {
   const cardRef = useRef<HTMLDivElement>(null)
