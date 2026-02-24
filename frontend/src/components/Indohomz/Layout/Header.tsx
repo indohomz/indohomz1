@@ -68,13 +68,29 @@ export default function Header({ variant = 'light' }: HeaderProps) {
               <NavLink to="/contact" isDark={isDark} isScrolled={isScrolled}>Contact</NavLink>
             </motion.div>
 
-            {/* CTA Button */}
+            {/* Desktop Actions */}
             <motion.div 
-              className="hidden md:block"
+              className="hidden md:flex items-center gap-3"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             >
+              <Link
+                to="/admin/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group flex items-center justify-center w-11 h-11 rounded-full border transition-all duration-300 ${
+                  isDark || !isScrolled
+                    ? 'border-gold-500/40 text-gold-500 hover:bg-gold-500/15'
+                    : 'border-stone-300 text-stone-600 hover:border-gold-500 hover:text-gold-600'
+                }`}
+                aria-label="Open admin portal"
+                title="Admin Portal"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </Link>
               <Link 
                 to="/contact"
                 className={`group relative px-6 py-3 rounded-full text-sm font-sans font-medium tracking-wide overflow-hidden transition-all duration-500 ${
@@ -158,6 +174,9 @@ export default function Header({ variant = 'light' }: HeaderProps) {
                 </MobileNavLink>
                 <MobileNavLink to="/contact" index={2}>
                   Contact
+                </MobileNavLink>
+                <MobileNavLink to="/admin/login" index={3}>
+                  Admin Portal
                 </MobileNavLink>
               </nav>
 
