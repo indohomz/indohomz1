@@ -17,8 +17,6 @@ import {
   GurgaonMap,
   SocialProof,
   QuietModeProvider,
-  QuietModeToggle,
-  SmartHomeMatch,
   WhatsAppFloat,
 } from '../components/Indohomz'
 import SEO from '../components/Common/SEO'
@@ -26,7 +24,7 @@ import IntroReveal from '../components/Indohomz/Features/IntroReveal'
 import GuidedDiscovery from '../components/Indohomz/Features/GuidedDiscovery'
 import LivingInsights from '../components/Indohomz/Sections/LivingInsights'
 import BreathingSpace from '../components/Indohomz/Sections/BreathingSpace'
-import { ThemeProvider, ThemeToggle } from '../components/Indohomz/Features/ThemeProvider'
+import { ThemeProvider } from '../components/Indohomz/Features/ThemeProvider'
 
 // Premium Components
 import {
@@ -36,7 +34,6 @@ import {
   AIChatbot,
   PropertyComparison,
   TestimonialSlider,
-  CompareButton,
   MobileBottomBar,
 } from '../components/Premium'
 
@@ -164,15 +161,8 @@ export default function IndohomzLanding() {
 
           {/* Desktop Floating Features - Hidden on mobile */}
           <div className="hidden md:block">
-            <QuietModeToggle />
-            <SmartHomeMatch />
             <WhatsAppFloat phoneNumber="919053070100" />
             <AIChatbot />
-            <CompareButton onClick={() => setShowComparison(true)} />
-            {/* Theme Toggle - Desktop only */}
-            <div className="fixed bottom-6 left-6 z-50">
-              <ThemeToggle />
-            </div>
           </div>
           
           {/* Mobile Bottom Bar - Clean organized toolbar */}

@@ -27,26 +27,9 @@ export interface LiveProperty {
   created_at: string
 }
 
-const ATTRACTIVE_FALLBACK_IMAGES = [
-  'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&h=1000&fit=crop&auto=format',
-  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&h=1000&fit=crop&auto=format',
-  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&h=1000&fit=crop&auto=format',
-  'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&h=1000&fit=crop&auto=format',
-  'https://images.unsplash.com/photo-1613977257592-487ecd136cc3?w=1600&h=1000&fit=crop&auto=format',
-  'https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1600&h=1000&fit=crop&auto=format',
-]
-
-const isLocalImagePath = (url: string | undefined): boolean => {
-  if (!url) return true
-  return url.startsWith('/images/') || url.startsWith('images/')
-}
-
-const fallbackForSeed = (seed: number): string => {
-  return ATTRACTIVE_FALLBACK_IMAGES[Math.abs(seed) % ATTRACTIVE_FALLBACK_IMAGES.length]
-}
-
-export const normalizeImageUrl = (url: string | undefined, seed: number): string => {
-  return isLocalImagePath(url) ? fallbackForSeed(seed) : (url || fallbackForSeed(seed))
+export const normalizeImageUrl = (url: string | undefined, _seed: number): string => {
+  // Keep original property photos as-is (no auto replacement).
+  return url || ''
 }
 
 const toStringList = (images: string | string[] | undefined): string[] => {
