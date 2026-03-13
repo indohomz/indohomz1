@@ -1177,27 +1177,77 @@ function PropertyFormModal({
               <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wide mb-1.5">
                 Main Image URL (Cover Photo)
               </label>
-              <input
-                type="url"
-                value={formData.image_url}
-                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none placeholder:text-neutral-400"
-                placeholder="https://example.com/cover-image.jpg"
-              />
+              <div className="flex gap-2">
+                <input
+                  type="url"
+                  value={formData.image_url}
+                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                  className="flex-1 px-3 py-2 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none placeholder:text-neutral-400"
+                  placeholder="https://example.com/cover-image.jpg"
+                />
+                <label className="px-3 py-2 text-sm font-medium bg-neutral-100 border border-neutral-200 rounded-md cursor-pointer hover:bg-neutral-200 transition-colors whitespace-nowrap">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      if (file) {
+                        const reader = new FileReader()
+                        reader.onload = (event) => {
+                          const base64 = event.target?.result as string
+                          setFormData({ ...formData, image_url: base64 })
+                        }
+                        reader.readAsDataURL(file)
+                      }
+                    }}
+                  />
+                  Upload Image
+                </label>
+              </div>
             </div>
             <div>
               <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wide mb-1.5">
                 Gallery Images (Multiple URLs - one per line)
               </label>
-              <textarea
-                value={formData.images}
-                onChange={(e) => setFormData({ ...formData, images: e.target.value })}
-                rows={4}
-                className="w-full px-3 py-2 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none resize-none placeholder:text-neutral-400 font-mono"
-                placeholder={"https://example.com/image1.jpg\nhttps://example.com/image2.jpg\nhttps://example.com/image3.jpg"}
-              />
+              <div className="flex gap-2 mb-2">
+                <textarea
+                  value={formData.images}
+                  onChange={(e) => setFormData({ ...formData, images: e.target.value })}
+                  rows={4}
+                  className="flex-1 px-3 py-2 text-sm border border-neutral-200 rounded-md focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 outline-none resize-none placeholder:text-neutral-400 font-mono"
+                  placeholder={"https://example.com/image1.jpg\nhttps://example.com/image2.jpg\nhttps://example.com/image3.jpg"}
+                />
+              </div>
+              <label className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium bg-neutral-100 border border-neutral-200 rounded-md cursor-pointer hover:bg-neutral-200 transition-colors">
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files || [])
+                    Promise.all(
+                      files.map(file => {
+                        return new Promise<string>((resolve) => {
+                          const reader = new FileReader()
+                          reader.onload = (event) => {
+                            resolve(event.target?.result as string)
+                          }
+                          reader.readAsDataURL(file)
+                        })
+                      })
+                    ).then(base64Images => {
+                      const currentImages = formData.images.split('\n').filter(url => url.trim())
+                      const newImages = [...currentImages, ...base64Images].join('\n')
+                      setFormData({ ...formData, images: newImages })
+                    })
+                  }}
+                />
+                + Add Gallery Images
+              </label>
               <p className="mt-1 text-[10px] text-neutral-500">
-                Add multiple image URLs for property gallery. One URL per line.
+                Add multiple image URLs or upload files. One URL per line. You can also upload multiple image files at once.
               </p>
             </div>
             {/* Image Preview */}
