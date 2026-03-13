@@ -120,73 +120,9 @@ export default function TestimonialSlider() {
         </motion.div>
 
         {/* Main testimonial */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image/Video side */}
-          <div className="relative">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={current.id}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                className="relative"
-              >
-                {/* Main image */}
-                <div className="relative rounded-2xl overflow-hidden aspect-square max-w-md mx-auto shadow-2xl">
-                  {current.video ? (
-                    <>
-                      <video
-                        ref={videoRef}
-                        src={current.video}
-                        poster={current.image}
-                        className="w-full h-full object-cover"
-                        loop
-                        muted
-                      />
-                      <button
-                        onClick={() => {
-                          if (videoRef.current) {
-                            if (isPlaying) {
-                              videoRef.current.pause()
-                            } else {
-                              videoRef.current.play()
-                            }
-                            setIsPlaying(!isPlaying)
-                          }
-                        }}
-                        className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
-                      >
-                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                          {isPlaying ? (
-                            <Pause className="w-6 h-6 text-luxury-charcoal" />
-                          ) : (
-                            <Play className="w-6 h-6 text-luxury-charcoal ml-1" />
-                          )}
-                        </div>
-                      </button>
-                    </>
-                  ) : (
-                    <img
-                      src={current.image}
-                      alt={current.name}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-
-                {/* Highlight badge */}
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gold-500 text-white px-6 py-2 rounded-full font-sans text-sm shadow-lg">
-                  "{current.highlight}"
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
+        <div className="max-w-3xl mx-auto">
           {/* Text side */}
-          <div className="lg:pl-8">
+          <div className="">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={current.id}
@@ -216,11 +152,6 @@ export default function TestimonialSlider() {
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
-                  <img
-                    src={current.image}
-                    alt={current.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-gold-500"
-                  />
                   <div>
                     <h4 className="font-sans font-medium text-luxury-charcoal">
                       {current.name}

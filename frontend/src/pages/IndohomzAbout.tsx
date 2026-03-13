@@ -257,7 +257,7 @@ export default function IndohomzAbout() {
                 <p>
                   Indohomz homes are designed for modern professionals who refuse to compromise 
                   on quality. Spacious rooms, premium amenities, professional management, and 
-                  a community that feels like family.
+                  a welcoming community.
                 </p>
                 <p>
                   Whether you're a startup founder, corporate professional, or creative freelancer — 

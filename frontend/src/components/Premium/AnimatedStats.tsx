@@ -20,7 +20,7 @@ interface Props {
 }
 
 const defaultStats: Stat[] = [
-  { value: 500, suffix: '+', label: 'Happy Families', description: 'Living their best life' },
+  { value: 7000, suffix: '+', label: 'Happy Tenants', description: 'With 24/7 support' },
   { value: 50, suffix: '+', label: 'Premium Properties', description: 'Across Gurgaon' },
   { value: 98, suffix: '%', label: 'Satisfaction Rate', description: 'From our residents' },
   { value: 24, suffix: '/7', label: 'Support', description: 'Always here for you' },

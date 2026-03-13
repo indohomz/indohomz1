@@ -42,7 +42,7 @@ const Hero = () => {
 
         {/* Subheadline */}
         <p className="mb-10 max-w-2xl text-lg sm:text-xl text-gray-200 drop-shadow-md">
-          Fully furnished spaces with high-speed WiFi, housekeeping, and a community that feels like family. Zero brokerage.
+          Fully furnished spaces with high-speed WiFi, housekeeping, and a supportive community. Zero brokerage.
         </p>
 
         {/* Call to Actions */}
