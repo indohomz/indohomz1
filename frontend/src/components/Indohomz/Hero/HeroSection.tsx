@@ -1,21 +1,11 @@
-/**
- * Indohomz - Luxury Cinematic Hero Section
- * Full-screen, muted video loop, editorial typography
- * Premium animations with gold accents
- */
-
 import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
-// Premium video - self-hosted or high-quality stock
-const HERO_VIDEO_URL = 'https://videos.pexels.com/video-files/3773486/3773486-uhd_2560_1440_30fps.mp4'
-
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [videoLoaded, setVideoLoaded] = useState(false)
-  const [videoError, setVideoError] = useState(false)
+  const imageRef = useRef<HTMLImageElement>(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -26,61 +16,37 @@ export default function HeroSection() {
   const mediaScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
   const textOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0])
   const textY = useTransform(scrollYProgress, [0, 0.35], ['0%', '10%'])
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.4, 0.7])
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75 // Slower for luxury feel
-    }
-  }, [videoLoaded])
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.6])
 
   return (
     <section 
       ref={containerRef}
       className="relative h-screen w-full overflow-hidden bg-luxury-charcoal"
     >
-      {/* Background Media with Parallax */}
+      {/* Background Image with Parallax */}
       <motion.div 
         className="absolute inset-0 z-0"
         style={{ y: mediaY, scale: mediaScale }}
       >
-        {/* Video */}
-        {!videoError && (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            onLoadedData={() => setVideoLoaded(true)}
-            onError={() => setVideoError(true)}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1500 filter-warm ${
-              videoLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <source src={HERO_VIDEO_URL} type="video/mp4" />
-          </video>
-        )}
-
-        {/* Fallback Image */}
+        {/* Main Image */}
         <img
-          src="/images/properties/dlf-phase-4/5.webp"
-          alt="Premium living space"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1500 filter-warm ${
-            videoLoaded && !videoError ? 'opacity-0' : 'opacity-100'
-          }`}
+          ref={imageRef}
+          src="/images/main.jpg"
+          alt="IndoHomz - Gurgaon's Finest Living"
+          onLoad={() => setImageLoaded(true)}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "/logo.png"
+          }}
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
         />
 
-        {/* Gradient Overlays - Warmer, more luxurious */}
+        {/* Dark Gradient Overlays - Better text contrast */}
         <motion.div 
-          className="absolute inset-0 bg-luxury-charcoal"
+          className="absolute inset-0 bg-black"
           style={{ opacity: overlayOpacity }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-luxury-charcoal/90 via-luxury-charcoal/50 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-luxury-charcoal/70 via-transparent to-luxury-charcoal/40" />
-        
-        {/* Warm gold tint overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gold-500/5 via-transparent to-gold-600/10 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/50" />
       </motion.div>
 
       {/* Content */}
@@ -95,45 +61,56 @@ export default function HeroSection() {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-              className="w-16 h-px bg-gold-500 mb-10 origin-left"
+              className="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-600 mb-12 origin-left rounded-full"
             />
 
-            {/* Overline - Luxury label */}
+            {/* Overline - LARGE & CLEAR */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-gold-500 text-xs font-sans font-medium uppercase tracking-[0.35em] mb-8"
+              className="text-gold-300 text-2xl md:text-4xl font-display font-bold uppercase tracking-widest mb-6 drop-shadow-2xl"
+            >
+              IndoHomz
+            </motion.p>
+
+            {/* Subheading - Clear branding */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="text-stone-200 text-xl md:text-2xl font-sans uppercase tracking-[0.35em] mb-12 drop-shadow-lg"
             >
               Gurgaon's Finest Living
             </motion.p>
 
-            {/* Headline - Elegant serif typography */}
+            {/* Headline - Large & Bold */}
             <motion.h1
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.4, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="font-display text-white font-light leading-[0.92] mb-10 tracking-tight"
-              style={{ fontSize: 'clamp(3.5rem, 11vw, 7.5rem)' }}
+              className="font-display text-white font-bold leading-[0.95] mb-10 tracking-tight drop-shadow-2xl"
+              style={{ fontSize: 'clamp(3.5rem, 12vw, 8.5rem)' }}
             >
-              This is how
-              <br />
-              <span className="text-gold-400">you live.</span>
+              This is how <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-200 to-gold-400">
+                you live.
+              </span>
             </motion.h1>
 
-            {/* Subtext - Clean and confident */}
+            {/* Subtext - Prominent */}
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1 }}
-              className="text-stone-400 text-lg md:text-xl font-sans font-light leading-relaxed mb-14 max-w-lg"
+              className="text-stone-100 text-lg md:text-xl font-sans font-medium leading-relaxed mb-16 max-w-2xl drop-shadow-lg"
             >
               Not rooms. Not rentals. 
-              <span className="text-stone-300"> A life, curated</span> for those who 
+              <span className="text-gold-200"> A life, curated</span> for those who 
               appreciate the extraordinary.
             </motion.p>
 
-            {/* CTA - Luxury button style */}
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -142,11 +119,9 @@ export default function HeroSection() {
             >
               <Link
                 to="/properties"
-                className="group inline-flex items-center gap-5"
+                className="group inline-flex items-center gap-3 px-10 py-4 bg-gold-500 hover:bg-gold-400 text-black font-display text-lg font-bold rounded-full transition-all duration-300 shadow-2xl shadow-gold-500/50 hover:shadow-gold-500/70"
               >
-                <span className="relative px-8 py-4 bg-gold-500 text-luxury-charcoal text-sm font-sans font-medium tracking-wide rounded-full overflow-hidden transition-all duration-500 hover:bg-gold-400 hover:shadow-gold-lg">
-                  <span className="relative z-10">Explore Homes</span>
-                </span>
+                Explore Homes
               </Link>
               
               <Link
