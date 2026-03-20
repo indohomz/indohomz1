@@ -4,20 +4,20 @@ import { ArrowRight, MapPin } from 'lucide-react';
 const Hero = () => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      {/* 1. The Image Background */}
+      {/* Background Image - Bedroom/Living Space */}
       <img
-        src="/images/main.jpg"
-        alt="IndoHomz Hero"
+        src="/images/main.jpeg"
+        alt="IndoHomz Premium Living Space"
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
         onError={(e) => {
           (e.target as HTMLImageElement).src = "/images/properties/placeholder.jpg";
         }}
       />
 
-      {/* 2. Dark Overlay for Text Visibility */}
+      {/* Dark Overlay for Text Visibility */}
       <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-b from-black/50 via-black/40 to-black/60 z-10" />
 
-      {/* 3. The Content Layer */}
+      {/* Content Layer */}
       <div className="relative z-20 flex h-full min-h-screen flex-col items-center justify-center px-4 text-center text-white py-20">
         
         {/* IndoHomz Branding - Large & Clear */}

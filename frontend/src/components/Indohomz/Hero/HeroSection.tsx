@@ -31,7 +31,7 @@ export default function HeroSection() {
         {/* Main Image */}
         <img
           ref={imageRef}
-          src="/images/main.jpg"
+          src="/images/main.jpeg"
           alt="IndoHomz - Gurgaon's Finest Living"
           onLoad={() => setImageLoaded(true)}
           onError={(e) => {
