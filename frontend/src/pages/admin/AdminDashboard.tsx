@@ -32,8 +32,10 @@ import {
   Phone,
   Mail,
   MessageSquare,
-  ChevronDown
+  ChevronDown,
+  Upload
 } from 'lucide-react'
+import { PROPERTIES as CURRENT_WEBSITE_PROPERTIES } from '../../data/properties'
 
 // API Base URL - Works for both development and production
 const getApiBaseUrl = () => {
@@ -115,6 +117,7 @@ export default function AdminDashboard() {
   const [editingProperty, setEditingProperty] = useState<Property | null>(null)
   const [leadStatusFilter, setLeadStatusFilter] = useState<string>('all')
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+  const [isSyncingWebsiteProperties, setIsSyncingWebsiteProperties] = useState(false)
 
   // Get auth token
   const getToken = () => localStorage.getItem('admin_token')
@@ -147,6 +150,81 @@ export default function AdminDashboard() {
       setProperties(data.items || [])
     } catch (error) {
       console.error('Error fetching properties:', error)
+    }
+  }
+
+  // Sync currently visible website properties into backend so they can be edited from admin.
+  const syncCurrentWebsiteProperties = async () => {
+    const token = getToken()
+    if (!token) {
+      showNotification('error', 'Please login again to sync properties')
+      return
+    }
+
+    setIsSyncingWebsiteProperties(true)
+
+    try {
+      // Ensure we have latest backend properties before syncing.
+      const existingRes = await fetch(`${API_BASE}/api/v1/properties?limit=500`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      const existingData = await existingRes.json()
+      const existingItems: Property[] = Array.isArray(existingData?.items) ? existingData.items : []
+
+      const existingKeys = new Set(
+        existingItems.map((p) => `${p.title.trim().toLowerCase()}|${(p.location || '').trim().toLowerCase()}`)
+      )
+
+      let createdCount = 0
+
+      for (const item of CURRENT_WEBSITE_PROPERTIES) {
+        const key = `${item.title.trim().toLowerCase()}|${(item.location || '').trim().toLowerCase()}`
+        if (existingKeys.has(key)) continue
+
+        const createPayload = {
+          title: item.title,
+          price: item.price,
+          location: item.location,
+          area: item.area,
+          city: item.city || 'Gurgaon',
+          property_type: item.property_type || 'pg',
+          bedrooms: item.bedrooms ?? 1,
+          bathrooms: item.bathrooms ?? 1,
+          area_sqft: item.area_sqft ?? 0,
+          furnishing: item.furnishing || 'furnished',
+          image_url: item.image_url || '',
+          images: JSON.stringify(item.images || []),
+          amenities: item.amenities || '',
+          highlights: item.highlights || '',
+          description: item.description || '',
+          is_available: item.is_available ?? true
+        }
+
+        const createRes = await fetch(`${API_BASE}/api/v1/properties`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(createPayload)
+        })
+
+        if (createRes.ok) {
+          createdCount += 1
+        }
+      }
+
+      await fetchProperties()
+      await fetchStats()
+      showNotification('success', createdCount > 0
+        ? `${createdCount} website properties added to admin`
+        : 'All current website properties are already synced')
+    } catch (error) {
+      showNotification('error', 'Failed to sync current website properties')
+    } finally {
+      setIsSyncingWebsiteProperties(false)
     }
   }
 
@@ -525,6 +603,17 @@ export default function AdminDashboard() {
                   >
                     <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
                     <span className="hidden sm:inline">Refresh</span>
+                  </button>
+                  <button
+                    onClick={syncCurrentWebsiteProperties}
+                    disabled={isSyncingWebsiteProperties}
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm text-stone-600 hover:text-luxury-charcoal hover:bg-luxury-sand/50 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    title="Import current website properties into admin for editing"
+                  >
+                    <Upload className={`h-4 w-4 ${isSyncingWebsiteProperties ? 'animate-pulse' : ''}`} />
+                    <span className="hidden sm:inline">
+                      {isSyncingWebsiteProperties ? 'Syncing...' : 'Sync Website Properties'}
+                    </span>
                   </button>
                 </div>
 
